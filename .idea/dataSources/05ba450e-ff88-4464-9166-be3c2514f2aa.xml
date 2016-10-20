@@ -5,28 +5,156 @@
       <visible>1</visible>
     </schema>
     <schema id="2" name="castingteam"/>
-    <schema id="3" name="castingteam_office"/>
-    <schema id="4" name="foodfox"/>
-    <schema id="5" name="information_schema"/>
-    <schema id="6" name="mysql"/>
-    <schema id="7" name="performance_schema"/>
-    <schema id="8" name="sys"/>
-    <schema id="9" name="test"/>
-    <table id="10" parent="1" name="language"/>
-    <column id="11" parent="10" name="id">
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="performance_schema"/>
+    <schema id="6" name="sys"/>
+    <schema id="7" name="castingteam.com"/>
+    <schema id="8" name="symfony"/>
+    <schema id="9" name="symfony_test"/>
+    <schema id="10" name="wordpress"/>
+    <table id="11" parent="1" name="migration_versions"/>
+    <table id="12" parent="1" name="sport"/>
+    <table id="13" parent="1" name="team"/>
+    <table id="14" parent="1" name="event"/>
+    <table id="15" parent="1" name="bet"/>
+    <column id="16" parent="11" name="version">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="17" parent="11" name="PRIMARY">
+      <columns>version</columns>
+      <primary>1</primary>
+    </key>
+    <column id="18" parent="12" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="12" parent="10" name="language_code">
+    <column id="19" parent="12" name="name">
       <mandatory>1</mandatory>
-      <data-type>char(2)|0</data-type>
+      <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="13" parent="10" name="language_name">
+    <column id="20" parent="12" name="code">
       <mandatory>1</mandatory>
-      <data-type>varchar(20)|0</data-type>
+      <data-type>varchar(255)|0</data-type>
     </column>
-    <key id="14" parent="10" name="PRIMARY">
+    <key id="21" parent="12" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="22" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="23" parent="13" name="sport_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="24" parent="13" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="25" parent="13" name="code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="26" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="27" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="28" parent="14" name="team_first_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="29" parent="14" name="team_second_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="30" parent="14" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="31" parent="14" name="date">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="32" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="33" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="34" parent="15" name="date">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="35" parent="15" name="event_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="36" parent="15" name="rate_team_one">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="37" parent="15" name="rate_team_two">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="38" parent="15" name="rate_draw">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="39" parent="15" name="rate_neither_team_one">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="40" parent="15" name="rate_neither_team_two">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="41" parent="15" name="rate_neither_draw">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="42" parent="15" name="coefficient_one">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="43" parent="15" name="coefficient_two">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="44" parent="15" name="allowance_one">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="45" parent="15" name="allowance_two">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="46" parent="15" name="total">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="47" parent="15" name="total_less">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="48" parent="15" name="total_more">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <key id="49" parent="15" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>

@@ -5,23 +5,19 @@ namespace AppBundle\Entity;
 /**
  * Sport
  */
-class Sport
+class Sport extends Entity
 {
     /**
+     * @ORM\Column(type="string" column="name" length="255" nullable="false")
      * @var string
      */
     private $name;
 
     /**
+     * @ORM\Column(type="string" column="code" length="255" nullable="false")
      * @var string
      */
     private $code;
-
-    /**
-     * @var integer
-     */
-    private $id;
-
 
     /**
      * Set name
@@ -69,15 +65,5 @@ class Sport
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

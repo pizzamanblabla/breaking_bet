@@ -5,80 +5,80 @@ namespace AppBundle\Entity;
 /**
  * Event
  */
-class Event
+class Event extends Entity
 {
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="Team")
+     * @ORM\JoinColumn(name="team_first_id", referencedColumnName="id", nullable=true)
+     * @var Team
      */
-    private $teamFirstId;
+    private $teamFirst;
 
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="Team")
+     * @ORM\JoinColumn(name="team_second_id", referencedColumnName="id", nullable=true)
+     * @var Team
      */
-    private $teamSecondId;
+    private $teamSecond;
 
     /**
+     * @ORM\Column(type="string" column="name" length="255" nullable="false")
      * @var string
      */
     private $name;
 
     /**
+     * @ORM\Column(type="datetime" column="date" nullable="false")
      * @var \DateTime
      */
     private $date;
 
     /**
-     * @var integer
-     */
-    private $id;
-
-
-    /**
-     * Set teamFirstId
+     * Set teamFirst
      *
-     * @param integer $teamFirstId
+     * @param Team $teamFirst
      *
      * @return Event
      */
-    public function setTeamFirstId($teamFirstId)
+    public function setTeamFirstId(Team $teamFirst)
     {
-        $this->teamFirstId = $teamFirstId;
+        $this->teamFirst = $teamFirst;
 
         return $this;
     }
 
     /**
-     * Get teamFirstId
+     * Get teamFirst
      *
-     * @return integer
+     * @return Team
      */
-    public function getTeamFirstId()
+    public function getTeamFirst()
     {
-        return $this->teamFirstId;
+        return $this->teamFirst;
     }
 
     /**
-     * Set teamSecondId
+     * Set teamSecond
      *
-     * @param integer $teamSecondId
+     * @param Team $teamSecond
      *
      * @return Event
      */
-    public function setTeamSecondId($teamSecondId)
+    public function setTeamSecondId(Team $teamSecond)
     {
-        $this->teamSecondId = $teamSecondId;
+        $this->teamSecond = $teamSecond;
 
         return $this;
     }
 
     /**
-     * Get teamSecondId
+     * Get teamSecond
      *
-     * @return integer
+     * @return Team
      */
-    public function getTeamSecondId()
+    public function getTeamSecond()
     {
-        return $this->teamSecondId;
+        return $this->teamSecond;
     }
 
     /**
@@ -127,15 +127,5 @@ class Event
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

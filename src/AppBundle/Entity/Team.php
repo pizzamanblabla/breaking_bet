@@ -5,39 +5,37 @@ namespace AppBundle\Entity;
 /**
  * Team
  */
-class Team
+class Team extends Entity
 {
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="Sport")
+     * @ORM\JoinColumn(name="sport_id", referencedColumnName="id", nullable=true)
+     * @var Sport
      */
-    private $sportId;
+    private $sport;
 
     /**
+     * @ORM\Column(type="string" column="name" length="255" nullable="false")
      * @var string
      */
     private $name;
 
     /**
+     * @ORM\Column(type="string" column="code" length="255" nullable="false")
      * @var string
      */
     private $code;
 
     /**
-     * @var integer
-     */
-    private $id;
-
-
-    /**
-     * Set sportId
+     * Set sport
      *
-     * @param integer $sportId
+     * @param Sport $sport
      *
      * @return Team
      */
-    public function setSportId($sportId)
+    public function setSportId($sport)
     {
-        $this->sportId = $sportId;
+        $this->sport = $sport;
 
         return $this;
     }
@@ -45,11 +43,11 @@ class Team
     /**
      * Get sportId
      *
-     * @return integer
+     * @return Sport
      */
     public function getSportId()
     {
-        return $this->sportId;
+        return $this->sport;
     }
 
     /**
@@ -98,15 +96,5 @@ class Team
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

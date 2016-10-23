@@ -5,88 +5,98 @@ namespace AppBundle\Entity;
 /**
  * Bet
  */
-class Bet
+class Bet extends Entity
 {
     /**
+     * @ORM\Column(type="datetime" column="date" nullable="false")
      * @var \DateTime
      */
     private $date;
 
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=true)
+     * @var Event
      */
-    private $eventId;
+    private $event;
 
     /**
+     * @ORM\Column(type="float" column="rate_team_one" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateTeamOne;
 
     /**
+     * @ORM\Column(type="float" column="rate_team_two" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateTeamTwo;
 
     /**
+     * @ORM\Column(type="float" column="rate_draw" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateDraw;
 
     /**
+     * @ORM\Column(type="float" column="rate_neither_team_one" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateNeitherTeamOne;
 
     /**
+     * @ORM\Column(type="float" column="rate_neither_team_two" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateNeitherTeamTwo;
 
     /**
+     * @ORM\Column(type="float" column="rate_neither_draw" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $rateNeitherDraw;
 
     /**
+     * @ORM\Column(type="float" column="coefficient_one" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $coefficientOne;
 
     /**
+     * @ORM\Column(type="float" column="coefficient_two" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $coefficientTwo;
 
     /**
+     * @ORM\Column(type="float" column="allowance_one" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $allowanceOne;
 
     /**
+     * @ORM\Column(type="float" column="allowance_two" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $allowanceTwo;
 
     /**
+     * @ORM\Column(type="float" column="total" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $total;
 
     /**
+     * @ORM\Column(type="float" column="total_less" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $totalLess;
 
     /**
+     * @ORM\Column(type="float" column="total_more" precision="10" scale="0" nullable="false")
      * @var float
      */
     private $totalMore;
-
-    /**
-     * @var integer
-     */
-    private $id;
-
 
     /**
      * Set date
@@ -113,27 +123,27 @@ class Bet
     }
 
     /**
-     * Set eventId
+     * Set event
      *
-     * @param integer $eventId
+     * @param Event $event
      *
      * @return Bet
      */
-    public function setEventId($eventId)
+    public function setEvent(Event $event)
     {
-        $this->eventId = $eventId;
+        $this->event = $event;
 
         return $this;
     }
 
     /**
-     * Get eventId
+     * Get event
      *
-     * @return integer
+     * @return Event
      */
     public function getEventId()
     {
-        return $this->eventId;
+        return $this->event;
     }
 
     /**
@@ -446,16 +456,6 @@ class Bet
     public function getTotalMore()
     {
         return $this->totalMore;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
 

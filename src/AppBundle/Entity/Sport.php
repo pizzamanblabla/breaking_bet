@@ -2,19 +2,22 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Sport
+ * @ORM\Entity
+ * @ORM\Table(name="sport")
  */
 class Sport extends Entity
 {
     /**
-     * @ORM\Column(type="string" column="name" length="255" nullable="false")
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string" column="code" length="255" nullable="false")
+     * @ORM\Column(type="string", name="code", length=255, nullable=false)
      * @var string
      */
     private $code;

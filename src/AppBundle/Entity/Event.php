@@ -2,8 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Event
+ * @ORM\Entity
+ * @ORM\Table(name="event")
  */
 class Event extends Entity
 {
@@ -22,13 +25,13 @@ class Event extends Entity
     private $teamSecond;
 
     /**
-     * @ORM\Column(type="string" column="name" length="255" nullable="false")
+     * @ORM\Column(type="string", column="name", length=255, nullable=false)
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="datetime" column="date" nullable="false")
+     * @ORM\Column(type="datetime", column="date", nullable=false)
      * @var \DateTime
      */
     private $date;

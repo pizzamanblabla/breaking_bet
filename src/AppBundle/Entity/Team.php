@@ -2,8 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Team
+ * @ORM\Entity
+ * @ORM\Table(name="team")
  */
 class Team extends Entity
 {
@@ -15,13 +18,13 @@ class Team extends Entity
     private $sport;
 
     /**
-     * @ORM\Column(type="string" column="name" length="255" nullable="false")
+     * @ORM\Column(type="string", column="name", length=255, nullable=false)
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string" column="code" length="255" nullable="false")
+     * @ORM\Column(type="string", column="code", length=255, nullable=false)
      * @var string
      */
     private $code;

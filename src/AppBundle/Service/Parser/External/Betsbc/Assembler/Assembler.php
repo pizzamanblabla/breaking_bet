@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Interaction\Assembler\Request;
+namespace AppBundle\Service\Parser\External\Betbc\Assembler;
 
-use AppBundle\Interaction\Assembler\AssemblerInterface;
+use AppBundle\Service\Parser\External\AssemblerInterface;
 use AppBundle\ServiceConfig\ServiceConfigInterface;
 use GuzzleHttp\Psr7\Request;
 
@@ -12,6 +12,11 @@ class Assembler implements AssemblerInterface
      * @var ServiceConfigInterface
      */
     private $config;
+
+    /**
+     * @var string
+     */
+    private $serviceId;
 
     /**
      * Assembler constructor.
@@ -25,12 +30,14 @@ class Assembler implements AssemblerInterface
     /**
      * {@inheritdoc}
      */
-    public function assemble($serviceId)
+    public function assemble()
     {
         return
             new Request(
                 'GET',
-                $this->config->getBaseUrl($serviceId)
+                $this->config->getBaseUrl($this->serviceId),
+                [],
+                $this->config->getQueryParameters($this->serviceId)
             );
     }
 }

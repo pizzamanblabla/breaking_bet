@@ -5,7 +5,7 @@ namespace AppBundle\Interaction\Protocol;
 use GuzzleHttp\Client;
 use Psr\Http\Message\RequestInterface;
 
-class Protocol
+class Protocol implements ProtocolInterface
 {
     /**
      * @var Client

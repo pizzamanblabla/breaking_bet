@@ -21,4 +21,10 @@ interface ServiceConfigInterface
      * @return string[]
      */
     public function getQueryParameters($serviceId);
+
+    /**
+     * @param string $serviceId
+     * @return string
+     */
+    public function getServiceName($serviceId);
 }

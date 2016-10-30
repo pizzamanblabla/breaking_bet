@@ -3,6 +3,7 @@ parameters:
         betsbc:
             base_url: 'http://www.betsbc.com/api/v1/bets/line'
             proxy: ''
+            service_name: 'Betbc'
             query_parameters_map:
                 rev: '5'
                 ext: '0'

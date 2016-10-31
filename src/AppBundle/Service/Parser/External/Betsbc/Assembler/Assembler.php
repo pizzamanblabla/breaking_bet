@@ -14,11 +14,6 @@ class Assembler implements AssemblerInterface
     private $config;
 
     /**
-     * @var string
-     */
-    private $serviceId;
-
-    /**
      * Assembler constructor.
      * @param ServiceConfigInterface $config
      */
@@ -30,14 +25,14 @@ class Assembler implements AssemblerInterface
     /**
      * {@inheritdoc}
      */
-    public function assemble()
+    public function assemble($serviceId)
     {
         return
             new Request(
                 'GET',
-                $this->config->getBaseUrl($this->serviceId),
+                $this->config->getBaseUrl($serviceId),
                 [],
-                $this->config->getQueryParameters($this->serviceId)
+                $this->config->getQueryParameters($serviceId)
             );
     }
 }

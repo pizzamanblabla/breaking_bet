@@ -7,5 +7,5 @@ interface DataProviderInterface
     /**
      * @return mixed[]
      */
-    public function provide();
+    public function provide($serviceId);
 }

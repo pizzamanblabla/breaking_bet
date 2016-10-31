@@ -2,14 +2,14 @@
 
 namespace AppBundle\Service\Parser\External\Betbc\DataProvider;
 
-use AppBundle\Interaction\Assembler\AssemblerInterface;
 use AppBundle\Interaction\Protocol\ProtocolInterface;
+use AppBundle\Service\Parser\External\AssemblerInterface;
 use AppBundle\Service\Parser\External\DataProviderInterface;
 
 class DataProvider implements DataProviderInterface
 {
     /**
-     * @var AssemblerInterface $assembler
+     * @var AssemblerInterface
      */
     private $assembler;
 
@@ -19,29 +19,24 @@ class DataProvider implements DataProviderInterface
     private $protocol;
 
     /**
-     * @var string
-     */
-    private $serviceId;
-
-    /**
      * DataProvider constructor.
      * @param AssemblerInterface $assembler
      * @param ProtocolInterface $protocol
-     * @param string $serviceId
      */
-    public function __construct($serviceId, AssemblerInterface $assembler, ProtocolInterface $protocol)
+    public function __construct(AssemblerInterface $assembler, ProtocolInterface $protocol)
     {
         $this->assembler = $assembler;
         $this->protocol = $protocol;
-        $this->serviceId = $serviceId;
     }
 
     /**
+     * @param string $serviceId
      * @return mixed[]
      */
-    public function provide()
+    public function provide($serviceId)
     {
-        $response = $this->assembler->assemble($this->serviceId);
+        $request = $this->assembler->assemble($serviceId);
 
+        return $this->protocol->send($request);
     }
 }

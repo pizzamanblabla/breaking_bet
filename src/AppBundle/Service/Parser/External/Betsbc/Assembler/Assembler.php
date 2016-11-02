@@ -31,7 +31,12 @@ class Assembler implements AssemblerInterface
             new Request(
                 'GET',
                 $this->config->getBaseUrl($serviceId),
-                [],
+                [
+                    'proxy' => [
+                        'http'  => $this->config->getProxy($serviceId),
+                        'https' => $this->config->getProxy($serviceId),
+                    ],
+                ],
                 $this->config->getQueryParameters($serviceId)
             );
     }

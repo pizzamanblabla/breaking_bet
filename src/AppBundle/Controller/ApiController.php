@@ -14,16 +14,6 @@ class ApiController extends Controller
      */
     public function numberAction()
     {
-        $sport = new Sport();
-        $sport
-            ->setName('Football')
-            ->setCode('football')
-        ;
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($sport);
-        $em->flush();
 
         return new Response(
             '<html><body>Lucky number: </body></html>'

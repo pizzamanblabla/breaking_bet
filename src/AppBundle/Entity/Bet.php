@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Bet extends Entity
 {
     /**
-     * @ORM\Column(type="datetime", column="date", nullable="false")
+     * @ORM\Column(type="datetime", name="date", nullable=false)
      * @var \DateTime
      */
     private $date;
@@ -24,79 +24,79 @@ class Bet extends Entity
     private $event;
 
     /**
-     * @ORM\Column(type="float", column="rate_team_one", precision=10, scale="0", nullable=false)
+     * @ORM\Column(type="float", name="rate_team_one", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateTeamOne;
 
     /**
-     * @ORM\Column(type="float", column="rate_team_two", precision=10, scale="0", nullable=false)
+     * @ORM\Column(type="float", name="rate_team_two", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateTeamTwo;
 
     /**
-     * @ORM\Column(type="float", column="rate_draw", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="rate_draw", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateDraw;
 
     /**
-     * @ORM\Column(type="float", column="rate_neither_team_one", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="rate_neither_team_one", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateNeitherTeamOne;
 
     /**
-     * @ORM\Column(type="float", column="rate_neither_team_two", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="rate_neither_team_two", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateNeitherTeamTwo;
 
     /**
-     * @ORM\Column(type="float", column="rate_neither_draw", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="rate_neither_draw", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $rateNeitherDraw;
 
     /**
-     * @ORM\Column(type="float", column="coefficient_one", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="coefficient_one", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $coefficientOne;
 
     /**
-     * @ORM\Column(type="float", column="coefficient_two", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="coefficient_two", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $coefficientTwo;
 
     /**
-     * @ORM\Column(type="float", column="allowance_one", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float", name="allowance_one", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $allowanceOne;
 
     /**
-     * @ORM\Column(type="float" column="allowance_two" precision=10 scale=0 nullable=false)
+     * @ORM\Column(type="float", name="allowance_two", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $allowanceTwo;
 
     /**
-     * @ORM\Column(type="float" column="total" precision=10 scale=0 nullable=false)
+     * @ORM\Column(type="float", name="total", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $total;
 
     /**
-     * @ORM\Column(type="float" column="total_less" precision=10 scale=0 nullable=false)
+     * @ORM\Column(type="float", name="total_less", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $totalLess;
 
     /**
-     * @ORM\Column(type="float" column="total_more" precision=10 scale=0 nullable=false)
+     * @ORM\Column(type="float", name="total_more", precision=10, scale=0, nullable=false)
      * @var float
      */
     private $totalMore;

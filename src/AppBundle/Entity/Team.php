@@ -18,13 +18,13 @@ class Team extends Entity
     private $sport;
 
     /**
-     * @ORM\Column(type="string", column="name", length=255, nullable=false)
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", column="code", length=255, nullable=false)
+     * @ORM\Column(type="string", name="code", length=255, nullable=false)
      * @var string
      */
     private $code;

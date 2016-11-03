@@ -25,13 +25,13 @@ class Event extends Entity
     private $teamSecond;
 
     /**
-     * @ORM\Column(type="string", column="name", length=255, nullable=false)
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="datetime", column="date", nullable=false)
+     * @ORM\Column(type="datetime", name="date", nullable=false)
      * @var \DateTime
      */
     private $date;

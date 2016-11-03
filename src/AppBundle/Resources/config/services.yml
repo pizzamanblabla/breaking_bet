@@ -1,1 +1,8 @@
 services:
+    service.parser:
+        class: AppBundle\Service\Parser\Parser
+        arguments:
+            - '@service.parser.external.factory'
+    service.parser.external.factory:
+        class: AppBundle\Service\Parser\External\Factory\Factory
+

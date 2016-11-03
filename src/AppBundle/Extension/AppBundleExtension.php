@@ -31,7 +31,8 @@ class AppBundleExtension extends Extension
     {
         return [
             'services.yml',
-            'parameters.yml'
+            'parameters.yml',
+            'command.yml',
         ];
     }
 }

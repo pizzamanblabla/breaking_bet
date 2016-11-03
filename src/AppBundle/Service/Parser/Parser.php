@@ -2,9 +2,11 @@
 
 namespace AppBundle\Service\Parser;
 
+use AppBundle\Interaction\Request\RequestInterface;
 use AppBundle\Service\Parser\External\Factory\FactoryInterface;
+use AppBundle\Service\ServiceInterface;
 
-class Parser implements ParserInterface
+class Parser implements ServiceInterface
 {
     /**
      * @var FactoryInterface
@@ -23,10 +25,10 @@ class Parser implements ParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($serviceId)
+    public function behave(RequestInterface $request)
     {
-        $response = $this->factory->dataProvider($serviceId)->provide();
+        $response = $this->factory->dataProvider($request->getServiceId())->provide($request->getServiceId());
 
-        $this->factory->resolver($serviceId)->resolve($response);
+        $this->factory->resolver($request->getServiceId())->resolve($response);
     }
 }

@@ -25,7 +25,7 @@ class Factory implements FactoryInterface {
      */
     public function assembler($serviceId)
     {
-        // TODO: Implement assembler() method.
+        return $this->create($serviceId, 'Assembler');
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace AppBundle\Interaction\Protocol;
 
+use AppBundle\Interaction\Protocol\Exception\WrongHttpStatusException;
 use GuzzleHttp\Client;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class Protocol implements ProtocolInterface
 {
@@ -23,11 +23,22 @@ class Protocol implements ProtocolInterface
     }
 
     /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
-    public function send(RequestInterface $request)
+    public function send(RequestInterface $request, array $options)
     {
-        return $this->client->send($request);
+        $response =  $this->client->send(
+            $request,
+            $options
+        );
+
+        if ($response->getStatusCode() != 200) {
+            throw new WrongHttpStatusException(
+                $response->getBody()->getContents(),
+                $response->getStatusCode()
+            );
+        }
+
+        return $response;
     }
 }

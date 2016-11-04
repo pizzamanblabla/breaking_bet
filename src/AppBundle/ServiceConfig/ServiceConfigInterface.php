@@ -12,7 +12,7 @@ interface ServiceConfigInterface
 
     /**
      * @param string $serviceId
-     * @return string
+     * @return string[]
      */
     public function getProxy($serviceId);
 

@@ -28,10 +28,13 @@ services:
             - '@service_config'
     parser.external.resolver.betbc:
         class: AppBundle\Service\Parser\External\Betsbc\Resolver\Resolver
+        arguments:
+            - '@service_container'
     parser.external.data_provider.betbc:
         class: AppBundle\Service\Parser\External\Betsbc\DataProvider\DataProvider
         arguments:
             - '@parser.external.assembler.betbc'
             - '@interaction.protocol'
+            - '@service_config'
 
 

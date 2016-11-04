@@ -3,11 +3,14 @@
 namespace AppBundle\Interaction\Protocol;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 interface ProtocolInterface
 {
     /**
      * @param RequestInterface $request
+     * @param array $options
+     * @return ResponseInterface
      */
-    public function send(RequestInterface $request);
+    public function send(RequestInterface $request, array $options);
 }

@@ -23,11 +23,11 @@ class Bet extends Entity
      */
     private $event;
 
-    /**
-     * @ORM\OneToMany(targetEntity="", mappedBy="cart", orphanRemoval=true, cascade={"persist", "remove"})
-     * @var ArrayCollection|CartItem[]
-     **/
-    private $coefficients;
+//    /**
+//     * @ORM\OneToMany(targetEntity="", mappedBy="cart", orphanRemoval=true, cascade={"persist", "remove"})
+//     * @var ArrayCollection|CartItem[]
+//     **/
+//    private $coefficients;
 
     /**
      * Set date

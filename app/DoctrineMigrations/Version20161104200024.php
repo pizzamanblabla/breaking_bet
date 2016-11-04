@@ -17,7 +17,7 @@ class Version20161104200024 extends AbstractMigration
     {
         $table = $schema->createTable('coefficient');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('event_id', 'integer');
+        $table->addColumn('bet_id', 'integer');
         $table->addColumn('coefficient_type_id', 'integer');
         $table->addColumn('date', 'datetime');
         $table->addColumn('value', 'float');

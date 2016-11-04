@@ -25,10 +25,10 @@ class Event extends Entity
     private $teamSecond;
 
     /**
-     * @ORM\Column(type="string", name="name", length=255, nullable=false)
+     * @ORM\Column(type="string", name="code", length=255, nullable=false)
      * @var string
      */
-    private $name;
+    private $code;
 
     /**
      * @ORM\Column(type="datetime", name="date", nullable=false)
@@ -37,13 +37,20 @@ class Event extends Entity
     private $date;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Chain")
+     * @ORM\JoinColumn(name="chain_id", referencedColumnName="id", nullable=true)
+     * @var Chain
+     */
+    private $chain;
+
+    /**
      * Set teamFirst
      *
      * @param Team $teamFirst
      *
      * @return Event
      */
-    public function setTeamFirstId(Team $teamFirst)
+    public function setTeamFirst(Team $teamFirst)
     {
         $this->teamFirst = $teamFirst;
 
@@ -67,7 +74,7 @@ class Event extends Entity
      *
      * @return Event
      */
-    public function setTeamSecondId(Team $teamSecond)
+    public function setTeamSecond(Team $teamSecond)
     {
         $this->teamSecond = $teamSecond;
 
@@ -85,27 +92,27 @@ class Event extends Entity
     }
 
     /**
-     * Set name
+     * Set code
      *
-     * @param string $name
+     * @param string $code
      *
      * @return Event
      */
-    public function setName($name)
+    public function setCode($code)
     {
-        $this->name = $name;
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get code
      *
      * @return string
      */
     public function getName()
     {
-        return $this->name;
+        return $this->code;
     }
 
     /**
@@ -130,5 +137,34 @@ class Event extends Entity
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return Chain
+     */
+    public function getChain()
+    {
+        return $this->chain;
+    }
+
+    /**
+     * @param Chain $chain
+     * @return Event
+     */
+    public function setChain($chain)
+    {
+        $this->chain = $chain;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

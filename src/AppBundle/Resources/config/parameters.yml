@@ -9,3 +9,4 @@ parameters:
             query_parameters_map:
                 rev: '5'
                 ext: '0'
+                lng: '1'

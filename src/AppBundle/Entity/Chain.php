@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="team")
+ * @ORM\Table(name="chain")
  */
-class Team extends Entity
+class Chain extends Entity
 {
     /**
      * @ORM\ManyToOne(targetEntity="Sport")
@@ -34,7 +34,7 @@ class Team extends Entity
      *
      * @param Sport $sport
      *
-     * @return Team
+     * @return Chain
      */
     public function setSport(Sport $sport)
     {
@@ -44,7 +44,7 @@ class Team extends Entity
     }
 
     /**
-     * Get sportId
+     * Get sport
      *
      * @return Sport
      */
@@ -58,7 +58,7 @@ class Team extends Entity
      *
      * @param string $name
      *
-     * @return Team
+     * @return Chain
      */
     public function setName($name)
     {
@@ -82,7 +82,7 @@ class Team extends Entity
      *
      * @param string $code
      *
-     * @return Team
+     * @return Chain
      */
     public function setCode($code)
     {

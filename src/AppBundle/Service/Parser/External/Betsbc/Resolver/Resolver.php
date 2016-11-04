@@ -4,6 +4,7 @@ namespace AppBundle\Service\Parser\External\Betsbc\Resolver;
 
 use AppBundle\Entity\Bet;
 use AppBundle\Entity\Chain;
+use AppBundle\Entity\Coefficient;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Sport;
 use AppBundle\Entity\Team;
@@ -28,7 +29,7 @@ class Resolver extends BaseResolver
                 foreach ($chain['evts'] as $event) {
                     $eventEntity = $this->resolveEvent($event, $chainEntity);
 
-                    $this->resolveBet($event['main']);
+                    $this->resolveBet($event['main'], $eventEntity);
 
                     echo json_encode($event);die;
                 }
@@ -162,13 +163,44 @@ class Resolver extends BaseResolver
      */
     private function resolveBet(array $bet, Event $event)
     {
+        var_dump($bet);die;
+
         $entity = (new Bet())
             ->setDate(new \DateTime())
             ->setEvent($event)
         ;
 
+        $repository = $this->getDoctrine()->getRepository('AppBundle:CoefficientType');
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
+
+        if (array_key_exists('69', $bet)) {
+            $data = $this->finder->findOrElse('P1', $bet[69], []);
+
+            if (!count($data)) {
+                $data = $this->finder->findOrElse('Y', $bet[69], []);
+            }
+
+            $coefficient = (new Coefficient())
+                ->setBet($entity)
+                ->setCoefficientType($repository->findOneByCode('actual_p1'))
+                ->setValue($data['kf'])
+                ->setDate(new \DateTime($data['md']))
+                ->setPs($data['ps'])
+            ;
+        }
+
+        if (array_key_exists('70', $bet)) {
+
+        }
+
+        if (array_key_exists('71', $bet)) {
+
+        }
+
+        if (array_key_exists('72', $bet)) {
+
+        }
     }
 }

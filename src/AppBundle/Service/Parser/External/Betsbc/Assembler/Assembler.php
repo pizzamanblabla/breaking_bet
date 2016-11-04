@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\Parser\External\Betbc\Assembler;
+namespace AppBundle\Service\Parser\External\Betsbc\Assembler;
 
 use AppBundle\Service\Parser\External\AssemblerInterface;
 use AppBundle\ServiceConfig\ServiceConfigInterface;
@@ -30,14 +30,8 @@ class Assembler implements AssemblerInterface
         return
             new Request(
                 'GET',
-                $this->config->getBaseUrl($serviceId),
-                [
-                    'proxy' => [
-                        'http'  => $this->config->getProxy($serviceId),
-                        'https' => $this->config->getProxy($serviceId),
-                    ],
-                ],
-                $this->config->getQueryParameters($serviceId)
+                $this->config->getBaseUrl($serviceId) . '?' . $this->config->getQueryParameters($serviceId)
+
             );
     }
 }

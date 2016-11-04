@@ -2,8 +2,8 @@ parameters:
     service_configuration:
         betsbc:
             base_url: 'http://www.betsbc.com/api/v1/bets/line'
-            proxy: ''
-            service_name: 'Betbc'
+            proxy: '89.107.58.215:443'
+            service_name: 'betbc'
             query_parameters_map:
                 rev: '5'
                 ext: '0'

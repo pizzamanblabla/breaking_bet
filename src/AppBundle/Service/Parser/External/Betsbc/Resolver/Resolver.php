@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\Parser\External\Betbc\Resolver;
+namespace AppBundle\Service\Parser\External\Betsbc\Resolver;
 
 use AppBundle\Service\Parser\External\ResolverInterface;
 

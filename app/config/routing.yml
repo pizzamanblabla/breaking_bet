@@ -1,3 +1,4 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+controller.api.parse:
+    path: '/api/parse'
+    defaults: { _controller: controller.api:parseAction, security: false }
+    methods: [GET]

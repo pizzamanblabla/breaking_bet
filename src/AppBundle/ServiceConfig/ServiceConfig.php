@@ -42,7 +42,7 @@ class ServiceConfig implements ServiceConfigInterface
      */
     public function getQueryParameters($serviceId)
     {
-        return $this->getValueOrThrowException($this->getConfig($serviceId), 'query_parameters_map');
+        return http_build_query($this->getValueOrThrowException($this->getConfig($serviceId), 'query_parameters_map'));
     }
 
     /**

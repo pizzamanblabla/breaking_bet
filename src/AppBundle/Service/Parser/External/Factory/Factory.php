@@ -2,14 +2,40 @@
 
 namespace AppBundle\Service\Parser\External\Factory;
 
+use AppBundle\ServiceConfig\ServiceConfig;
+use AppBundle\ServiceConfig\ServiceConfigInterface;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class Factory implements FactoryInterface {
+
+    /**
+     * @var ServiceConfig
+     */
+    private $config;
+
+    /**
+     * @var Container
+     */
+    private $container;
+
+    /**
+     * Factory constructor.
+     * @param ServiceConfigInterface $config
+     * @param ContainerInterface $container
+     */
+    public function __construct(ServiceConfigInterface $config, ContainerInterface $container)
+    {
+        $this->config = $config;
+        $this->container = $container;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function dataProvider($serviceId)
     {
-        return $this->create($serviceId, 'DataProvider');
+        return $this->create($serviceId, 'data_provider');
     }
 
     /**
@@ -17,7 +43,7 @@ class Factory implements FactoryInterface {
      */
     public function resolver($serviceId)
     {
-        return $this->create($serviceId, 'Resolver');
+        return $this->create($serviceId, 'resolver');
     }
 
     /**
@@ -25,7 +51,7 @@ class Factory implements FactoryInterface {
      */
     public function assembler($serviceId)
     {
-        return $this->create($serviceId, 'Assembler');
+        return $this->create($serviceId, 'assembler');
     }
 
     /**
@@ -35,8 +61,12 @@ class Factory implements FactoryInterface {
      */
     private function create($serviceId, $class)
     {
-        $className = sprintf('\AppBundle\Service\Parser\External\%s\%s\%s', $serviceId, $class, $class);
+        $className = sprintf(
+            'parser.external.%s.%s',
+            $class,
+            $this->config->getServiceName($serviceId)
+        );
 
-        return new $className();
+        return $this->container->get($className);
     }
 }

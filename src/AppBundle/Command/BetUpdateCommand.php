@@ -8,9 +8,10 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BetUpdate extends Command
+class BetUpdateCommand extends Command
 {
     use LoggerAwareTrait;
 
@@ -37,8 +38,15 @@ class BetUpdate extends Command
     protected function configure()
     {
         $this
-            ->setName('parser:update')
+            ->setName('bets:update')
             ->setDescription('Updating bets')
+            ->addOption(
+                'service',
+                '-s',
+                InputOption::VALUE_OPTIONAL,
+                'Who do you want to greet?',
+                'all'
+            )
         ;
     }
 

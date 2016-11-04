@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\Parser\External\Betbc\DataProvider;
+namespace AppBundle\Service\Parser\External\Betsbc\DataProvider;
 
 use AppBundle\Interaction\Protocol\ProtocolInterface;
 use AppBundle\Service\Parser\External\AssemblerInterface;
@@ -30,8 +30,7 @@ class DataProvider implements DataProviderInterface
     }
 
     /**
-     * @param string $serviceId
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function provide($serviceId)
     {

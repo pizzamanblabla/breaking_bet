@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Sport;
+use AppBundle\Interaction\Request\Request;
+use AppBundle\Service\ServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,10 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends Controller
 {
     /**
-     * @Route("/api/parse")
+     * @var ServiceInterface
      */
-    public function numberAction()
+    private $service;
+
+    /**
+     * ApiController constructor.
+     * @param ServiceInterface $service
+     */
+    public function __construct(ServiceInterface $service)
     {
+        $this->service = $service;
+    }
+
+    public function parseAction()
+    {
+        $this->service->behave((new Request())->setServiceId('betsbc'));
 
         return new Response(
             '<html><body>Lucky number: </body></html>'

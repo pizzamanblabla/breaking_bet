@@ -4,6 +4,7 @@ namespace AppBundle\Interaction\Protocol;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Protocol implements ProtocolInterface
 {
@@ -23,9 +24,10 @@ class Protocol implements ProtocolInterface
 
     /**
      * @param RequestInterface $request
+     * @return ResponseInterface
      */
     public function send(RequestInterface $request)
     {
-        $this->client->send($request);
+        return $this->client->send($request);
     }
 }

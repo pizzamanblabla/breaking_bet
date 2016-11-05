@@ -35,7 +35,6 @@ class Chain extends BaseDataMigrator
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
-        $em->flush();
 
         return $entity;
     }

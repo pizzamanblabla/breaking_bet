@@ -18,6 +18,11 @@ abstract class BaseDataMigrator implements DataMigratorInterface
         $this->setContainer($container);
     }
 
+    public function flush()
+    {
+        $this->getDoctrine()->getManager()->flush();
+    }
+
     /**
      * @return mixed
      */

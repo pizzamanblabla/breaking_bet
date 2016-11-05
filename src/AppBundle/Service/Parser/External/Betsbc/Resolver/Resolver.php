@@ -59,6 +59,8 @@ class Resolver extends BaseResolver
                 }
             }
         }
+
+        $this->migrator->getChain()->flush();
     }
 
     /**

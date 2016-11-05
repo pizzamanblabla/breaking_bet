@@ -2,39 +2,29 @@
 
 namespace AppBundle\Service\Parser\External;
 
+use AppBundle\DataMigrator\Factory\DataMigratorFactoryInterface;
 use AppBundle\Helper\Finder\Finder;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 abstract class BaseResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
-
     /**
      * @var Finder
      */
     protected $finder;
 
     /**
-     * Resolver constructor.
-     * @param Container $container
-     * @param Finder $finder
+     * @var
      */
-    public function __construct(Container $container, Finder $finder)
-    {
-        $this->setContainer($container);
-        $this->finder = $finder;
-    }
+    protected $migrator;
 
     /**
-     * @return mixed
+     * Resolver constructor.
+     * @param DataMigratorFactoryInterface $migrator
+     * @param Finder $finder
      */
-    protected function getDoctrine()
+    public function __construct(DataMigratorFactoryInterface $migrator, Finder $finder)
     {
-        if (!$this->container->has('doctrine')) {
-            throw new \LogicException('The DoctrineBundle is not registered in your application.');
-        }
-
-        return $this->container->get('doctrine');
+        $this->migrator = $migrator;
+        $this->finder = $finder;
     }
 }

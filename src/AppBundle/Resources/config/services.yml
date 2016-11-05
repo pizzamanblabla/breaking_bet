@@ -29,12 +29,19 @@ services:
     parser.external.resolver.betbc:
         class: AppBundle\Service\Parser\External\Betsbc\Resolver\Resolver
         arguments:
-            - '@service_container'
+            - '@data_migrator.factory'
+            - '@helper.finder'
     parser.external.data_provider.betbc:
         class: AppBundle\Service\Parser\External\Betsbc\DataProvider\DataProvider
         arguments:
             - '@parser.external.assembler.betbc'
             - '@interaction.protocol'
             - '@service_config'
+    data_migrator.factory:
+        class: AppBundle\DataMigrator\Factory\DataMigratorFactory
+        arguments:
+            - '@service_container'
+    helper.finder:
+        class: AppBundle\Helper\Finder\Finder
 
 

@@ -15,3 +15,9 @@
 /vendor/
 /web/bundles/
 /.idea/
+/web/assets/vendor
+/bower_components/
+/node_modules/
+
+# Composer PHAR
+/composer.phar

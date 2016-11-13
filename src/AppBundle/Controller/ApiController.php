@@ -3,11 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Sport;
-use AppBundle\Interaction\Request\Request;
+use AppBundle\Interaction\Request\Request as ServiceRequest;
 use AppBundle\Service\ServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends Controller
 {
@@ -27,7 +28,7 @@ class ApiController extends Controller
 
     public function parseAction()
     {
-        $this->service->behave((new Request())->setServiceId('betsbc'));
+        $this->service->behave((new ServiceRequest())->setServiceId('betsbc'));
 
         return new Response(
             '<html><body>Lucky number: </body></html>'
@@ -35,22 +36,13 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/api/sport/get/")
+     * @param Request $request
+     * @return Response
      */
-    public function showAction()
+    public function operationAction(Request $request)
     {
-        $product = $this->getDoctrine()
-            ->getRepository('AppBundle:Sport')
-            ->find(1);
-
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id '. 1
-            );
-        }
-
         return new Response(
-            '<html><body>Lucky number: '. var_dump($product) .'</body></html>'
+            '<html><body>Lucky number:</body></html>'
         );
     }
 }

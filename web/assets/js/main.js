@@ -1,4 +1,4 @@
-BreakingBet = {
+var BreakingBet = {
     init: function() {
         this.initSportChangeHandler();
     },
@@ -6,6 +6,9 @@ BreakingBet = {
 
     },
     filter: function() {
+
+    },
+    reloadBets: function() {
 
     }
 };

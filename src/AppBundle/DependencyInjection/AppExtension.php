@@ -33,6 +33,7 @@ class AppExtension extends Extension
             'services.yml',
             'parameters.yml',
             'command.yml',
+            'controllers.yml',
         ];
     }
 }

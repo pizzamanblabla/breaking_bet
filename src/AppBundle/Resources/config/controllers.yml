@@ -1,0 +1,10 @@
+services:
+    controller.api:
+        class: AppBundle\Controller\ApiController
+        arguments:
+            - '@service.parser'
+
+    controller.main:
+        class: AppBundle\Controller\MainController
+        arguments:
+            - '@service_container'

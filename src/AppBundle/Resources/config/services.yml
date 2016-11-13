@@ -1,8 +1,4 @@
 services:
-    controller.api:
-        class: AppBundle\Controller\ApiController
-        arguments:
-            - '@service.parser'
     service.parser:
         class: AppBundle\Service\Parser\Parser
         arguments:

@@ -2,3 +2,13 @@ controller.api.parse:
     path: '/api/parse'
     defaults: { _controller: controller.api:parseAction, security: false }
     methods: [GET]
+
+controller.api.bet.get:
+    path: '/api/bet/get'
+    defaults: { _controller: controller.api:operationAction, security: false }
+    methods: [POST]
+
+controller.main.home:
+    path: '/'
+    defaults: { _controller: controller.main:homeAction, security: false }
+    methods: [GET]

@@ -21,3 +21,9 @@
 
 # Composer PHAR
 /composer.phar
+
+# assets
+/web/public/.sass-cache/
+/web/public/dist/
+/web/assets/node_modules
+/web/public/*

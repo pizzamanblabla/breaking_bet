@@ -22,6 +22,17 @@ class MainController extends Controller
      */
     public function homeAction()
     {
-        return $this->render('AppBundle:Bets:list.html.twig', []);
+        $em = $this->getDoctrine()->getManager();
+        $sports = $em->getRepository('AppBundle:Sport')->findAll();
+        $chains = $em->getRepository('AppBundle:Chain')->findAll();
+
+        return
+            $this->render(
+                'AppBundle:Bets:list.html.twig',
+                [
+                    'sports' => $sports,
+                    'event_chains' => $chains,
+                ]
+            );
     }
 }

@@ -1,0 +1,35 @@
+<div class="filters">
+    <div class="filter">
+        <div class="filter-column">
+            <div class="select-wrapper-group">
+                <div class="select-wrapper select-wrapper-half">
+                    <select name="date_from">
+                        <option value="0">-</option>
+                    </select>
+                </div>
+                <span class="hyphen">-</span>
+                <div class="select-wrapper select-wrapper-half">
+                    <select name="date_to">
+                        <option value="0">-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="select-wrapper">
+                <select name="sport">
+                    <option value="0">All</option>
+                    {% for sport in sports %}
+                        <option value="{{ sport.id }}">{{ sport.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-wrapper">
+                <select name="event-chain">
+                    <option value="0">All</option>
+                    {% for chain in event_chains %}
+                        <option value="{{ chain.id }}">{{ chain.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

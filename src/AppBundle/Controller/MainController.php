@@ -25,6 +25,8 @@ class MainController extends Controller
         $em = $this->getDoctrine()->getManager();
         $sports = $em->getRepository('AppBundle:Sport')->findAll();
         $chains = $em->getRepository('AppBundle:Chain')->findAll();
+        $coefficientTypes = $em->getRepository('AppBundle:CoefficientType')->findAll();
+
 
         return
             $this->render(
@@ -32,6 +34,7 @@ class MainController extends Controller
                 [
                     'sports' => $sports,
                     'event_chains' => $chains,
+                    'coefficientTypes' => $coefficientTypes
                 ]
             );
     }

@@ -2,14 +2,14 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Interaction\Request\RequestInterface;
-use AppBundle\Interaction\Response\ResponseInterface;
+use AppBundle\Common\Dto\Request\ApiRequestInterface;
+use AppBundle\Common\Dto\Response\ApiResponseInterface;
 
 interface ServiceInterface
 {
     /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
+     * @param ApiRequestInterface $request
+     * @return ApiResponseInterface
      */
-    public function behave(RequestInterface $request);
+    public function behave(ApiRequestInterface $request);
 }

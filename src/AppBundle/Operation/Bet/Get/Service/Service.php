@@ -2,10 +2,10 @@
 
 namespace AppBundle\Operation\Bet\Get\Service;
 
-use AppBundle\Common\Dto\Request\ApiRequestInterface;
-use AppBundle\Common\Dto\Response\ApiResponseInterface;
+use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
+use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
 use AppBundle\Operation\Bet\Get\Dto\Request\ApiRequest;
-use AppBundle\Service\ServiceInterface;
+use AppBundle\Internal\Service\ServiceInterface;
 
 class Service implements ServiceInterface
 {

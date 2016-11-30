@@ -2,7 +2,7 @@
 
 namespace AppBundle\Operation\Bet\Get\Dto\Request;
 
-use AppBundle\Common\Dto\Request\ApiRequestInterface;
+use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
 use AppBundle\Entity\Chain;
 use AppBundle\Entity\CoefficientType;
 use AppBundle\Entity\Sport;

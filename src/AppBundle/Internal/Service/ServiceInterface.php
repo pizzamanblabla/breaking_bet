@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Internal\Service;
 
-use AppBundle\Common\Dto\Request\ApiRequestInterface;
-use AppBundle\Common\Dto\Response\ApiResponseInterface;
+use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
+use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
 
 interface ServiceInterface
 {

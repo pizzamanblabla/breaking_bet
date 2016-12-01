@@ -2,9 +2,12 @@
 
 namespace AppBundle\Service\Parser;
 
-use AppBundle\Interaction\Request\RequestInterface;
+use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
+use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
+use AppBundle\Interaction\Dto\Response\EmptySuccessfulResponse;
+use AppBundle\Interaction\Request\Request;
+use AppBundle\Internal\Service\ServiceInterface;
 use AppBundle\Service\Parser\External\Factory\FactoryInterface;
-use AppBundle\Service\ServiceInterface;
 
 class Parser implements ServiceInterface
 {
@@ -23,12 +26,24 @@ class Parser implements ServiceInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param ApiRequestInterface|Request $request
+     * @return ApiResponseInterface
      */
-    public function behave(RequestInterface $request)
+    public function behave(ApiRequestInterface $request)
     {
-        $response = $this->factory->dataProvider($request->getServiceId())->provide($request->getServiceId());
+        $response = $this->performOperation($request);
 
         $this->factory->resolver($request->getServiceId())->resolve($response);
+
+        return new EmptySuccessfulResponse();
+    }
+
+    /**
+     * @param ApiRequestInterface|Request $request
+     * @return mixed[]
+     */
+    private function performOperation(ApiRequestInterface $request)
+    {
+        return $this->factory->dataProvider($request->getServiceId())->provide($request->getServiceId());
     }
 }

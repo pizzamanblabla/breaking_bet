@@ -2,7 +2,9 @@
 
 namespace AppBundle\Interaction\Request;
 
-class Request implements RequestInterface
+use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
+
+class Request implements ApiRequestInterface
 {
     /**
      * @var string

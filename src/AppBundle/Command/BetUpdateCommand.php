@@ -3,7 +3,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Interaction\Request\Request;
-use AppBundle\Service\ServiceInterface;
+use AppBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;

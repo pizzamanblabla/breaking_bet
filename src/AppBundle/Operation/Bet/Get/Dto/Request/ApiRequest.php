@@ -7,6 +7,7 @@ use AppBundle\Entity\Chain;
 use AppBundle\Entity\CoefficientType;
 use AppBundle\Entity\Sport;
 use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ApiRequest implements ApiRequestInterface
 {
@@ -22,11 +23,15 @@ class ApiRequest implements ApiRequestInterface
 
     /**
      * @var DateTime
+     *
+     * @Assert\NotBlank()
      */
     private $dateFrom;
 
     /**
      * @var DateTime
+     *
+     * @Assert\NotBlank()
      */
     private $dateTo;
 

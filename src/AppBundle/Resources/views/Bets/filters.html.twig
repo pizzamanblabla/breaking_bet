@@ -1,4 +1,4 @@
-<div class="filters">
+<div id="filters" class="filters">
     <div class="filter-column">
         <div class="select-wrapper-group">
             <div class="select-wrapper select-wrapper-half">
@@ -34,24 +34,18 @@
             </select>
         </div>
     </div>
-    <div class="filter-column">
-        <div class="select-wrapper">
-            <select name="event-chain">
-                <option value="0">Coefficient type</option>
-                {% for type in coefficientTypes %}
-                    <option value="{{ type.id }}">{{ type.name }}</option>
-                {% endfor %}
-            </select>
+    {% for type in coefficientTypes %}
+        {% if (loop.index - 1) is divisible by(3) or loop.index==1 %}
+            <div class="filter-column">
+        {% endif %}
+        <div class="range-wrapper">
+            <label for="{{ type.code }}">{{ type.name }} : <span id="coefficient-value-{{ type.id }}">0</span></label>
+            <input id="coefficient-{{ type.id }}" class="coefficient-control" type="range" name="{{ type.code }}" value="0" min="-20" max="20">
         </div>
-        <div class="select-wrapper">
-            <select name="event-chain">
-                <option value="0">Coefficient type</option>
-                {% for type in coefficientTypes %}
-                    <option value="{{ type.id }}">{{ type.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
+        {% if loop.index is divisible by(3) %}
+            </div>
+        {% endif %}
+    {% endfor %}
     <div class="filter-column right">
         <input class="search-button" value="Search" type="button">
     </div>

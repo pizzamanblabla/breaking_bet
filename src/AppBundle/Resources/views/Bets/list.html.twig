@@ -3,16 +3,14 @@
 <div class="content">
     {% include 'AppBundle:Bets:filters.html.twig' %}
     <div class="bets-block">
-        <table class="bets">
-            <tr>
-                <tr class="table-head">
-                    <td>Sport</td>
-                    <td>Chain</td>
-                    <td>Event</td>
-                    {% for type in coefficientTypes %}
-                        <td>{{ type.name }}</td>
-                    {% endfor %}
-                </tr>
+        <table id="bets" class="bets">
+            <tr class="table-head">
+                <td>Sport</td>
+                <td>Chain</td>
+                <td>Event</td>
+                {% for type in coefficientTypes %}
+                    <td>{{ type.name }}</td>
+                {% endfor %}
             </tr>
         </table>
     </div>

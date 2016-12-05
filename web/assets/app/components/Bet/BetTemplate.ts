@@ -1,0 +1,1 @@
+export default '<tr><td>{{ bet.sport.name }}</td><td>{{ bet.chain.name}}</td></tr>'

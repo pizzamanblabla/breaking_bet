@@ -4,20 +4,28 @@ namespace AppBundle\Operation\Bet\Get\Dto\Request;
 
 use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
 use AppBundle\Entity\Chain;
-use AppBundle\Entity\CoefficientType;
 use AppBundle\Entity\Sport;
 use DateTime;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 class ApiRequest implements ApiRequestInterface
 {
     /**
      * @var Sport
+     *
+     * @Type("AppBundle\Entity\Sport")
+     * @SerializedName("sport")
      */
     private $sport;
 
     /**
      * @var Chain
+     *
+     * @Type("AppBundle\Entity\Chain")
+     * @SerializedName("chain")
      */
     private $chain;
 
@@ -34,11 +42,6 @@ class ApiRequest implements ApiRequestInterface
      * @Assert\NotBlank()
      */
     private $dateTo;
-
-    /**
-     * @var CoefficientType
-     */
-    private $coefficientType;
 
     /**
      * @var float
@@ -114,24 +117,6 @@ class ApiRequest implements ApiRequestInterface
     public function setDateTo($dateTo)
     {
         $this->dateTo = $dateTo;
-        return $this;
-    }
-
-    /**
-     * @return CoefficientType
-     */
-    public function getCoefficientType()
-    {
-        return $this->coefficientType;
-    }
-
-    /**
-     * @param CoefficientType $coefficientType
-     * @return ApiRequest
-     */
-    public function setCoefficientType($coefficientType)
-    {
-        $this->coefficientType = $coefficientType;
         return $this;
     }
 

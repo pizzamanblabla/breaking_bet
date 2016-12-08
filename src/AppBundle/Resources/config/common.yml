@@ -1,1 +1,6 @@
 services:
+    breaking_bet.object_builder.jms:
+        class: AppBundle\Internal\ObjectBuilder\JMSObjectBuilder
+        arguments:
+            - '@jms_serializer'
+            - '@logger'

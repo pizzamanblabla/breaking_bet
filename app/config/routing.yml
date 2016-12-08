@@ -1,8 +1,3 @@
-controller.api.parse:
-    path: '/api/parse'
-    defaults: { _controller: controller.api:parseAction, security: false }
-    methods: [GET]
-
 controller.api.bet.get:
     path: '/api/bet/get'
     defaults: { _controller: controller.api:operationAction, security: false }

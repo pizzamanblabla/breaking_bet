@@ -5,7 +5,7 @@ services:
             - '@breaking_bet.operation.bet.get.http_to_api_transformer'
             - '@validator'
             - '@breaking_bet.operation.bet.get.service'
-            - '@'
+            - '@breaking_bet.operation.bet.get.api_to_http_transformer'
             - '@logger'
 
     controller.main:

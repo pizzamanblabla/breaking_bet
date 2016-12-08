@@ -3,7 +3,7 @@
 namespace AppBundle\Interaction\Transformer\Request;
 
 use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
-use AppBundle\Interaction\Dto\Request\AriRequestFactoryInterface;
+use AppBundle\Interaction\Dto\Request\ApiRequestFactoryInterface;
 use AppBundle\Internal\ObjectBuilder\ObjectBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,16 +15,18 @@ class Transformer implements TransformerInterface
     private $builder;
 
     /**
-     * @var AriRequestFactoryInterface
+     * @var ApiRequestFactoryInterface
      */
     private $requestFactory;
 
     /**
      * @param ObjectBuilderInterface $builder
-     * @param AriRequestFactoryInterface $requestFactory
+     * @param ApiRequestFactoryInterface $requestFactory
      */
-    public function __construct(ObjectBuilderInterface $builder, AriRequestFactoryInterface $requestFactory)
-    {
+    public function __construct(
+        ObjectBuilderInterface $builder,
+        ApiRequestFactoryInterface $requestFactory
+    ) {
         $this->builder = $builder;
         $this->requestFactory = $requestFactory;
     }

@@ -1,0 +1,12 @@
+services:
+    breaking_bet.operation.bet.get.service:
+        class: AppBundle\Operation\Bet\Get\Service\Service
+
+    breaking_bet.operation.bet.get.http_to_api_transformer:
+        class: AppBundle\Interaction\Transformer\Request\Transformer
+        arguments:
+            - '@'
+            - '@breaking_bet.operation.bet.get.request_factory'
+
+    breaking_bet.operation.bet.get.request_factory:
+        class: AppBundle\Operation\Bet\Get\Dto\Request\ApiRequestFactory

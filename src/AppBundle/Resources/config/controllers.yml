@@ -2,7 +2,11 @@ services:
     controller.api:
         class: AppBundle\Controller\ApiController
         arguments:
-            - '@service.parser'
+            - '@breaking_bet.operation.bet.get.http_to_api_transformer'
+            - '@validator'
+            - '@breaking_bet.operation.bet.get.service'
+            - '@'
+            - '@logger'
 
     controller.main:
         class: AppBundle\Controller\MainController

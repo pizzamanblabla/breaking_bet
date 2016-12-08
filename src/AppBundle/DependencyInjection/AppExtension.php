@@ -34,6 +34,7 @@ class AppExtension extends Extension
             'parameters.yml',
             'command.yml',
             'controllers.yml',
+            'operation/bet/get.yml',
         ];
     }
 }

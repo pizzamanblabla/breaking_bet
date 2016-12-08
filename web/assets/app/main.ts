@@ -11,15 +11,19 @@ let components: Component[] = [
 
 window.addEventListener('DOMContentLoaded', () => {
 
+
     // for (let component of components) {
     //     let instance = Object.create(component.element.prototype);
     //     component.element.prototype.constructor.call(instance, {el: component.name});
     // }
 
     document.getElementById('coefficient-1').addEventListener('change',  () => {
-        var matches = document.querySelectorAll("label[for='coefficient-1']");
-        console.log(matches);
-        alert('trigered');
+        var matches:NodeListOf<Element> = document.querySelectorAll(".range-wrapper label");
+
+        [matches].map(function(match) {
+            console.log(match);
+        });
+        alert('triggered');
     });
-    
+
 });

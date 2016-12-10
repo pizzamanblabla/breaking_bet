@@ -2,7 +2,7 @@
 
 namespace AppBundle\Interaction\DataExtractor;
 
-abstract class BaseDataExtractor implements DataExtractorInterface
+abstract class BaseDataExtractorDecorator implements DataExtractorInterface
 {
     /**
      * @var DataExtractorInterface

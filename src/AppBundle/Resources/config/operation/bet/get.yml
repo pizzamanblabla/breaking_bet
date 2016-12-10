@@ -7,9 +7,7 @@ services:
         arguments:
             - '@breaking_bet.object_builder.jms'
             - '@breaking_bet.operation.bet.get.request_factory'
+            - '@breaking_bet.interaction.data_extractor.assert_decorator'
 
     breaking_bet.operation.bet.get.request_factory:
         class: AppBundle\Operation\Bet\Get\Dto\Request\ApiRequestFactory
-
-    breaking_bet.operation.bet.get.api_to_http_transformer:
-        class: AppBundle\Operation\Bet\Get\Transformer\Response\Transformer

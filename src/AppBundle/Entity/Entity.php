@@ -21,4 +21,14 @@ abstract class Entity
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     * @return Entity
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace AppBundle\Interaction\DataExtractor\Request;
 
-use AppBundle\Interaction\DataExtractor\BaseDataExtractor;
+use AppBundle\Interaction\DataExtractor\DataExtractorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PostDataExtractor extends BaseDataExtractor
+class PostDataExtractor implements DataExtractorInterface
 {
     /**
      * @param Request $data
@@ -13,6 +13,6 @@ class PostDataExtractor extends BaseDataExtractor
      */
     public function extract($data)
     {
-        // TODO: Implement extract() method.
+        return $data->request->all();
     }
 }

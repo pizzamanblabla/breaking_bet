@@ -2,10 +2,10 @@
 
 namespace AppBundle\Interaction\DataExtractor\Request;
 
-use AppBundle\Interaction\DataExtractor\BaseDataExtractor;
+use AppBundle\Interaction\DataExtractor\DataExtractorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class JsonDataExtractor extends BaseDataExtractor
+class JsonDataExtractor implements DataExtractorInterface
 {
     /**
      * @param Request $data
@@ -13,6 +13,6 @@ class JsonDataExtractor extends BaseDataExtractor
      */
     public function extract($data)
     {
-        // TODO: Implement extract() method.
+        return json_decode($data->getContent($data), true);
     }
 }

@@ -5,13 +5,16 @@ namespace AppBundle\Controller;
 use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
 use AppBundle\Interaction\Transformer\Request\TransformerInterface as HttpToApiRequestTransoformerInterface;
 use AppBundle\Interaction\Transformer\Response\TransformerInterface as ApiToHttpResponseTransoformerInterface;
+use AppBundle\Internal\Enum\ResponseType;
 use AppBundle\Internal\Exception\ValidationException;
 use AppBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Exception;
 
 class ApiController extends Controller
 {
@@ -67,17 +70,21 @@ class ApiController extends Controller
      */
     public function operationAction(Request $request)
     {
-        $this->logger->info('Transforming request to inner entity');
-        $apiRequest = $this->httpToApiRequestTransformer->transform($request);
+        try {
+            $this->logger->info('Transforming request to inner entity');
+            $apiRequest = $this->httpToApiRequestTransformer->transform($request);
 
-        $this->logger->info('Validating request');
-        $this->validateApiRequest($apiRequest);
+            $this->logger->info('Validating request');
+            $this->validateApiRequest($apiRequest);
 
-        $this->logger->info('Executing operation');
-        $apiResponse = $this->service->behave($apiRequest);
+            $this->logger->info('Executing operation');
+            $apiResponse = $this->service->behave($apiRequest);
 
-        $this->logger->info('Transforming response to http response');
-        $this->apiToHttpResponseTransformer->transform($apiResponse);
+            $this->logger->info('Transforming response to http response');
+            $this->apiToHttpResponseTransformer->transform($apiResponse);
+        } catch (Exception $e) {
+            return $this->createErroneousResponse($e);
+        }
     }
 
     /**
@@ -92,5 +99,20 @@ class ApiController extends Controller
         if (count($errors) > 0) {
             throw new ValidationException((string)$errors);
         }
+    }
+
+    /**
+     * @param Exception $e
+     * @return JsonResponse
+     */
+    private function createErroneousResponse(Exception $e)
+    {
+        return
+            new JsonResponse(
+                [
+                    'type' => ResponseType::EXCEPTIONAL,
+                    'message' => $e->getMessage(),
+                ]
+            );
     }
 }

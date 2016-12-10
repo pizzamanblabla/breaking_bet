@@ -3,34 +3,34 @@
 namespace AppBundle\Operation\Bet\Get\Dto\Request;
 
 use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
-use AppBundle\Entity\Chain;
-use AppBundle\Entity\Sport;
 use DateTime;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 class ApiRequest implements ApiRequestInterface
 {
     /**
-     * @var Sport
+     * @var int
      *
-     * @Type("AppBundle\Entity\Sport")
+     * @Type("integer")
      * @SerializedName("sport")
      */
     private $sport;
 
     /**
-     * @var Chain
+     * @var int
      *
-     * @Type("AppBundle\Entity\Chain")
+     * @Type("integer")
      * @SerializedName("chain")
      */
     private $chain;
 
     /**
      * @var DateTime
+     *
+     * @Type("DateTime")
+     * @SerializedName("dateFrom")
      *
      * @Assert\NotBlank()
      */
@@ -39,17 +39,23 @@ class ApiRequest implements ApiRequestInterface
     /**
      * @var DateTime
      *
+     * @Type("DateTime")
+     * @SerializedName("dateTo")
+     *
      * @Assert\NotBlank()
      */
     private $dateTo;
 
     /**
-     * @var float
+     * @var Coefficient[]
+     *
+     * @Type("array<AppBundle\Operation\Bet\Get\Dto\Request\Coefficient>")
+     * @SerializedName("coefficients")
      */
-    private $coefficientValue;
+    private $coefficients;
 
     /**
-     * @return Sport
+     * @return int
      */
     public function getSport()
     {
@@ -57,7 +63,7 @@ class ApiRequest implements ApiRequestInterface
     }
 
     /**
-     * @param Sport $sport
+     * @param int $sport
      * @return ApiRequest
      */
     public function setSport($sport)
@@ -67,7 +73,7 @@ class ApiRequest implements ApiRequestInterface
     }
 
     /**
-     * @return Chain
+     * @return int
      */
     public function getChain()
     {
@@ -75,10 +81,10 @@ class ApiRequest implements ApiRequestInterface
     }
 
     /**
-     * @param Chain $chain
+     * @param int $chain
      * @return ApiRequest
      */
-    public function setChain($chain)
+    public function setChainId($chain)
     {
         $this->chain = $chain;
         return $this;
@@ -121,20 +127,20 @@ class ApiRequest implements ApiRequestInterface
     }
 
     /**
-     * @return float
+     * @return Coefficient[]
      */
-    public function getCoefficientValue()
+    public function getCoefficients()
     {
-        return $this->coefficientValue;
+        return $this->coefficients;
     }
 
     /**
-     * @param float $coefficientValue
+     * @param Coefficient[] $coefficients
      * @return ApiRequest
      */
-    public function setCoefficientValue($coefficientValue)
+    public function setCoefficients($coefficients)
     {
-        $this->coefficientValue = $coefficientValue;
+        $this->coefficients = $coefficients;
         return $this;
     }
 }

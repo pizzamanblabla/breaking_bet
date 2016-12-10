@@ -2,8 +2,6 @@
 
 namespace AppBundle\Operation\Bet\Get\Dto\Response;
 
-use AppBundle\Entity\Bet;
-
 class ApiResponse
 {
     /**

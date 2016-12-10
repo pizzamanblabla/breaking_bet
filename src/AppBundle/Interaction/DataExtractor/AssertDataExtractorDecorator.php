@@ -2,7 +2,7 @@
 
 namespace AppBundle\Interaction\DataExtractor;
 
-class AssertDataExtractor extends BaseDataExtractor
+class AssertDataExtractorDecorator extends BaseDataExtractorDecorator
 {
     /**
      * @var string

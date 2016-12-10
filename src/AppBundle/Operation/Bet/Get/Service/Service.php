@@ -15,6 +15,7 @@ class Service implements ServiceInterface
      */
     public function behave(ApiRequestInterface $request)
     {
-        // TODO: Implement behave() method.
+        var_dump($request);
+        die;
     }
 }

@@ -4,7 +4,7 @@
             <div class="select-wrapper select-wrapper-half">
                 <select name="date_from">
                     {% for i in -50..50 %}
-                        <option value="{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
+                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -12,7 +12,7 @@
             <div class="select-wrapper select-wrapper-half">
                 <select name="date_to">
                     {% for i in -50..50 %}
-                        <option value="{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
+                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
                     {% endfor %}
                 </select>
             </div>

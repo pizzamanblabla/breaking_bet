@@ -1,6 +1,10 @@
 services:
     breaking_bet.operation.bet.get.service:
         class: AppBundle\Operation\Bet\Get\Service\Service
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'
 
     breaking_bet.operation.bet.get.http_to_api_transformer:
         class: AppBundle\Interaction\Transformer\Request\Transformer

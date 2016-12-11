@@ -34,3 +34,8 @@ services:
 
     breaking_bet.interaction.api_to_http_transformer:
         class: AppBundle\Interaction\Transformer\Response\Transformer
+
+    breaking_bet.entity.repository.factory:
+        class: AppBundle\Entity\Repository\RepositoryFactory
+        arguments:
+            - '@doctrine.orm.entity_manager'

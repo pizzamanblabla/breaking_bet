@@ -58,7 +58,11 @@ class Service extends BaseEntityService
                     !is_null($rightCoef) &&
                     abs($leftCoef->getValue() - $rightCoef->getValue()) >= $coefficient->getValue()
                 ) {
-                    $coefficientChange[$coefficient->getType()] = abs($leftCoef->getValue() - $rightCoef->getValue());
+                    $coefficientChange =
+                        $this->calculateCoefficientDifference(
+                            $leftBet->getCoefficients()->toArray(),
+                            $rightBet->getCoefficients()->toArray()
+                        );
                 }
             }
 
@@ -83,6 +87,26 @@ class Service extends BaseEntityService
         }
 
         return null;
+    }
+
+    /**
+     * @param EntityCoefficient[] $left
+     * @param EntityCoefficient[] $right
+     * @return string[]
+     */
+    private function calculateCoefficientDifference(array $left, array $right)
+    {
+        $coefficientChange = [];
+
+        foreach ($left as $leftCoefficient) {
+            foreach ($right as $rightCoefficient) {
+                if ($leftCoefficient->getCoefficientType() == $rightCoefficient->getCoefficientType()) {
+                    $coefficientChange[$leftCoefficient->getCoefficientType()->getCode()] = $rightCoefficient->getValue() - $leftCoefficient->getValue();
+                }
+            }
+        }
+
+        return $coefficientChange;
     }
 
     /**
@@ -111,7 +135,7 @@ class Service extends BaseEntityService
             (new Bet())
                 ->setSport($bet->getEvent()->getChain()->getSport()->getName())
                 ->setChain($bet->getEvent()->getChain()->getName())
-                ->setEvent($bet->getEvent()->getName())
+                ->setEvent($bet->getEvent()->getDate()->format('Y-m-d H:i'))
                 ->setCoefficients($this->createResponseCoefficient($bet->getCoefficients(), $coefficientChange))
             ;
     }

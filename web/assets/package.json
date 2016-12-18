@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
-    "awesome-typescript-loader": "^2.2.4",
+    "awesome-typescript-loader": "3.0.0-beta.10",
     "concurrently": "^3.1.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -23,7 +23,7 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.2.0",
-    "typescript": "^2.0.10",
+    "typescript": "2.1.4",
     "vue-class-component": "^3.2.0",
     "vue-hot-reload-api": "^2.0.6",
     "webpack": "^1.13.3"

@@ -30,16 +30,24 @@ class Transformer implements TransformerInterface
     {
         return
             array_reduce(
-                get_object_vars($target),
-                function($merged, $property) use ($target) {
-                    $getMethod = sprintf('get%s', ucfirst($property));
-
-                    if (!method_exists($target, $getMethod)) {
+                get_class_methods($target),
+                function($merged, $getMethod) use ($target) {
+                    if (!preg_match('/get/', $getMethod)) {
                         return $merged;
                     }
 
+                    $property = mb_strtolower(preg_replace('/get/', '', $getMethod));
+
                     if (is_object($target->$getMethod())) {
                         $transformed = [$property => $this->transformToArray($target->$getMethod())];
+                    } elseif (is_array($target->$getMethod())) {
+                        $collection = [];
+
+                        foreach ($target->$getMethod() as $object) {
+                            $collection[] = $this->transformToArray($object);
+                        }
+
+                        $transformed = [$property => $collection];
                     } else {
                         $transformed = [$property => $target->$getMethod()];
                     }

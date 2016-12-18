@@ -66,7 +66,7 @@ class Coefficient extends Entity
     }
 
     /**
-     * @return mixed
+     * @return CoefficientType
      */
     public function getCoefficientType()
     {
@@ -74,7 +74,7 @@ class Coefficient extends Entity
     }
 
     /**
-     * @param mixed $coefficientType
+     * @param CoefficientType $coefficientType
      * @return Coefficient
      */
     public function setCoefficientType($coefficientType)

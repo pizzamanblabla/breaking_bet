@@ -2,8 +2,13 @@
 
 namespace AppBundle\Operation\Bet\Get\Dto\Response;
 
-class ApiResponse
+use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
+use AppBundle\Interaction\Dto\Response\Successful;
+
+class ApiResponse implements ApiResponseInterface
 {
+    use Successful;
+
     /**
      * @var Bet[]
      */

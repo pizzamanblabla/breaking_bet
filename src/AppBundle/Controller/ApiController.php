@@ -81,7 +81,7 @@ class ApiController extends Controller
             $apiResponse = $this->service->behave($apiRequest);
 
             $this->logger->info('Transforming response to http response');
-            $this->apiToHttpResponseTransformer->transform($apiResponse);
+            return $this->apiToHttpResponseTransformer->transform($apiResponse);
         } catch (Exception $e) {
             return $this->createErroneousResponse($e);
         }

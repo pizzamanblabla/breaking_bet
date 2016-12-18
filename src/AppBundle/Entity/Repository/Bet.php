@@ -55,6 +55,8 @@ class Bet extends EntityRepository
                 ->setParameter('chain', $apiRequest->getChain());
         }
 
+        $queryBuilder->orderBy('b.date', 'DESC');
+
         return $queryBuilder->getQuery()->getResult();
     }
 }

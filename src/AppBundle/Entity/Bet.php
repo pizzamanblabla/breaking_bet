@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,16 +26,24 @@ class Bet extends Entity
      */
     private $event;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="", mappedBy="cart", orphanRemoval=true, cascade={"persist", "remove"})
-//     * @var ArrayCollection|CartItem[]
-//     **/
-//    private $coefficients;
+    /**
+     * @ORM\OneToMany(targetEntity="Coefficient", mappedBy="bet")
+     * @var Coefficient[]
+     **/
+    private $coefficients;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->coefficients = new ArrayCollection();
+    }
 
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      *
      * @return Bet
      */
@@ -46,7 +57,7 @@ class Bet extends Entity
     /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -76,18 +87,11 @@ class Bet extends Entity
     {
         return $this->event;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->coefficients = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add coefficient
      *
-     * @param  $coefficient
+     * @param Coefficient $coefficient
      *
      * @return Bet
      */
@@ -101,7 +105,7 @@ class Bet extends Entity
     /**
      * Remove coefficient
      *
-     * @param  $coefficient
+     * @param Coefficient $coefficient
      */
     public function removeCoefficient($coefficient)
     {
@@ -111,7 +115,7 @@ class Bet extends Entity
     /**
      * Get coefficients
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getCoefficients()
     {

@@ -3,10 +3,13 @@ import Component from 'vue-class-component';
 import BetTemplate from './BetTemplate';
 
 @Component({
-    template: BetTemplate
+    template: BetTemplate,
+    props: {
+        bets: {type: Array, required: true},
+    }
 })
 
-export default class BetFiltersComponent {
+export default class BetComponent {
     public static ready () {
         alert('test2');
     }

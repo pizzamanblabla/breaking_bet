@@ -3,16 +3,16 @@
         <div class="select-wrapper-group">
             <div class="select-wrapper select-wrapper-half">
                 <select name="date_from">
-                    {% for i in -50..50 %}
-                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
+                    {% for i in -250..0 %}
+                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:00 d-m-Y') }}</option>
                     {% endfor %}
                 </select>
             </div>
             <span class="hyphen">-</span>
             <div class="select-wrapper select-wrapper-half">
                 <select name="date_to">
-                    {% for i in -50..50 %}
-                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:m d-m-Y') }}</option>
+                    {% for i in -250..0 %}
+                        <option value="{{ "now"|date_modify( i ~" hour")|date('Y-m-d\\TH:i:sO') }}" {% if i == 0 %} selected {% endif %}>{{ "now"|date_modify( i ~" hour")|date('H:00 d-m-Y') }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -39,15 +39,15 @@
             <div class="filter-column">
         {% endif %}
         <div class="range-wrapper">
-            <label for="{{ type.code }}">{{ type.name }} : <span id="coefficient-value-{{ type.id }}">0</span></label>
-            <input id="coefficient-{{ type.id }}" class="coefficient-control" type="range" name="{{ type.code }}" value="0" min="-20" max="20">
+            <label for="{{ type.code }}">{{ type.name }} : <span id="coefficient-{{ type.id }}-value">0</span></label>
+            <input id="coefficient-{{ type.id }}" class="coefficient-control" type="range" name="{{ type.code }}" value="0" min="0" step="0.1" max="20">
         </div>
         {% if loop.index is divisible by(3) %}
             </div>
         {% endif %}
     {% endfor %}
     <div class="filter-column right">
-        <input class="search-button" value="Search" type="button">
+        <input id="submit-search" class="search-button" value="Search" type="button">
     </div>
     <div class="clear"></div>
 </div>

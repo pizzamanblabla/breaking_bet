@@ -28,3 +28,7 @@
 /web/assets/node_modules
 /web/public/styles.css
 /web/public/bundle-app.js
+
+#Prod
+/bootstrap.php
+/cli-config.php

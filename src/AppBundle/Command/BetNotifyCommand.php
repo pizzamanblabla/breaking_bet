@@ -4,6 +4,7 @@ namespace AppBundle\Command;
 
 use AppBundle\Internal\Service\ServiceInterface;
 use AppBundle\Operation\Bet\Get\Dto\Request\ApiRequest;
+use DateTime;
 use Exception;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -50,7 +51,7 @@ class BetNotifyCommand extends Command
     {
         try {
             $this->logger->info('Composing request');
-            $this->service->behave((new ApiRequest()));
+            $this->service->behave($this->createRequest());
 
         } catch (Exception $e) {
             $this->logger->error(
@@ -66,5 +67,17 @@ class BetNotifyCommand extends Command
         $this->logger->info('Notifications sent');
 
         return 0;
+    }
+
+    /**
+     * @return ApiRequest
+     */
+    private function createRequest()
+    {
+        return
+            (new ApiRequest())
+                ->setDateTo(new DateTime())
+                ->setDateFrom((new DateTime())->modify('-1 hour'))
+                ->setCoefficients([]);
     }
 }

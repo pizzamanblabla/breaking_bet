@@ -6,3 +6,9 @@ services:
         - '@logger'
       tags:
         - { name: console.command }
+
+    bets.notify:
+      class: AppBundle\Command\BetNotifyCommand
+      arguments:
+          - '@breaking_bet.operation.bet.get.service'
+          - '@logger'

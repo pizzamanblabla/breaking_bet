@@ -25,13 +25,13 @@ class Transformer implements TransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform(ApiResponseInterface $request)
+    public function transform(ApiResponseInterface $response)
     {
         return
             new JsonResponse(
                 [
-                    'type' => ResponseType::SUCCESSFUL,
-                    'data' => $this->typeTransformer->transform($request),
+                    'type' => $response->obtainType()->getValue(),
+                    'data' => $this->typeTransformer->transform($response),
                 ]
             );
     }

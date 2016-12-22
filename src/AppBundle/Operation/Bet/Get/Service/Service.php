@@ -12,6 +12,7 @@ use AppBundle\Operation\Bet\Get\Dto\Request\Coefficient;
 use AppBundle\Operation\Bet\Get\Dto\Response\ApiResponse;
 use AppBundle\Operation\Bet\Get\Dto\Response\Bet;
 use AppBundle\Operation\Bet\Get\Dto\Response\Coefficient as ResponseCoefficient;
+use AppBundle\Operation\Common\Dto\Response\EmptyErrorResponse;
 use Doctrine\Common\Collections\Collection;
 
 class Service extends BaseEntityService
@@ -166,10 +167,13 @@ class Service extends BaseEntityService
 
     /**
      * @param $bets
-     * @return ApiResponse
+     * @return ApiResponseInterface
      */
     private function createResponse($bets)
     {
-        return (new ApiResponse())->setBets($bets);
+        return
+            count($bets)
+                ? (new ApiResponse())->setContainer($bets, Bet::class)
+                : new EmptyErrorResponse();
     }
 }

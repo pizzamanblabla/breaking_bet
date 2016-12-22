@@ -1,1 +1,5 @@
 services:
+    breaking_bet.notification_service_decorator:
+        class: AppBundle\Operation\Notification\Service\NotificationServiceDecorator
+        arguments:
+            - '@breaking_bet.operation.bet.get.service'

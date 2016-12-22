@@ -17,7 +17,6 @@ class Parser implements ServiceInterface
     private $factory;
 
     /**
-     * Parser constructor.
      * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory)

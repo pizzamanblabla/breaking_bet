@@ -6,6 +6,7 @@ use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
 use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
 use AppBundle\Interaction\Transformer\Internal\TransformerInterface;
 use AppBundle\Interaction\Transport\TransportInterface;
+use AppBundle\Internal\Container;
 use AppBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -50,17 +51,19 @@ class NotificationServiceDecorator implements ServiceInterface
 
     /**
      * @param ApiRequestInterface $request
-     * @return ApiResponseInterface
+     * @return ApiResponseInterface|Container
      */
     public function behave(ApiRequestInterface $request)
     {
         $apiResponse = $this->service->behave($request);
 
-        $this->logger->info('Transforming to notification request');
-        $apiRequest = $this->transformer->transform($apiResponse);
+        if ($apiResponse->obtainType()->isSuccessful()) {
+            $this->logger->info('Transforming to notification request');
+            $apiRequest = $this->transformer->transform($apiResponse);
 
-        $this->logger->info('Dispatching notification');
-        $this->transport->dispatch($apiRequest);
+            $this->logger->info('Dispatching notification');
+            $this->transport->dispatch($apiRequest);
+        }
 
         return $apiResponse;
     }

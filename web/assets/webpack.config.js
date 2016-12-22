@@ -4,7 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     context: __dirname,
     entry:  {
-        app: ['./app/main.ts', './css/main.scss'],
+        app: ['./app/main.tsx', './css/main.scss'],
     },
     output: {
         path:     '../public',
@@ -14,7 +14,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.ts$/,
+                test: /\.tsx$/,
                 loader: 'awesome-typescript-loader',
                 include: __dirname,
             },
@@ -29,6 +29,6 @@ module.exports = {
         new ExtractTextPlugin("styles.css")
     ],
     resolve: {
-        extensions: ['', '.ts'],
+        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
 };

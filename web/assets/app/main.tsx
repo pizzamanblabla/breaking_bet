@@ -24,7 +24,7 @@ let components: Component[] = [
 ];
 
 function dispatch(url:string, parameters) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", url);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -36,20 +36,20 @@ function dispatch(url:string, parameters) {
 }
 
 function resolveRemoteResponse(response) {
-    for (var i = 0, len = response.data.bets.length; i < len; i++) {
-        var bet = document.createElement("tr");
-        var betHtml:string = BetTemplate;
+    for (let i = 0, len = response.data.bets.length; i < len; i++) {
+        let bet = document.createElement("tr");
+        let betHtml:string = BetTemplate;
         betHtml = betHtml.replace(/:sport/i, response.data.bets[i].sport);
         betHtml = betHtml.replace(/:chain/i, response.data.bets[i].chain);
         betHtml = betHtml.replace(/:event/i, response.data.bets[i].event);
 
-        for (var j = 0, length = response.data.bets[i].coefficients.length; j < length; j++) {
-            var coef = response.data.bets[i].coefficients[j];
-            var regex = new RegExp(':' + coef.type);
+        for (let j = 0, length = response.data.bets[i].coefficients.length; j < length; j++) {
+            let coef = response.data.bets[i].coefficients[j];
+            let regex = new RegExp(':' + coef.type);
             betHtml = betHtml.replace(regex, coef.value + ' ( ' + coef.difference + ' )');
         }
 
-        var types = [
+        let types = [
             'actual_p1',
             'actual_p2',
             'actual_x',
@@ -69,8 +69,8 @@ function resolveRemoteResponse(response) {
             'actual_n',
         ];
 
-        for (var j = 0, l = types.length; j < l; j++) {
-            var regex = new RegExp(':' + types[j]);
+        for (let j = 0, l = types.length; j < l; j++) {
+            let regex = new RegExp(':' + types[j]);
             betHtml = betHtml.replace(regex, '-');
         }
 
@@ -81,42 +81,42 @@ function resolveRemoteResponse(response) {
 }
 
 function addEventListenerList(list:NodeListOf<Element>, event:string, fn) {
-    for (var i = 0, len = list.length; i < len; i++) {
+    for (let i = 0, len = list.length; i < len; i++) {
         list[i].addEventListener(event, fn, false);
     }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    var controls = document.getElementsByClassName('coefficient-control');
+    let controls = document.getElementsByClassName('coefficient-control');
 
     addEventListenerList(controls, 'change', (e) => {
         document.getElementById(e.target.id + '-value').innerHTML = e.target.value;
     });
 
     document.getElementById('submit-search').addEventListener('click', (e) => {
-        var coefficients = [];
-        var controls = document.getElementsByClassName('coefficient-control');
+        let coefficients = [];
+        let controls = document.getElementsByClassName('coefficient-control');
 
-        for (var i = 0, len = controls.length; i < len; i++) {
-            if ((<HTMLInputElement>controls[i]).value != '0') {
+        for (let i = 0, len = controls.length; i < len; i++) {
+            if ((controls[i] as HTMLInputElement).value != '0') {
                 coefficients.push(
                     {
-                        "type": (<HTMLInputElement>controls[i]).name,
-                        "value": (<HTMLInputElement>controls[i]).value
+                        "type": (controls[i] as HTMLInputElement).name,
+                        "value": (controls[i] as HTMLInputElement).value
                     }
                 )
             }
         }
 
-        var parameters = {
-            "sport": (<HTMLInputElement>document.getElementsByName('sport')[0]).value,
-            "chain": (<HTMLInputElement>document.getElementsByName('event-chain')[0]).value,
-            "dateFrom": (<HTMLInputElement>document.getElementsByName('date_from')[0]).value,
-            "dateTo": (<HTMLInputElement>document.getElementsByName('date_to')[0]).value,
+        let parameters = {
+            "sport": (document.getElementsByName('sport')[0] as HTMLInputElement).value,
+            "chain": (document.getElementsByName('event-chain')[0] as HTMLInputElement).value,
+            "dateFrom": (document.getElementsByName('date_from')[0] as HTMLInputElement).value,
+            "dateTo": (document.getElementsByName('date_to')[0] as HTMLInputElement).value,
             "coefficients": coefficients
         };
 
-        var bets = document.getElementById('bets');
+        let bets = document.getElementById('bets');
 
         while (bets.childNodes.length > 2) {
             bets.removeChild(bets.lastChild);

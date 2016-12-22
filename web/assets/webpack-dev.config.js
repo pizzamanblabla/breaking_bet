@@ -1,7 +1,7 @@
 module.exports = {
     context: __dirname,
     entry:  {
-        app: ['./app/main.ts', './css/main.scss'],
+        app: ['./app/main.tsx', './css/main.scss'],
     },
     output: {
         path:     '../public',

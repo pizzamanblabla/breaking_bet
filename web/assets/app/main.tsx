@@ -1,5 +1,8 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import BetComponent from "./components/Bet/Bet";
 import BetTemplate from './components/Bet/BetTemplate';
+import LoadingComponent from "./components/Popup/Loading";
 
 interface Component {
     name: string;
@@ -33,9 +36,19 @@ function dispatch(url:string, parameters) {
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(parameters));
+
+    ReactDOM.render(
+        <LoadingComponent content="public/images/loading_icon.gif" message="Loading..." display={true} />,
+        document.getElementById('popup')
+    );
 }
 
 function resolveRemoteResponse(response) {
+    ReactDOM.render(
+        <LoadingComponent content="public/images/loading_icon.gif" message="Loading..." display={false} />,
+        document.getElementById('popup')
+    );
+
     for (let i = 0, len = response.data.bets.length; i < len; i++) {
         let bet = document.createElement("tr");
         let betHtml:string = BetTemplate;

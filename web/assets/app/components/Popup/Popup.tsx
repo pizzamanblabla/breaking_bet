@@ -1,17 +1,26 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
 export interface PopupProps {
     message: string;
-    template: string;
+    content: string;
+    display: boolean;
 }
 
 export interface PopupState {
 
 }
 
-export default class PopupComponent {
+export abstract class PopupComponent extends React.Component<PopupProps, PopupState> {
     public render() {
-        return <h1>Hello from </h1>;
+        if (this.props.display) {
+            return <div id="dialog-window-wrapper">
+                <div id="dialog-background"></div>
+                {this.getTemplate()}
+            </div>;
+        } else {
+            return null;
+        }
     }
+
+    protected abstract getTemplate();
 }

@@ -20,6 +20,11 @@ class Bet
     private $event;
 
     /**
+     * @var string
+     */
+    private $team;
+
+    /**
      * @var Coefficient[]
      */
     private $coefficients;
@@ -75,6 +80,24 @@ class Bet
     public function setEvent($event)
     {
         $this->event = $event;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param string $team
+     * @return Bet
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
         return $this;
     }
 

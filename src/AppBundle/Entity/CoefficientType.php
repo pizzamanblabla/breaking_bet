@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CoefficientType
  *
  * @ORM\Table(name="coefficient_type")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CoefficientType")
  */
 class CoefficientType extends Entity
 {

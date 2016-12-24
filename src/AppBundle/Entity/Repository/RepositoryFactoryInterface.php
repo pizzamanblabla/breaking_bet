@@ -33,4 +33,9 @@ interface RepositoryFactoryInterface
      * @return Team
      */
     public function team();
+
+    /**
+     * @return CoefficientType
+     */
+    public function coefficientType();
 }

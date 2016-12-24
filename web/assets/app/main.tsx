@@ -1,30 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import BetComponent from "./components/Bet/Bet";
-import BetTemplate from './components/Bet/BetTemplate';
+import BetCollection from "./components/Bet/Bet";
 import LoadingComponent from "./components/Popup/Loading";
-
-interface Component {
-    name: string;
-    element: any;
-}
-
-interface FilterParameters {
-    dateFrom: string;
-    dateTo: string;
-    sport?: number;
-    chain?: number;
-    [coefficients: number]: Coefficient
-}
-
-interface Coefficient {
-    type: string,
-    value: number,
-}
-
-let components: Component[] = [
-    {name: '#bets', element: BetComponent},
-];
 
 function dispatch(url:string, parameters) {
     let xhr = new XMLHttpRequest();
@@ -49,48 +26,10 @@ function resolveRemoteResponse(response) {
         document.getElementById('popup')
     );
 
-    for (let i = 0, len = response.data.bets.length; i < len; i++) {
-        let bet = document.createElement("tr");
-        let betHtml:string = BetTemplate;
-        betHtml = betHtml.replace(/:sport/i, response.data.bets[i].sport);
-        betHtml = betHtml.replace(/:chain/i, response.data.bets[i].chain);
-        betHtml = betHtml.replace(/:event/i, response.data.bets[i].event);
-
-        for (let j = 0, length = response.data.bets[i].coefficients.length; j < length; j++) {
-            let coef = response.data.bets[i].coefficients[j];
-            let regex = new RegExp(':' + coef.type);
-            betHtml = betHtml.replace(regex, coef.value + ' ( ' + coef.difference + ' )');
-        }
-
-        let types = [
-            'actual_p1',
-            'actual_p2',
-            'actual_x',
-            'double_1x',
-            'double_x2',
-            'double_12',
-            'handicap_kf_f1',
-            'handicap_f2',
-            'handicap_kf_f2',
-            'handicap_f2',
-            'total',
-            'total_under',
-            'total_over',
-            'total_over',
-            'total_over',
-            'actual_y',
-            'actual_n',
-        ];
-
-        for (let j = 0, l = types.length; j < l; j++) {
-            let regex = new RegExp(':' + types[j]);
-            betHtml = betHtml.replace(regex, '-');
-        }
-
-        betHtml = betHtml.replace(/:[^<]+/, '-');
-        bet.innerHTML = betHtml;
-        document.getElementById('bets').appendChild(bet);
-    }
+    ReactDOM.render(
+        <BetCollection collection={response.data.bets}/>,
+        document.getElementById('bets')
+    );
 }
 
 function addEventListenerList(list:NodeListOf<Element>, event:string, fn) {
@@ -128,12 +67,6 @@ window.addEventListener('DOMContentLoaded', () => {
             "dateTo": (document.getElementsByName('date_to')[0] as HTMLInputElement).value,
             "coefficients": coefficients
         };
-
-        let bets = document.getElementById('bets');
-
-        while (bets.childNodes.length > 2) {
-            bets.removeChild(bets.lastChild);
-        }
 
         dispatch('/api/bet/get', parameters);
     });

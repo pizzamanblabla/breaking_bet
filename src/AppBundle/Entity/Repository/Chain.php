@@ -8,10 +8,10 @@ use AppBundle\Entity\Chain as ChainEntity;
 class Chain extends EntityRepository
 {
     /**
-     * @return ChainEntity
+     * @return ChainEntity[]
      */
-    public function getLast()
+    public function findAll()
     {
-
+        return $this->findBy([], ['id' => 'DESC']);
     }
 }

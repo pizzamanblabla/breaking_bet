@@ -4,6 +4,7 @@ namespace AppBundle\Operation\Bet\Get\Service;
 
 use AppBundle\Entity\Bet as EntityBet;
 use AppBundle\Entity\Coefficient as EntityCoefficient;
+use AppBundle\Entity\CoefficientType as EntityCoefficienType;
 use AppBundle\Interaction\Dto\Request\ApiRequestInterface;
 use AppBundle\Interaction\Dto\Response\ApiResponseInterface;
 use AppBundle\Internal\Service\BaseEntityService;
@@ -137,6 +138,13 @@ class Service extends BaseEntityService
                 ->setSport($bet->getEvent()->getChain()->getSport()->getName())
                 ->setChain($bet->getEvent()->getChain()->getName())
                 ->setEvent($bet->getEvent()->getDate()->format('Y-m-d H:i'))
+                ->setTeam(
+                    sprintf(
+                        '%s - %s',
+                        $bet->getEvent()->getTeamFirst()->getName(),
+                        $bet->getEvent()->getTeamSecond()->getName()
+                    )
+                )
                 ->setCoefficients($this->createResponseCoefficient($bet->getCoefficients(), $coefficientChange))
             ;
     }
@@ -150,18 +158,33 @@ class Service extends BaseEntityService
     {
         return
             array_map(
-                function(EntityCoefficient $coefficient) use ($coefficientChange) {
-                    $coefficientResponse = (new ResponseCoefficient())
-                        ->setType($coefficient->getCoefficientType()->getCode())
-                        ->setValue($coefficient->getValue());
+                function(EntityCoefficienType $coefficientType) use ($coefficientChange, $coefficients) {
+                    $coefficientResponse = '';
 
-                    if (array_key_exists($coefficient->getCoefficientType()->getCode(), $coefficientChange)) {
-                        $coefficientResponse->setDifference($coefficientChange[$coefficient->getCoefficientType()->getCode()]);
+                    foreach ($coefficients as $coefficient) {
+                        if ($coefficientType->getCode() == $coefficient->getCoefficientType()->getCode()) {
+                            $coefficientResponse = (new ResponseCoefficient())
+                                ->setType($coefficient->getCoefficientType()->getCode())
+                                ->setValue($coefficient->getValue());
+
+
+                            if (array_key_exists($coefficient->getCoefficientType()->getCode(), $coefficientChange)) {
+                                $coefficientResponse->setDifference($coefficientChange[$coefficient->getCoefficientType()->getCode()]);
+                            }
+                        }
+                    }
+
+                    if (empty($coefficientResponse)) {
+                        $coefficientResponse = (new ResponseCoefficient())
+                            ->setType($coefficientType->getCode())
+                            ->setValue(0)
+                            ->setDifference(0)
+                        ;
                     }
 
                     return $coefficientResponse;
                 },
-                $coefficients->toArray()
+                $this->repositoryFactory->coefficientType()->findAll()
             );
     }
 

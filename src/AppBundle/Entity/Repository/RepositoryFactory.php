@@ -5,6 +5,7 @@ namespace AppBundle\Entity\Repository;
 use AppBundle\Entity\Bet as BetEntity;
 use AppBundle\Entity\Chain as ChainEntity;
 use AppBundle\Entity\Coefficient as CoefficientEntity;
+use AppBundle\Entity\CoefficientType as CoefficientTypeEntity;
 use AppBundle\Entity\Event as EventEntity;
 use AppBundle\Entity\Sport as SportEntity;
 use AppBundle\Entity\Team as TeamEntity;
@@ -38,7 +39,7 @@ class RepositoryFactory implements RepositoryFactoryInterface
      */
     public function chain()
     {
-        return $this->entityManager->getRepository('AppBundle:Chain');
+        return $this->entityManager->getRepository(ChainEntity::class);
     }
 
     /**
@@ -71,5 +72,13 @@ class RepositoryFactory implements RepositoryFactoryInterface
     public function team()
     {
         return $this->entityManager->getRepository(TeamEntity::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function coefficientType()
+    {
+        return $this->entityManager->getRepository(CoefficientTypeEntity::class);
     }
 }

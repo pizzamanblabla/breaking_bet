@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-rm ../../var/logs/dev.log
+#Script directory
+dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+rm ${dir}/../../var/logs/dev.log;

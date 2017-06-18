@@ -17,7 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new AppBundle\AppBundle(),
+            new BreakingBetBundle\BreakingBetBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

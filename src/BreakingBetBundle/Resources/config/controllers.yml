@@ -1,0 +1,14 @@
+services:
+    controller.api:
+        class: BreakingBetBundle\Controller\ApiController
+        arguments:
+            - '@breaking_bet.operation.bet.get.http_to_api_transformer'
+            - '@validator'
+            - '@breaking_bet.operation.bet.get.service'
+            - '@breaking_bet.interaction.api_to_http_transformer'
+            - '@logger'
+
+    controller.main:
+        class: BreakingBetBundle\Controller\MainController
+        arguments:
+            - '@service_container'

@@ -1,0 +1,46 @@
+services:
+    breaking_bet.object_builder.jms:
+        class: BreakingBetBundle\Internal\ObjectBuilder\JMSObjectBuilder
+        arguments:
+            - '@jms_serializer'
+            - '@logger'
+
+    breaking_bet.interaction.data_extractor.assert_decorator:
+        class: BreakingBetBundle\Interaction\DataExtractor\AssertDataExtractorDecorator
+        arguments:
+            - '@breaking_bet.interaction.data_extractor.http_request.composite'
+            - 'Symfony\Component\HttpFoundation\Request'
+
+    breaking_bet.interaction.data_extractor.http_request.composite:
+        class: BreakingBetBundle\Interaction\DataExtractor\DataExtractorComposite
+        arguments:
+            -
+                - '@breaking_bet.interaction.data_extractor.http_request.json'
+                - '@breaking_bet.interaction.data_extractor.http_request.url'
+
+    breaking_bet.interaction.data_extractor.http_request.json:
+        class: BreakingBetBundle\Interaction\DataExtractor\Request\JsonDataExtractor
+
+    breaking_bet.interaction.data_extractor.http_request.post:
+        class: BreakingBetBundle\Interaction\DataExtractor\Request\PostDataExtractor
+
+    breaking_bet.interaction.data_extractor.http_request.get:
+        class: BreakingBetBundle\Interaction\DataExtractor\Request\GetDataExtractor
+
+    breaking_bet.interaction.data_extractor.http_request.url:
+        class: BreakingBetBundle\Interaction\DataExtractor\Request\UrlDataExtractor
+        arguments:
+            - '@router'
+
+    breaking_bet.interaction.api_to_http_transformer:
+        class: BreakingBetBundle\Interaction\Transformer\Response\Transformer
+        arguments:
+            - '@breaking_bet.interaction.object_to_array_transformer'
+
+    breaking_bet.interaction.object_to_array_transformer:
+        class: BreakingBetBundle\Interaction\Transformer\Type\ObjectToArrayTransformer
+
+    breaking_bet.entity.repository.factory:
+        class: BreakingBetBundle\Entity\Repository\RepositoryFactory
+        arguments:
+            - '@doctrine.orm.entity_manager'

@@ -2,12 +2,17 @@
 
 namespace BreakingBetBundle\Controller;
 
+use BreakingBetBundle\Interaction\Transformer\Internal\TransformerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class MainController extends Controller
+final class MainController extends Controller
 {
+    /**
+     * @var TransformerInterface
+     */
+    private $httpRequestTransformer;
     /**
      * MainController constructor.
      * @param ContainerInterface $container

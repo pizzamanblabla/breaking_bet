@@ -2,14 +2,14 @@
 
 namespace BreakingBetBundle\Internal\Service;
 
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
-use BreakingBetBundle\Interaction\Dto\Response\ApiResponseInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
+use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 
 interface ServiceInterface
 {
     /**
-     * @param ApiRequestInterface $request
-     * @return ApiResponseInterface
+     * @param InternalRequestInterface $request
+     * @return InternalResponseInterface
      */
-    public function behave(ApiRequestInterface $request);
+    public function behave(InternalRequestInterface $request): InternalResponseInterface;
 }

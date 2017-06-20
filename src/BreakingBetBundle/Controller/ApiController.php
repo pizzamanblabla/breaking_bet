@@ -2,26 +2,25 @@
 
 namespace BreakingBetBundle\Controller;
 
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
-use BreakingBetBundle\Interaction\Transformer\Request\TransformerInterface as HttpToApiRequestTransoformerInterface;
-use BreakingBetBundle\Interaction\Transformer\Response\TransformerInterface as ApiToHttpResponseTransoformerInterface;
-use BreakingBetBundle\Internal\Enum\ResponseType;
-use BreakingBetBundle\Internal\Exception\ValidationException;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
+use BreakingBetBundle\Interaction\Transformer\Request\TransformerInterface as HttpToInternalRequestTransformerInterface;
+use BreakingBetBundle\Enumeration\ResponseType;
 use BreakingBetBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Exception;
 
-class ApiController extends Controller
+final class ApiController extends Controller
 {
     /**
-     * @var HttpToApiRequestTransoformerInterface
+     * @var HttpToInternalRequestTransformerInterface
      */
-    private $httpToApiRequestTransformer;
+    private $httpToInternalRequestTransformer;
 
     /**
      * @var ValidatorInterface
@@ -44,20 +43,20 @@ class ApiController extends Controller
     private $logger;
 
     /**
-     * @param HttpToApiRequestTransoformerInterface $httpToApiRequestTransformer
+     * @param HttpToInternalRequestTransformerInterface $httpToInternalRequestTransformer
      * @param ValidatorInterface $validator
      * @param ServiceInterface $service
      * @param ApiToHttpResponseTransoformerInterface $apiToHttpResponseTransformer
      * @param LoggerInterface $logger
      */
     public function __construct(
-        HttpToApiRequestTransoformerInterface $httpToApiRequestTransformer,
+        HttpToInternalRequestTransformerInterface $httpToInternalRequestTransformer,
         ValidatorInterface $validator,
         ServiceInterface $service,
         ApiToHttpResponseTransoformerInterface $apiToHttpResponseTransformer,
         LoggerInterface $logger
     ) {
-        $this->httpToApiRequestTransformer = $httpToApiRequestTransformer;
+        $this->httpToApiRequestTransformer = $httpToInternalRequestTransformer;
         $this->validator = $validator;
         $this->service = $service;
         $this->apiToHttpResponseTransformer = $apiToHttpResponseTransformer;
@@ -72,7 +71,7 @@ class ApiController extends Controller
     {
         try {
             $this->logger->info('Transforming request to inner entity');
-            $apiRequest = $this->httpToApiRequestTransformer->transform($request);
+            $apiRequest = $this->httpToInternalRequestTransformer->transform($request);
 
             $this->logger->info('Validating request');
             $this->validateApiRequest($apiRequest);
@@ -88,16 +87,16 @@ class ApiController extends Controller
     }
 
     /**
-     * @param ApiRequestInterface $apiRequest
+     * @param InternalRequestInterface $apiRequest
      * @return void
-     * @throws ValidationException
+     * @throws ValidatorException
      */
-    private function validateApiRequest(ApiRequestInterface $apiRequest)
+    private function validateApiRequest(InternalRequestInterface $apiRequest)
     {
         $errors = $this->validator->validate($apiRequest);
 
         if (count($errors) > 0) {
-            throw new ValidationException((string)$errors);
+            throw new ValidatorException((string)$errors);
         }
     }
 

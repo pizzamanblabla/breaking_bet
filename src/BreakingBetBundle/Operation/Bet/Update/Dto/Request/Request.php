@@ -2,9 +2,9 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Dto\Request;
 
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 
-class Request implements ApiRequestInterface
+class Request implements InternalRequestInterface
 {
     /**
      * @var string

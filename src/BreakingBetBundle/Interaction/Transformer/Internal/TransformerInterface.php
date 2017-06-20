@@ -2,14 +2,14 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Internal;
 
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
-use BreakingBetBundle\Interaction\Dto\Response\ApiResponseInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
+use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 
 interface TransformerInterface
 {
     /**
-     * @param ApiResponseInterface $response
-     * @return ApiRequestInterface
+     * @param InternalResponseInterface $response
+     * @return InternalRequestInterface
      */
-    public function transform(ApiResponseInterface $response);
+    public function transform(InternalResponseInterface $response);
 }

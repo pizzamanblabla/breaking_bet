@@ -2,17 +2,10 @@
 
 namespace BreakingBetBundle\Interaction\Dto\Request;
 
-use Symfony\Component\Form\AbstractType;
-
-interface ApiRequestFactoryInterface
+interface InternalRequestFactoryInterface
 {
     /**
-     * @return ApiRequestInterface
+     * @return InternalRequestInterface
      */
     public function getRequest();
-
-    /**
-     * @return AbstractType
-     */
-    public function getRequestType();
 }

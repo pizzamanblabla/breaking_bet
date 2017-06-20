@@ -2,9 +2,9 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Request;
 
-use BreakingBetBundle\Interaction\DataExtractor\DataExtractorInterface;
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestFactoryInterface;
+use BreakingBetBundle\DataExtractor\DataExtractorInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestFactoryInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Internal\ObjectBuilder\ObjectBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,7 +16,7 @@ class Transformer implements TransformerInterface
     private $builder;
 
     /**
-     * @var ApiRequestFactoryInterface
+     * @var InternalRequestFactoryInterface
      */
     private $requestFactory;
 
@@ -27,12 +27,12 @@ class Transformer implements TransformerInterface
 
     /**
      * @param ObjectBuilderInterface $builder
-     * @param ApiRequestFactoryInterface $requestFactory
+     * @param InternalRequestFactoryInterface $requestFactory
      * @param DataExtractorInterface $dataExtractor
      */
     public function __construct(
         ObjectBuilderInterface $builder,
-        ApiRequestFactoryInterface $requestFactory,
+        InternalRequestFactoryInterface $requestFactory,
         DataExtractorInterface $dataExtractor
     ) {
         $this->builder = $builder;
@@ -42,14 +42,13 @@ class Transformer implements TransformerInterface
 
     /**
      * @param Request $request
-     * @return ApiRequestInterface
+     * @return InternalRequestInterface
      */
     public function transform(Request $request)
     {
         return
             $this->builder->build(
                 $this->requestFactory->getRequest(),
-                $this->requestFactory->getRequestType(),
                 $this->dataExtractor->extract($request)
             );
     }

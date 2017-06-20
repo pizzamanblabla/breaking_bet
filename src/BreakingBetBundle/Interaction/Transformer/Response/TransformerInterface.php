@@ -2,14 +2,14 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Response;
 
-use BreakingBetBundle\Interaction\Dto\Response\ApiResponseInterface;
+use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 interface TransformerInterface
 {
     /**
-     * @param ApiResponseInterface $request
+     * @param InternalResponseInterface $request
      * @return Response
      */
-    public function transform(ApiResponseInterface $request);
+    public function transform(InternalResponseInterface $request);
 }

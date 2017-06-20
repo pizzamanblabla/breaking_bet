@@ -2,14 +2,14 @@
 
 namespace BreakingBetBundle\Interaction\Dto\Response;
 
-use BreakingBetBundle\Internal\Enum\ResponseType;
+use BreakingBetBundle\Enumeration\ResponseType;
 
 trait Erroneous
 {
     /**
      * @return ResponseType
      */
-    public function obtainType()
+    public function getType()
     {
         return ResponseType::erroneous();
     }

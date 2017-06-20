@@ -2,11 +2,11 @@
 
 namespace BreakingBetBundle\Internal\ObjectBuilder;
 
+use BreakingBetBundle\Internal\ObjectBuilder\Exception\InvalidObjectException;
 use JMS\Serializer\Serializer;
 use Psr\Log\LoggerInterface;
-use Exception;
 
-class JMSObjectBuilder implements ObjectBuilderInterface
+final class JMSObjectBuilder implements ObjectBuilderInterface
 {
     /**
      * @var Serializer
@@ -31,11 +31,11 @@ class JMSObjectBuilder implements ObjectBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build($object, $objectFormType, array $data)
+    public function build($object, array $data)
     {
         try {
             return $this->serializer->fromArray($data, get_class($object));
-        } catch (Exception $e) {
+        } catch (InvalidObjectException $e) {
             $this->logger->warning(
                 "Could not build object: '{error}'",
                 [

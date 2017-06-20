@@ -2,7 +2,7 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Response;
 
-use BreakingBetBundle\Interaction\Dto\Response\ApiResponseInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Transformer\Type\TransformerInterface as TransformerInterfaceType;
 use BreakingBetBundle\Internal\Enum\ResponseType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +25,7 @@ class Transformer implements TransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform(ApiResponseInterface $request)
+    public function transform(InternalRequestInterface $request)
     {
         return
             new JsonResponse(

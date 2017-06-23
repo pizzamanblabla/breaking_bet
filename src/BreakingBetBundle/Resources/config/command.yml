@@ -1,6 +1,6 @@
 services:
     bets.update:
-        class: BreakingBetBundle\Command\BetUpdateCommand
+        class: BreakingBetBundle\Command\Bet\Update
         arguments:
             - '@service.parser'
             - '@logger'

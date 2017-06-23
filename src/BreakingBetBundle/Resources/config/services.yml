@@ -1,9 +1,4 @@
 services:
-    service.parser:
-        class: BreakingBetBundle\Service\Parser\Parser
-        arguments:
-            - '@service.parser.external.factory'
-
     service_config:
         class: BreakingBetBundle\ServiceConfig\ServiceConfig
         arguments:
@@ -16,37 +11,3 @@ services:
 
     guzzle.client:
         class: GuzzleHttp\Client
-
-    service.parser.external.factory:
-        class: BreakingBetBundle\Service\Parser\External\Factory\Factory
-        arguments:
-            - '@service_config'
-            - '@service_container'
-
-    parser.external.assembler.betbc:
-        class: BreakingBetBundle\Service\Parser\External\Betsbc\Assembler\Assembler
-        arguments:
-            - '@service_config'
-
-    parser.external.resolver.betbc:
-        class: BreakingBetBundle\Service\Parser\External\Betsbc\Resolver\Resolver
-        arguments:
-            - '@data_migrator.factory'
-            - '@helper.finder'
-
-    parser.external.data_provider.betbc:
-        class: BreakingBetBundle\Service\Parser\External\Betsbc\DataProvider\DataProvider
-        arguments:
-            - '@parser.external.assembler.betbc'
-            - '@interaction.protocol'
-            - '@service_config'
-
-    data_migrator.factory:
-        class: BreakingBetBundle\DataMigrator\Factory\DataMigratorFactory
-        arguments:
-            - '@service_container'
-
-    helper.finder:
-        class: BreakingBetBundle\Helper\Finder\Finder
-
-

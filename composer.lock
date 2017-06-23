@@ -4,9 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe88eb7291684f8b35d964a13e6678dc",
-    "content-hash": "67b05fa391217eec06ed527074b250b3",
+    "hash": "29886e8b952a56ed54ea0aff855dc951",
+    "content-hash": "89a9035fff1c0ffe99815b69cd7a91d9",
     "packages": [
+        {
+            "name": "boldtrn/jsonb-bundle",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boldtrn/JsonbBundle.git",
+                "reference": "df766567ea7092c860485f46e2c7659e082e2c73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boldtrn/JsonbBundle/zipball/df766567ea7092c860485f46e2c7659e082e2c73",
+                "reference": "df766567ea7092c860485f46e2c7659e082e2c73",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.4",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "doctrine/orm": ">2.4,<2.6",
+                "phpunit/phpunit": "~4.2"
+            },
+            "suggest": {
+                "doctrine/orm": "To use DQL functions"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Boldtrn\\JsonbBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Boldt",
+                    "email": "boldtrn@gmail.com"
+                }
+            ],
+            "description": "A library adding the support for JSONB columns of PostgreSQL to Doctrine.",
+            "homepage": "https://github.com/boldtrn/JsonbBundle",
+            "keywords": [
+                "bundle",
+                "doctrine",
+                "jsonb",
+                "postgresql",
+                "symfony"
+            ],
+            "time": "2015-10-22 19:05:50"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.7",

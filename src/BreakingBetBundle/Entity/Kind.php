@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Sport")
- * @ORM\Table(name="sport")
+ * @ORM\Table(name="kind")
  */
-class Sport extends Entity
+class Kind extends Entity
 {
     /**
      * @ORM\Column(type="string", name="name", length=255, nullable=false)
@@ -27,7 +27,7 @@ class Sport extends Entity
      *
      * @param string $name
      *
-     * @return Sport
+     * @return $this
      */
     public function setName($name)
     {

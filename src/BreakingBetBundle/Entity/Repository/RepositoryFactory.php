@@ -2,13 +2,7 @@
 
 namespace BreakingBetBundle\Entity\Repository;
 
-use BreakingBetBundle\Entity\Bet as BetEntity;
-use BreakingBetBundle\Entity\Chain as ChainEntity;
-use BreakingBetBundle\Entity\Coefficient as CoefficientEntity;
-use BreakingBetBundle\Entity\CoefficientType as CoefficientTypeEntity;
-use BreakingBetBundle\Entity\Event as EventEntity;
-use BreakingBetBundle\Entity\Sport as SportEntity;
-use BreakingBetBundle\Entity\Team as TeamEntity;
+use BreakingBetBundle\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RepositoryFactory implements RepositoryFactoryInterface
@@ -29,56 +23,56 @@ class RepositoryFactory implements RepositoryFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function bet()
+    public function bet(): Bet
     {
-        return $this->entityManager->getRepository(BetEntity::class);
+        return $this->entityManager->getRepository(Entity\Bet::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function chain()
+    public function chain(): Chain
     {
-        return $this->entityManager->getRepository(ChainEntity::class);
+        return $this->entityManager->getRepository(Entity\Chain::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function coefficient()
+    public function coefficient(): Coefficient
     {
-        return $this->entityManager->getRepository(CoefficientEntity::class);
+        return $this->entityManager->getRepository(Entity\Coefficient::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function event()
+    public function event(): Event
     {
-        return $this->entityManager->getRepository(EventEntity::class);
+        return $this->entityManager->getRepository(Entity\Event::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function sport()
+    public function kind(): Kind
     {
-        return $this->entityManager->getRepository(SportEntity::class);
+        return $this->entityManager->getRepository(Entity\Kind::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function team()
+    public function team(): Team
     {
-        return $this->entityManager->getRepository(TeamEntity::class);
+        return $this->entityManager->getRepository(Entity\Team::class);
     }
 
     /**
-     * {@inheritdoc}
+     * @return Source
      */
-    public function coefficientType()
+    public function source(): Source
     {
-        return $this->entityManager->getRepository(CoefficientTypeEntity::class);
+        return $this->entityManager->getRepository(Entity\Source::class);
     }
 }

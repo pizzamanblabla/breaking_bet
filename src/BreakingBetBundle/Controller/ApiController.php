@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Exception;
+use Throwable;
 
 final class ApiController extends Controller
 {
@@ -81,7 +81,7 @@ final class ApiController extends Controller
 
             $this->logger->info('Transforming response to http response');
             return $this->apiToHttpResponseTransformer->transform($apiResponse);
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return $this->createErroneousResponse($e);
         }
     }
@@ -101,10 +101,10 @@ final class ApiController extends Controller
     }
 
     /**
-     * @param Exception $e
+     * @param Throwable $e
      * @return JsonResponse
      */
-    private function createErroneousResponse(Exception $e)
+    private function createErroneousResponse(Throwable $e)
     {
         return
             new JsonResponse(

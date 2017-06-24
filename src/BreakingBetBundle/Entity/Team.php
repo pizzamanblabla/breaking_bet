@@ -8,14 +8,24 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Team")
  * @ORM\Table(name="team")
  */
-class Team extends Entity
+class Team
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Sport")
-     * @ORM\JoinColumn(name="sport_id", referencedColumnName="id", nullable=true)
-     * @var Sport
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="team_id_seq", allocationSize=1, initialValue=1)
      */
-    private $sport;
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Kind")
+     * @ORM\JoinColumn(name="kind_id", referencedColumnName="id", nullable=false)
+     * @var Kind
+     */
+    private $kind;
 
     /**
      * @ORM\Column(type="string", name="name", length=255, nullable=false)
@@ -24,52 +34,48 @@ class Team extends Entity
     private $name;
 
     /**
-     * @ORM\Column(type="string", name="code", length=255, nullable=false)
+     * @ORM\Column(type="string", name="external_id", length=255, nullable=false)
      * @var string
      */
-    private $code;
+    private $externalId;
 
     /**
-     * Set sport
-     *
-     * @param Sport $sport
-     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
      * @return Team
      */
-    public function setSport(Sport $sport)
+    public function setId($id)
     {
-        $this->sport = $sport;
-
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Get sportId
-     *
-     * @return Sport
+     * @return Kind
      */
-    public function getSport()
+    public function getKind()
     {
-        return $this->sport;
+        return $this->kind;
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Team
+     * @param Kind $kind
+     * @return $this
      */
-    public function setName($name)
+    public function setKind(Kind $kind)
     {
-        $this->name = $name;
-
+        $this->kind = $kind;
         return $this;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -78,26 +84,30 @@ class Team extends Entity
     }
 
     /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Team
+     * @param string $name
+     * @return $this
      */
-    public function setCode($code)
+    public function setName($name)
     {
-        $this->code = $code;
-
+        $this->name = $name;
         return $this;
     }
 
     /**
-     * Get code
-     *
      * @return string
      */
-    public function getCode()
+    public function getExternalId()
     {
-        return $this->code;
+        return $this->externalId;
+    }
+
+    /**
+     * @param string $externalId
+     * @return Team
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+        return $this;
     }
 }

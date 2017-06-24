@@ -2,141 +2,129 @@
 
 namespace BreakingBetBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Event")
  * @ORM\Table(name="event")
  */
-class Event extends Entity
+class Event
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="team_first_id", referencedColumnName="id", nullable=true)
-     * @var Team
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="event_id_seq", allocationSize=1, initialValue=1)
      */
-    private $teamFirst;
+    private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="team_second_id", referencedColumnName="id", nullable=true)
-     * @var Team
+     * @var Team[]
+     *
+     * @ORM\ManyToMany(targetEntity="Team", orphanRemoval=true)
+     * @ORM\JoinTable(
+     *     name="event_team",
+     *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="team_id", referencedColumnName="id")}
+     * )
      */
-    private $teamSecond;
+    private $teams;
 
     /**
-     * @ORM\Column(type="string", name="code", length=255, nullable=false)
      * @var string
+     *
+     * @ORM\Column(type="string", name="external_id", length=255, nullable=false)
      */
-    private $code;
+    private $externalId;
 
     /**
-     * @ORM\Column(type="datetime", name="date", nullable=false)
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", name="date", nullable=false)
      */
     private $date;
 
     /**
+     * @var Chain
+     *
      * @ORM\ManyToOne(targetEntity="Chain")
      * @ORM\JoinColumn(name="chain_id", referencedColumnName="id", nullable=true)
-     * @var Chain
      */
     private $chain;
 
     /**
-     * Set teamFirst
-     *
-     * @param Team $teamFirst
-     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
      * @return Event
      */
-    public function setTeamFirst(Team $teamFirst)
+    public function setId($id)
     {
-        $this->teamFirst = $teamFirst;
-
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Get teamFirst
-     *
-     * @return Team
+     * @return Team[]
      */
-    public function getTeamFirst()
+    public function getTeams()
     {
-        return $this->teamFirst;
+        return $this->teams;
     }
 
     /**
-     * Set teamSecond
-     *
-     * @param Team $teamSecond
-     *
+     * @param Team[] $teams
      * @return Event
      */
-    public function setTeamSecond(Team $teamSecond)
+    public function setTeams(array $teams)
     {
-        $this->teamSecond = $teamSecond;
-
+        $this->teams = $teams;
         return $this;
     }
 
     /**
-     * Get teamSecond
-     *
-     * @return Team
-     */
-    public function getTeamSecond()
-    {
-        return $this->teamSecond;
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Event
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
      * @return string
      */
-    public function getName()
+    public function getExternalId()
     {
-        return $this->code;
+        return $this->externalId;
     }
 
     /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
+     * @param string $externalId
      * @return Event
      */
-    public function setDate($date)
+    public function setExternalId($externalId)
     {
-        $this->date = $date;
-
+        $this->externalId = $externalId;
         return $this;
     }
 
     /**
-     * Get date
-     *
      * @return \DateTime
      */
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @param DateTime $date
+     * @return Event
+     */
+    public function setDate(DateTime $date)
+    {
+        $this->date = $date;
+        return $this;
     }
 
     /**
@@ -151,20 +139,9 @@ class Event extends Entity
      * @param Chain $chain
      * @return Event
      */
-    public function setChain($chain)
+    public function setChain(Chain $chain)
     {
         $this->chain = $chain;
-
         return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 }

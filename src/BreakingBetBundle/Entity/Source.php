@@ -5,10 +5,10 @@ namespace BreakingBetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Chain")
- * @ORM\Table(name="chain")
+ * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Source")
+ * @ORM\Table(name="source")
  */
-class Chain
+class Source
 {
     /**
      * @var int
@@ -16,16 +16,9 @@ class Chain
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="chain_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="source_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Kind")
-     * @ORM\JoinColumn(name="kind_id", referencedColumnName="id", nullable=false)
-     * @var Kind
-     */
-    private $kind;
 
     /**
      * @ORM\Column(type="string", name="name", length=255, nullable=false)
@@ -34,10 +27,10 @@ class Chain
     private $name;
 
     /**
-     * @ORM\Column(type="string", name="external_id", length=255, nullable=false)
+     * @ORM\Column(type="string", name="url", length=255, nullable=false)
      * @var string
      */
-    private $externalId;
+    private $url;
 
     /**
      * @return int
@@ -49,29 +42,11 @@ class Chain
 
     /**
      * @param int $id
-     * @return Chain
+     * @return $this
      */
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return Kind
-     */
-    public function getKind()
-    {
-        return $this->kind;
-    }
-
-    /**
-     * @param Kind $kind
-     * @return $this
-     */
-    public function setKind(Kind $kind)
-    {
-        $this->kind = $kind;
         return $this;
     }
 
@@ -96,18 +71,18 @@ class Chain
     /**
      * @return string
      */
-    public function getExternalId()
+    public function getUrl()
     {
-        return $this->externalId;
+        return $this->url;
     }
 
     /**
-     * @param string $externalId
-     * @return $this
+     * @param string $url
+     * @return Source
      */
-    public function setExternalId($externalId)
+    public function setUrl($url)
     {
-        $this->externalId = $externalId;
+        $this->url = $url;
         return $this;
     }
 }

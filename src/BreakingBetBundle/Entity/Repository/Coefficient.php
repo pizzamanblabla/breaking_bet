@@ -3,15 +3,8 @@
 namespace BreakingBetBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use BreakingBetBundle\Entity\Coefficient as CoefficientEntity;
+use BreakingBetBundle\Entity;
 
 class Coefficient extends EntityRepository
 {
-    /**
-     * @return CoefficientEntity
-     */
-    public function getLast()
-    {
-
-    }
 }

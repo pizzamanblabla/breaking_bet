@@ -3,60 +3,65 @@
 namespace BreakingBetBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Bet")
  * @ORM\Table(name="bet")
  */
-class Bet extends Entity
+class Bet
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="bet_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var DateTime
+     *
      * @ORM\Column(type="datetime", name="date", nullable=false)
-     * @var \DateTime
      */
     private $date;
 
     /**
+     *  @var Event
+     *
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=true)
-     * @var Event
      */
     private $event;
 
     /**
-     * @ORM\OneToMany(targetEntity="Coefficient", mappedBy="bet")
      * @var Coefficient[]
+     *
+     * @ORM\OneToMany(targetEntity="Coefficient", mappedBy="bet")
      **/
     private $coefficients;
 
     /**
-     * Constructor
+     * @return int
      */
-    public function __construct()
+    public function getId()
     {
-        $this->coefficients = new ArrayCollection();
+        return $this->id;
     }
 
     /**
-     * Set date
-     *
-     * @param DateTime $date
-     *
+     * @param int $id
      * @return Bet
      */
-    public function setDate($date)
+    public function setId($id)
     {
-        $this->date = $date;
-
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Get date
-     *
      * @return DateTime
      */
     public function getDate()
@@ -65,22 +70,16 @@ class Bet extends Entity
     }
 
     /**
-     * Set event
-     *
-     * @param Event $event
-     *
+     * @param DateTime $date
      * @return Bet
      */
-    public function setEvent(Event $event)
+    public function setDate(DateTime $date)
     {
-        $this->event = $event;
-
+        $this->date = $date;
         return $this;
     }
 
     /**
-     * Get event
-     *
      * @return Event
      */
     public function getEvent()
@@ -89,36 +88,30 @@ class Bet extends Entity
     }
 
     /**
-     * Add coefficient
-     *
-     * @param Coefficient $coefficient
-     *
+     * @param Event $event
      * @return Bet
      */
-    public function addCoefficient($coefficient)
+    public function setEvent(Event $event)
     {
-        $this->coefficients[] = $coefficient;
-
+        $this->event = $event;
         return $this;
     }
 
     /**
-     * Remove coefficient
-     *
-     * @param Coefficient $coefficient
-     */
-    public function removeCoefficient($coefficient)
-    {
-        $this->coefficients->removeElement($coefficient);
-    }
-
-    /**
-     * Get coefficients
-     *
-     * @return Collection
+     * @return Coefficient[]
      */
     public function getCoefficients()
     {
         return $this->coefficients;
+    }
+
+    /**
+     * @param Coefficient[] $coefficients
+     * @return Bet
+     */
+    public function setCoefficients(array $coefficients)
+    {
+        $this->coefficients = $coefficients;
+        return $this;
     }
 }

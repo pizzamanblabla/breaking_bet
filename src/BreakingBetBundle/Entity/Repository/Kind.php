@@ -3,8 +3,9 @@
 namespace BreakingBetBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use BreakingBetBundle\Entity;
 
-class CoefficientType extends EntityRepository
+class Kind extends EntityRepository
 {
 
 }

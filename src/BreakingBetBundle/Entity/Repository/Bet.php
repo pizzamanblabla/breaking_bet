@@ -4,7 +4,7 @@ namespace BreakingBetBundle\Entity\Repository;
 
 use BreakingBetBundle\Operation\Bet\Get\Dto\Request\ApiRequest;
 use Doctrine\ORM\EntityRepository;
-use BreakingBetBundle\Entity\Bet as BetEntity;
+use BreakingBetBundle\Entity;
 use DateTime;
 
 class Bet extends EntityRepository
@@ -12,7 +12,7 @@ class Bet extends EntityRepository
     /**
      * @param DateTime $from
      * @param DateTime $to
-     * @return BetEntity[]
+     * @return Entity\Bet[]
      */
     public function findByTimeSpan(DateTime $from, DateTime $to)
     {
@@ -28,7 +28,7 @@ class Bet extends EntityRepository
 
     /**
      * @param ApiRequest $apiRequest
-     * @return BetEntity[]
+     * @return Entity\Bet[]
      */
     public function findByApiRequest(ApiRequest $apiRequest)
     {

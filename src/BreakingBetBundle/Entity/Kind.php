@@ -5,11 +5,21 @@ namespace BreakingBetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Sport")
+ * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Kind")
  * @ORM\Table(name="kind")
  */
-class Kind extends Entity
+class Kind
 {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="kind_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
     /**
      * @ORM\Column(type="string", name="name", length=255, nullable=false)
      * @var string
@@ -17,28 +27,30 @@ class Kind extends Entity
     private $name;
 
     /**
-     * @ORM\Column(type="string", name="code", length=255, nullable=false)
+     * @ORM\Column(type="string", name="external_id", length=255, nullable=false)
      * @var string
      */
-    private $code;
+    private $externalId;
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return $this
+     * @return int
      */
-    public function setName($name)
+    public function getId()
     {
-        $this->name = $name;
+        return $this->id;
+    }
 
+    /**
+     * @param int $id
+     * @return Kind
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -47,26 +59,30 @@ class Kind extends Entity
     }
 
     /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Sport
+     * @param string $name
+     * @return $this
      */
-    public function setCode($code)
+    public function setName($name)
     {
-        $this->code = $code;
-
+        $this->name = $name;
         return $this;
     }
 
     /**
-     * Get code
-     *
      * @return string
      */
-    public function getCode()
+    public function getExternalId()
     {
-        return $this->code;
+        return $this->externalId;
+    }
+
+    /**
+     * @param string $externalId
+     * @return Kind
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+        return $this;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace BreakingBetBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,19 +11,30 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="coefficient")
  * @ORM\Entity(repositoryClass="BreakingBetBundle\Entity\Repository\Coefficient")
  */
-class Coefficient extends Entity
+class Coefficient
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="coefficient_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var Bet
+     *
      * @ORM\ManyToOne(targetEntity="Bet")
      * @ORM\JoinColumn(name="bet_id", referencedColumnName="id", nullable=true)
-     * @var Bet
      */
     private $bet;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CoefficientType")
-     * @ORM\JoinColumn(name="coefficient_type_id", referencedColumnName="id", nullable=true)
-     * @var CoefficientType
+     * @var string
+     *
+     * @ORM\Column(name="coefficient_type", type="coefficient_type", nullable=false)
      */
     private $coefficientType;
 
@@ -48,7 +60,25 @@ class Coefficient extends Entity
     private $ps;
 
     /**
-     * @return mixed
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Coefficient
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return Bet
      */
     public function getBet()
     {
@@ -56,17 +86,17 @@ class Coefficient extends Entity
     }
 
     /**
-     * @param mixed $bet
+     * @param Bet $bet
      * @return Coefficient
      */
-    public function setBet($bet)
+    public function setBet(Bet $bet)
     {
         $this->bet = $bet;
         return $this;
     }
 
     /**
-     * @return CoefficientType
+     * @return string
      */
     public function getCoefficientType()
     {
@@ -74,7 +104,7 @@ class Coefficient extends Entity
     }
 
     /**
-     * @param CoefficientType $coefficientType
+     * @param string $coefficientType
      * @return Coefficient
      */
     public function setCoefficientType($coefficientType)
@@ -84,7 +114,7 @@ class Coefficient extends Entity
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getDate()
     {
@@ -92,10 +122,10 @@ class Coefficient extends Entity
     }
 
     /**
-     * @param mixed $date
+     * @param DateTime $date
      * @return Coefficient
      */
-    public function setDate($date)
+    public function setDate(DateTime $date)
     {
         $this->date = $date;
         return $this;

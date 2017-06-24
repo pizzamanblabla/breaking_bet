@@ -3,14 +3,14 @@
 namespace BreakingBetBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use BreakingBetBundle\Entity\Chain as ChainEntity;
+use BreakingBetBundle\Entity;
 
 class Chain extends EntityRepository
 {
     /**
-     * @return ChainEntity[]
+     * @return Entity\Chain[]
      */
-    public function findAll()
+    public function findAllWithOrderDesc()
     {
         return $this->findBy([], ['id' => 'DESC']);
     }

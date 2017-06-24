@@ -3,15 +3,9 @@
 namespace BreakingBetBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use BreakingBetBundle\Entity\Event as EventEntity;
+use BreakingBetBundle\Entity;
 
 class Event extends EntityRepository
 {
-    /**
-     * @return EventEntity
-     */
-    public function getLast()
-    {
 
-    }
 }

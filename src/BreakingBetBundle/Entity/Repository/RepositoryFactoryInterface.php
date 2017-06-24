@@ -5,37 +5,37 @@ namespace BreakingBetBundle\Entity\Repository;
 interface RepositoryFactoryInterface
 {
     /**
+     * @return Source
+     */
+    public function source(): Source;
+
+    /**
      * @return Bet
      */
-    public function bet();
+    public function bet(): Bet;
 
     /**
      * @return Chain
      */
-    public function chain();
+    public function chain(): Chain;
 
     /**
      * @return Coefficient
      */
-    public function coefficient();
+    public function coefficient(): Coefficient;
 
     /**
      * @return Event
      */
-    public function event();
+    public function event(): Event;
 
     /**
-     * @return Sport
+     * @return Kind
      */
-    public function sport();
+    public function kind(): Kind;
 
     /**
      * @return Team
      */
-    public function team();
-
-    /**
-     * @return CoefficientType
-     */
-    public function coefficientType();
+    public function team(): Team;
 }

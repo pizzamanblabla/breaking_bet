@@ -23,7 +23,7 @@ final class AssertDataExtractorDecorator extends BaseDataExtractorDecorator
     /**
      * {@inheritdoc}
      */
-    public function extract($data)
+    public function extract($data): array
     {
         assert($data instanceof $this->assertToEntity);
 

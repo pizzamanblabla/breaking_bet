@@ -2,9 +2,10 @@
 
 namespace BreakingBetBundle\Controller;
 
+use BreakingBetBundle\Enumeration\ResponseType;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Transformer\Request\TransformerInterface as HttpToInternalRequestTransformerInterface;
-use BreakingBetBundle\Enumeration\ResponseType;
+use BreakingBetBundle\Interaction\Transformer\Response\TransformerInterface as InternalToHttpResponseTransformerInterface;
 use BreakingBetBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,9 +34,9 @@ final class ApiController extends Controller
     private $service;
 
     /**
-     * @var ApiToHttpResponseTransoformerInterface
+     * @var InternalToHttpResponseTransformerInterface
      */
-    private $apiToHttpResponseTransformer;
+    private $internalToHttpResponseTransformer;
 
     /**
      * @var LoggerInterface
@@ -46,20 +47,20 @@ final class ApiController extends Controller
      * @param HttpToInternalRequestTransformerInterface $httpToInternalRequestTransformer
      * @param ValidatorInterface $validator
      * @param ServiceInterface $service
-     * @param ApiToHttpResponseTransoformerInterface $apiToHttpResponseTransformer
+     * @param InternalToHttpResponseTransformerInterface $internalToHttpResponseTransformer
      * @param LoggerInterface $logger
      */
     public function __construct(
         HttpToInternalRequestTransformerInterface $httpToInternalRequestTransformer,
         ValidatorInterface $validator,
         ServiceInterface $service,
-        ApiToHttpResponseTransoformerInterface $apiToHttpResponseTransformer,
+        InternalToHttpResponseTransformerInterface $internalToHttpResponseTransformer,
         LoggerInterface $logger
     ) {
-        $this->httpToApiRequestTransformer = $httpToInternalRequestTransformer;
+        $this->httpToInternalRequestTransformer = $httpToInternalRequestTransformer;
         $this->validator = $validator;
         $this->service = $service;
-        $this->apiToHttpResponseTransformer = $apiToHttpResponseTransformer;
+        $this->internalToHttpResponseTransformer = $internalToHttpResponseTransformer;
         $this->logger = $logger;
     }
 
@@ -80,7 +81,7 @@ final class ApiController extends Controller
             $apiResponse = $this->service->behave($apiRequest);
 
             $this->logger->info('Transforming response to http response');
-            return $this->apiToHttpResponseTransformer->transform($apiResponse);
+            return $this->internalToHttpResponseTransformer->transform($apiResponse);
         } catch (Throwable $e) {
             return $this->createErroneousResponse($e);
         }

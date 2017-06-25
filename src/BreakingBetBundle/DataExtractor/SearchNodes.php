@@ -27,7 +27,7 @@ final class SearchNodes implements DataExtractorInterface
     /**
      * {@inheritdoc}
      */
-    public function extract($extractable)
+    public function extract($extractable): array
     {
         $extracted = $this->decoratedDataExtractor->extract($extractable);
 

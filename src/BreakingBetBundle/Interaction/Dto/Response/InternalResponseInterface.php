@@ -2,7 +2,7 @@
 
 namespace BreakingBetBundle\Interaction\Dto\Response;
 
-use BreakingBetBundle\Interaction\Enum\ResponseType;
+use BreakingBetBundle\Enumeration\ResponseType;
 
 interface InternalResponseInterface
 {

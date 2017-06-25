@@ -11,5 +11,5 @@ interface TransformerInterface
      * @param InternalResponseInterface $request
      * @return Response
      */
-    public function transform(InternalResponseInterface $request);
+    public function transform(InternalResponseInterface $request): Response;
 }

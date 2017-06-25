@@ -20,7 +20,7 @@ final class Composite implements DataExtractorInterface
     /**
      * {@inheritdoc}
      */
-    public function extract($data)
+    public function extract($data): array
     {
         return
             array_reduce(

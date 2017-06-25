@@ -2,17 +2,19 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Response;
 
-use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
+use BreakingBetBundle\Enumeration\ResponseType;
+use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\Transformer\Type\TransformerInterface as TransformerInterfaceType;
-use BreakingBetBundle\Internal\Enum\ResponseType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class Transformer implements TransformerInterface
 {
     /**
-     * @var TransformerInterfaceType
+     * @var NormalizerInterface
      */
-    private $typeTransformer;
+    private $normalizer;
 
     /**
      * @param TransformerInterfaceType $typeTransformer
@@ -25,13 +27,13 @@ class Transformer implements TransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform(InternalRequestInterface $request)
+    public function transform(InternalResponseInterface $response): Response
     {
         return
             new JsonResponse(
                 [
                     'type' => ResponseType::SUCCESSFUL,
-                    'data' => $this->typeTransformer->transform($request),
+                    'data' => $this->normalizer->normalize($response),
                 ]
             );
     }

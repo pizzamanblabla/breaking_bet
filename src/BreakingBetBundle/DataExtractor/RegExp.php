@@ -2,9 +2,9 @@
 
 namespace BreakingBetBundle\DataExtractor;
 
-use InstaParserBundle\DataExtractor\Exception\WrongInputFormatException;
+use BreakingBetBundle\DataExtractor\Exception\DataExtractionException;
+use InstaParserBundle\Internal\PayloadModifier\PayloadModifierInterface;
 use InstaParserBundle\Internal\Sanitizer\SanitizerInterface;
-use InstaParserBundle\PayloadModifier\PayloadModifierInterface;
 
 final class RegExp implements DataExtractorInterface
 {
@@ -41,10 +41,10 @@ final class RegExp implements DataExtractorInterface
     /**
      * {@inheritdoc}
      */
-    public function extract($extractable)
+    public function extract($extractable): array
     {
         if (!is_string($extractable)) {
-            throw new WrongInputFormatException();
+            throw new DataExtractionException();
         }
 
         $matched = preg_match($this->regExp, $extractable, $match) ? $match[0] : '';

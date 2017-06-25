@@ -8,5 +8,5 @@ interface DataExtractorInterface
      * @param mixed $data
      * @return mixed[]
      */
-    public function extract($data);
+    public function extract($data): array;
 }

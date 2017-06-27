@@ -2,7 +2,6 @@
 
 namespace BreakingBetBundle\Command;
 
-use Exception;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Internal\Service\ServiceInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -10,6 +9,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 abstract class BaseCommand extends Command
 {
@@ -41,21 +41,23 @@ abstract class BaseCommand extends Command
         try {
             $this->logger->info('Transforming input to internal request');
             $this->service->behave($this->createRequest($input));
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->logger->error(
-                'An error occurred while parsing',
+                'An error occurred while parsing :exception',
                 [
-                    'exception' => $e,
+                    ':exception' => $e,
                 ]
             );
             return 1;
         }
+
         $this->logger->info('Completed');
         $output->writeln([
             '==================',
             'Command completed!',
             '==================',
         ]);
+
         return 0;
     }
 

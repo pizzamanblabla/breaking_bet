@@ -5,6 +5,7 @@ namespace BreakingBetBundle\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 use BreakingBetBundle\Entity;
 
-class Source extends EntityRepository
-{
-}
+/**
+ * @method findOneByName(string $name)
+ */
+class Source extends EntityRepository {}

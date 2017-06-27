@@ -1,1 +1,3 @@
 services:
+    breaking_bet.bet.update.service:
+        class: BreakingBetBundle\Operation\Bet\Update\Service\Service

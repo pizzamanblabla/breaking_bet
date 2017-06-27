@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Throwable;
 
-final class ApiController extends Controller
+final class ApplicationController extends Controller
 {
     /**
      * @var HttpToInternalRequestTransformerInterface

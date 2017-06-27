@@ -4,12 +4,11 @@ namespace BreakingBetBundle\Interaction\Transformer\Response;
 
 use BreakingBetBundle\Enumeration\ResponseType;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
-use BreakingBetBundle\Interaction\Transformer\Type\TransformerInterface as TransformerInterfaceType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class Transformer implements TransformerInterface
+final class Json implements TransformerInterface
 {
     /**
      * @var NormalizerInterface
@@ -17,11 +16,11 @@ class Transformer implements TransformerInterface
     private $normalizer;
 
     /**
-     * @param TransformerInterfaceType $typeTransformer
+     * @param NormalizerInterface $normalizer
      */
-    public function __construct(TransformerInterfaceType $typeTransformer)
+    public function __construct(NormalizerInterface $normalizer)
     {
-        $this->typeTransformer = $typeTransformer;
+        $this->normalizer = $normalizer;
     }
 
     /**

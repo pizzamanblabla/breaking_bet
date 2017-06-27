@@ -2,7 +2,7 @@ services:
     bets.update:
         class: BreakingBetBundle\Command\Bet\Update
         arguments:
-            - '@service.parser'
+            - '@breaking_bet.bet.update.service'
             - '@logger'
         tags:
             - { name: console.command }

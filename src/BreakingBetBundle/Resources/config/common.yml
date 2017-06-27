@@ -6,7 +6,7 @@ services:
             - '@logger'
 
     breaking_bet.interaction.api_to_http_transformer:
-        class: BreakingBetBundle\Interaction\Transformer\Response\Transformer
+        class: BreakingBetBundle\Interaction\Transformer\Response\Json
         arguments:
             - '@breaking_bet.interaction.object_to_array_transformer'
 

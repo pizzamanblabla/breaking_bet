@@ -2,17 +2,18 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Dto\Request;
 
+use BreakingBetBundle\Entity\Source;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 
 class Request implements InternalRequestInterface
 {
     /**
-     * @var string
+     * @var Source
      */
     private $source;
 
     /**
-     * @return string
+     * @return Source
      */
     public function getSource()
     {
@@ -20,10 +21,10 @@ class Request implements InternalRequestInterface
     }
 
     /**
-     * @param string $source
-     * @return Request
+     * @param Source $source
+     * @return $this
      */
-    public function setSource($source)
+    public function setSource(Source $source)
     {
         $this->source = $source;
         return $this;

@@ -3,6 +3,7 @@ services:
         class: BreakingBetBundle\Command\Bet\Update
         arguments:
             - '@breaking_bet.bet.update.service'
+            - '@breaking_bet.entity.repository.factory'
             - '@logger'
         tags:
             - { name: console.command }

@@ -1,6 +1,6 @@
 services:
     controller.api:
-        class: BreakingBetBundle\Controller\ApiController
+        class: BreakingBetBundle\Controller\ApplicationController
         arguments:
             - '@breaking_bet.operation.bet.get.http_to_api_transformer'
             - '@validator'

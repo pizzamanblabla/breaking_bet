@@ -5,7 +5,7 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-class Version20161020135950 extends AbstractMigration
+class Version0001Initial extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -16,7 +16,8 @@ class Version20161020135950 extends AbstractMigration
             CREATE TABLE source (
                 id SERIAL NOT NULL PRIMARY KEY,
                 name CHARACTER VARYING(128) NOT NULL,
-                url CHARACTER VARYING(256) NOT NULL
+                url CHARACTER VARYING(256) NOT NULL,
+                meta JSONB NOT NULL DEFAULT '{}'
             );
 SQL
         );

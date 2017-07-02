@@ -2,35 +2,31 @@
 
 namespace BreakingBetBundle\Operation\Bet\Get\Dto\Request;
 
-use BreakingBetBundle\Interaction\Dto\Request\ApiRequestInterface;
+use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use DateTime;
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ApiRequest implements ApiRequestInterface
+class Request implements InternalRequestInterface
 {
     /**
      * @var int
      *
-     * @Type("integer")
-     * @SerializedName("sport")
+     * @Serializer\Type("integer")
      */
     private $sport;
 
     /**
      * @var int
      *
-     * @Type("integer")
-     * @SerializedName("chain")
+     * @Serializer\Type("integer")
      */
     private $chain;
 
     /**
      * @var DateTime
      *
-     * @Type("DateTime")
-     * @SerializedName("dateFrom")
+     * @Serializer\Type("DateTime")
      *
      * @Assert\NotBlank()
      */
@@ -39,8 +35,7 @@ class ApiRequest implements ApiRequestInterface
     /**
      * @var DateTime
      *
-     * @Type("DateTime")
-     * @SerializedName("dateTo")
+     * @Serializer\Type("DateTime")
      *
      * @Assert\NotBlank()
      */
@@ -49,8 +44,7 @@ class ApiRequest implements ApiRequestInterface
     /**
      * @var Coefficient[]
      *
-     * @Type("array<BreakingBetBundle\Operation\Bet\Get\Dto\Request\Coefficient>")
-     * @SerializedName("coefficients")
+     * @Serializer\Type("array<BreakingBetBundle\Operation\Bet\Get\Dto\Request\Coefficient>")
      */
     private $coefficients;
 

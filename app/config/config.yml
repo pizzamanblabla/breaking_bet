@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
 
 parameters:
     locale: en
@@ -14,7 +13,6 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -64,7 +62,7 @@ swiftmailer:
     spool:     { type: memory }
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    dir_name: "%kernel.root_dir%/migrations"
     namespace: Application\Migrations
     table_name: migration_versions
     name: Breaking Bet Migrations

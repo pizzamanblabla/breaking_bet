@@ -21,16 +21,25 @@ class Source
     private $id;
 
     /**
-     * @ORM\Column(type="string", name="name", length=255, nullable=false)
      * @var string
+     *
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", name="url", length=255, nullable=false)
      * @var string
+     *
+     * @ORM\Column(type="string", name="url", length=255, nullable=false)
      */
     private $url;
+
+    /**
+     * @var string[]
+     *
+     * @ORM\Column(type="jsonb", name="meta", nullable=false)
+     */
+    private $meta = [];
 
     /**
      * @return int
@@ -83,6 +92,24 @@ class Source
     public function setUrl($url)
     {
         $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @param string[] $meta
+     * @return Source
+     */
+    public function setMeta(array $meta)
+    {
+        $this->meta = $meta;
         return $this;
     }
 }

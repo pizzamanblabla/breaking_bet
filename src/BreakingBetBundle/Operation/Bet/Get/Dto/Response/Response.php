@@ -2,10 +2,10 @@
 
 namespace BreakingBetBundle\Operation\Bet\Get\Dto\Response;
 
-use BreakingBetBundle\Interaction\Dto\Response\ApiResponseInterface;
+use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\Dto\Response\Successful;
 
-class ApiResponse implements ApiResponseInterface
+class ApiResponse implements InternalResponseInterface
 {
     use Successful;
 

@@ -30,7 +30,9 @@ class BreakingBetExtension extends Extension
     private function getConfigurationList()
     {
         return [
-
+            'command.yml',
+            'common.yml',
+            'operation/bet/update.yml',
         ];
     }
 }

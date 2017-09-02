@@ -32,7 +32,7 @@ class BreakingBetExtension extends Extension
         return [
             'command.yml',
             'common.yml',
-            'operation/bet/update.yml',
+            'operation/bet/update/update.yml',
         ];
     }
 }

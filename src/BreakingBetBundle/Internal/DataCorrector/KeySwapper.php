@@ -2,7 +2,7 @@
 
 namespace BreakingBetBundle\Internal\DataCorrector;
 
-final class KeyReplacer implements DataCorrectorInterface
+final class KeySwapper implements DataCorrectorInterface
 {
     /**
      * @var string[]

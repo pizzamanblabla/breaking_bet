@@ -7,7 +7,7 @@ final class Json implements PayloadModifierInterface
     /**
      * {@inheritdoc}
      */
-    public function modify(string $modifiable): array
+    public function modify($modifiable)
     {
         $modified =  json_decode($modifiable, 1);
 

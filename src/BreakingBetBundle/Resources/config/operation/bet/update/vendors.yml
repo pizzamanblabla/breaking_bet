@@ -1,0 +1,16 @@
+services:
+    breaking_bet.bet.update.betsbc.data_parser:
+        class: BreakingBetBundle\Interaction\DataParser\DataParser
+        arguments:
+            - '@breaking_bet.bet.update.betsbc.data_extractor'
+            - '@breaking_bet.bet.update.betsbc.data_corrector'
+            - '@logger'
+
+    breaking_bet.bet.update.betsbc.data_extractor:
+        class: BreakingBetBundle\Interaction\DataExtractor\HttpResponse\Content
+        arguments:
+            - '@breaking_bet.data_extractor.blank'
+            - '@breaking_bet.payload_modifier.json'
+
+    breaking_bet.bet.update.betsbc.data_corrector:
+        class:

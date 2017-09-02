@@ -5,7 +5,7 @@ namespace BreakingBetBundle\Entity\Repository;
 use BreakingBetBundle\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 
-class RepositoryFactory implements RepositoryFactoryInterface
+final class RepositoryFactory implements RepositoryFactoryInterface
 {
     /**
      * @var EntityManagerInterface

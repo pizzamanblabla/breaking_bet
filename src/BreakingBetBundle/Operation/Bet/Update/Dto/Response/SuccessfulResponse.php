@@ -13,4 +13,22 @@ class SuccessfulResponse implements InternalResponseInterface
      * @var Kind[]
      */
     private $kinds;
+
+    /**
+     * @return Kind[]
+     */
+    public function getKinds()
+    {
+        return $this->kinds;
+    }
+
+    /**
+     * @param Kind[] $kinds
+     * @return SuccessfulResponse
+     */
+    public function setKinds(array $kinds)
+    {
+        $this->kinds = $kinds;
+        return $this;
+    }
 }

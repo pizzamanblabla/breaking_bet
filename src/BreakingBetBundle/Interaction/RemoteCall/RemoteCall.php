@@ -2,9 +2,9 @@
 
 namespace BreakingBetBundle\Interaction\RemoteCall;
 
+use BreakingBetBundle\Interaction\DataParser\DataParserInterface;
 use BreakingBetBundle\Interaction\Dto\Response\ResponseFactoryInterface;
 use GuzzleHttp\ClientInterface;
-use BreakingBetBundle\DataExtractor\DataExtractorInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\RequestAssembler\RequestAssemblerInterface;
@@ -29,9 +29,9 @@ final class RemoteCall implements RemoteCallInterface
     private $client;
 
     /**
-     * @var DataExtractorInterface
+     * @var DataParserInterface
      */
-    private $dataExtractor;
+    private $dataParser;
 
     /**
      * @var ObjectBuilderInterface
@@ -51,7 +51,7 @@ final class RemoteCall implements RemoteCallInterface
     /**
      * @param RequestAssemblerInterface $requestAssembler
      * @param ClientInterface $client
-     * @param DataExtractorInterface $dataExtractor
+     * @param DataParserInterface $dataParser
      * @param ObjectBuilderInterface $objectBuilder
      * @param ResponseFactoryInterface $responseFactory
      * @param ValidatorInterface $validator
@@ -60,7 +60,7 @@ final class RemoteCall implements RemoteCallInterface
     public function __construct(
         RequestAssemblerInterface $requestAssembler,
         ClientInterface $client,
-        DataExtractorInterface $dataExtractor,
+        DataParserInterface $dataParser,
         ObjectBuilderInterface $objectBuilder,
         ResponseFactoryInterface $responseFactory,
         ValidatorInterface $validator,
@@ -70,7 +70,7 @@ final class RemoteCall implements RemoteCallInterface
 
         $this->requestAssembler = $requestAssembler;
         $this->client = $client;
-        $this->dataExtractor = $dataExtractor;
+        $this->dataParser = $dataParser;
         $this->objectBuilder = $objectBuilder;
         $this->responseFactory = $responseFactory;
         $this->validator = $validator;
@@ -79,7 +79,7 @@ final class RemoteCall implements RemoteCallInterface
     /**
      * {@inheritdoc}
      */
-    public function call(InternalRequestInterface $request)
+    public function call(InternalRequestInterface $request): InternalResponseInterface
     {
         $this->logger->info('Trying to build http request');
         $httpRequest = $this->requestAssembler->assemble($request);
@@ -87,11 +87,11 @@ final class RemoteCall implements RemoteCallInterface
         $this->logger->info('Sending remote request');
         $httpResponse = $this->client->send($httpRequest);
 
-        $this->logger->info('Extracting data from http response');
-        $extracted = $this->dataExtractor->extract($httpResponse);
+        $this->logger->info('Parsing data from http response');
+        $parsed = $this->dataParser->parse($httpResponse);
 
         $this->logger->info('Building internal request');
-        return $this->buildInternalRequest($extracted);
+        return $this->buildInternalRequest($parsed);
     }
 
     /**

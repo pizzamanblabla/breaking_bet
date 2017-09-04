@@ -14,7 +14,7 @@ class Version0002Sources extends AbstractMigration
     {
         $this->addSql(<<<SQL
             INSERT INTO source (name, url, meta) 
-            VALUES ('betsbc', 'http://www.betsbc.com', '{"proxy":{"ip": "89.107.58.215", "port": "443"}, "initialUrl": "/api/v1/bets/line"}');
+            VALUES ('betsbc', 'http://www.betsbc.com/api/v1/live/soon/list?rev=3&other=1&fut=1', '{"proxy":{"ip": "89.107.58.215", "port": "443"}}');
 SQL
         );
     }

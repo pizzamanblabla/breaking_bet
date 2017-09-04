@@ -1,6 +1,6 @@
 services:
     breaking_bet.bet.update.betsbc.data_parser:
-        class: BreakingBetBundle\Interaction\DataParser\DataParser
+        class: BreakingBetBundle\Internal\DataParser\DataParser
         arguments:
             - '@breaking_bet.bet.update.betsbc.data_extractor'
             - '@breaking_bet.bet.update.betsbc.data_corrector'
@@ -9,8 +9,22 @@ services:
     breaking_bet.bet.update.betsbc.data_extractor:
         class: BreakingBetBundle\Interaction\DataExtractor\HttpResponse\Content
         arguments:
-            - '@breaking_bet.data_extractor.blank'
+            - '@breaking_bet.bet.update.betsbc.data_extractor.unwrapper'
             - '@breaking_bet.payload_modifier.json'
 
+    breaking_bet.bet.update.betsbc.data_extractor.unwrapper:
+        class: BreakingBetBundle\Internal\DataExtractor\Unwrapper
+        arguments:
+            - 'reply'
+
     breaking_bet.bet.update.betsbc.data_corrector:
-        class:
+        class: BreakingBetBundle\Internal\DataCorrector\Composite
+        arguments:
+            -
+                - '@breaking_bet.bet.update.betsbc.data_corrector.keys_swapper'
+
+    breaking_bet.bet.update.betsbc.data_corrector.keys_swapper:
+        class: BreakingBetBundle\Internal\DataCorrector\KeySwapper
+        arguments:
+            -
+                sports: 'kinds'

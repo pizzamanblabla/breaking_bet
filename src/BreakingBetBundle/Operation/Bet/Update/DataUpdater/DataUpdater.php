@@ -4,7 +4,7 @@ namespace BreakingBetBundle\Operation\Bet\Update\DataUpdater;
 
 use BreakingBetBundle\Entity;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
-use BreakingBetBundle\Internal\Service\BaseDataUpdater;
+use BreakingBetBundle\Internal\DataUpdater\BaseDataUpdater;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Response\Kind;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Response\SuccessfulResponse;
 

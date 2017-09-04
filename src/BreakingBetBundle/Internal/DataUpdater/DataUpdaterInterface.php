@@ -1,6 +1,6 @@
 <?php
 
-namespace BreakingBetBundle\Interaction\DataUpdater;
+namespace BreakingBetBundle\Internal\DataUpdater;
 
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 

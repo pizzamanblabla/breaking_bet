@@ -1,9 +1,8 @@
 <?php
 
-namespace BreakingBetBundle\Internal\Service;
+namespace BreakingBetBundle\Internal\DataUpdater;
 
 use BreakingBetBundle\Entity\Repository\RepositoryFactoryInterface;
-use BreakingBetBundle\Interaction\DataUpdater\DataUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace BreakingBetBundle\Interaction\DataParser;
+namespace BreakingBetBundle\Internal\DataParser;
 
 interface DataParserInterface
 {

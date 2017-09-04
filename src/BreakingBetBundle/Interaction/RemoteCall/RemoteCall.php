@@ -2,8 +2,8 @@
 
 namespace BreakingBetBundle\Interaction\RemoteCall;
 
-use BreakingBetBundle\Interaction\DataParser\DataParserInterface;
 use BreakingBetBundle\Interaction\Dto\Response\ResponseFactoryInterface;
+use BreakingBetBundle\Internal\DataParser\DataParserInterface;
 use GuzzleHttp\ClientInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;

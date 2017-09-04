@@ -16,7 +16,7 @@ services:
     breaking_bet.bet.update.remote_call:
         class: BreakingBetBundle\Interaction\RemoteCall\RemoteCall
         arguments:
-            - ''
+            - '@breaking_bet.bet.update.request_assembler'
             - '@breaking_bet.guzzle.client'
             - '@breaking_bet.bet.update.data_parser.chain'
             - '@breaking_bet.object_builder.jms'
@@ -24,11 +24,16 @@ services:
             - '@validator'
             - '@logger'
 
+    breaking_bet.bet.update.request_assembler:
+        class: BreakingBetBundle\Operation\Bet\Update\RequestAssembler\RequestAssembler
+        arguments:
+            - 'GET'
+
     breaking_bet.bet.update.response_factory:
         class: BreakingBetBundle\Operation\Bet\Update\Dto\Response\SuccessfulResponseFactory
 
     breaking_bet.bet.update.data_parser.chain:
-        class: BreakingBetBundle\Interaction\DataParser\Chain
+        class: BreakingBetBundle\Internal\DataParser\Chain
         arguments:
             -
                 - '@breaking_bet.bet.update.betsbc.data_parser'

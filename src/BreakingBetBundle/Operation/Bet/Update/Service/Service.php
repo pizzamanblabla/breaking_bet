@@ -2,10 +2,10 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Service;
 
-use BreakingBetBundle\Interaction\DataUpdater\DataUpdaterInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\RemoteCall\RemoteCallInterface;
+use BreakingBetBundle\Internal\DataUpdater\DataUpdaterInterface;
 use BreakingBetBundle\Internal\Service\ServiceInterface;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Request\Request;
 use Psr\Log\LoggerAwareTrait;
@@ -48,8 +48,6 @@ final class Service implements ServiceInterface
      */
     public function behave(InternalRequestInterface $request): InternalResponseInterface
     {
-        //var_dump($request);die;
-
         $response = $this->remoteCall->call($request);
 
         if ($response->getType()->isSuccessful()) {

@@ -33,6 +33,7 @@ class BreakingBetExtension extends Extension
             'command.yml',
             'common.yml',
             'operation/bet/update/update.yml',
+            'operation/bet/update/vendors.yml',
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace BreakingBetBundle\Interaction\DataParser;
+namespace BreakingBetBundle\Internal\DataParser;
 
 final class Chain implements DataParserInterface
 {

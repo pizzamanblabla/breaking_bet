@@ -2,20 +2,36 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Dto\Response;
 
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Chain
 {
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("externalId")
      */
     private $externalId;
 
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
      */
     private $name;
 
     /**
      * @var Event[]
+     *
+     * @Assert\Type("array")
+     *
+     * @Serializer\Type("array<BreakingBetBundle\Operation\Bet\Update\Dto\Response\Event>")
      */
     private $events;
 

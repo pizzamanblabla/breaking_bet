@@ -26,7 +26,11 @@ final class KeySwapper implements DataCorrectorInterface
 
         foreach ($data as $key => $value) {
             if (in_array($key, array_keys($this->keysMap)) && $key) {
-                $correctedData[$this->keysMap[$key]] = $value;
+                if (is_array($value)) {
+                    $correctedData[$this->keysMap[$key]] = $this->correct($value);
+                } else {
+                    $correctedData[$this->keysMap[$key]] = $value;
+                }
             } elseif (is_array($value)) {
                 $correctedData[$key] = $this->correct($value);
             } else {

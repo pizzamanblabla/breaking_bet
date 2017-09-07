@@ -28,3 +28,14 @@ services:
         arguments:
             -
                 sports: 'kinds'
+                id_sp: 'externalId'
+                chmps: 'chains'
+                name_sp: 'name'
+                evts: 'events'
+                name_ch: 'name'
+                id_ch: 'externalId'
+                id_ev: 'externalId'
+                name_ht: 'name'
+                id_ht: 'externalId'
+                date_ev_str: 'date'
+                main: 'bets'

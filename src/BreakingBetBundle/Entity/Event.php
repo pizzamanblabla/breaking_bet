@@ -22,6 +22,12 @@ class Event
     private $id;
 
     /**
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
+     * @var string
+     */
+    private $name;
+
+    /**
      * @var Team[]
      *
      * @ORM\ManyToMany(targetEntity="Team", orphanRemoval=true)
@@ -142,6 +148,24 @@ class Event
     public function setChain(Chain $chain)
     {
         $this->chain = $chain;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
         return $this;
     }
 }

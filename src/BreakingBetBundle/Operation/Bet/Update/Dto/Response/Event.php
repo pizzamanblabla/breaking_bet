@@ -2,32 +2,56 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Dto\Response;
 
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Event
 {
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("externalId")
      */
     private $externalId;
 
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
      */
     private $date;
 
     /**
-     * @var Bet[]
+     * @var Bet
+     *
+     * @Assert\Type("object")
+     *
+     * @Serializer\Type("BreakingBetBundle\Operation\Bet\Update\Dto\Response\Bet")
      */
-    private $bets;
+    private $bet;
 
     /**
      * @var Team[]
+     *
+     * @Assert\Type("array")
+     *
+     * @Serializer\Type("array<BreakingBetBundle\Operation\Bet\Update\Dto\Response\Team>")
      */
-    private $teams;
+    private $teams = [];
 
     /**
      * @return string
@@ -84,20 +108,20 @@ class Event
     }
 
     /**
-     * @return Bet[]
+     * @return Bet
      */
-    public function getBets()
+    public function getBet()
     {
-        return $this->bets;
+        return $this->bet;
     }
 
     /**
-     * @param Bet[] $bets
+     * @param Bet $bet
      * @return Event
      */
-    public function setBets(array $bets)
+    public function setBets(Bet $bet)
     {
-        $this->bets = $bets;
+        $this->bet = $bet;
         return $this;
     }
 

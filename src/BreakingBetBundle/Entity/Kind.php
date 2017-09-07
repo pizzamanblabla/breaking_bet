@@ -33,6 +33,13 @@ class Kind
     private $externalId;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Source")
+     * @ORM\JoinColumn(name="source_id", referencedColumnName="id", nullable=false)
+     * @var Source
+     */
+    private $source;
+
+    /**
      * @return int
      */
     public function getId()
@@ -83,6 +90,24 @@ class Kind
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+        return $this;
+    }
+
+    /**
+     * @return Source
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param Source $source
+     * @return Kind
+     */
+    public function setSource(Source $source)
+    {
+        $this->source = $source;
         return $this;
     }
 }

@@ -2,7 +2,7 @@ services:
     bets.update:
         class: BreakingBetBundle\Command\Bet\Update
         arguments:
-            - '@breaking_bet.bet.update.service'
+            - '@breaking_bet.bet.update.service.trnasactional'
             - '@breaking_bet.entity.repository.factory'
             - '@logger'
         tags:

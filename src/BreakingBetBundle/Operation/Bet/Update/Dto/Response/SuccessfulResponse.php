@@ -4,6 +4,8 @@ namespace BreakingBetBundle\Operation\Bet\Update\Dto\Response;
 
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\Dto\Response\Successful;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SuccessfulResponse implements InternalResponseInterface
 {
@@ -11,6 +13,10 @@ class SuccessfulResponse implements InternalResponseInterface
 
     /**
      * @var Kind[]
+     *
+     * @Assert\Type("array")
+     *
+     * @Serializer\Type("array<BreakingBetBundle\Operation\Bet\Update\Dto\Response\Kind>")
      */
     private $kinds;
 

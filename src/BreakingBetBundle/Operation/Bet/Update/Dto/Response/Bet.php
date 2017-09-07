@@ -2,15 +2,26 @@
 
 namespace BreakingBetBundle\Operation\Bet\Update\Dto\Response;
 
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Bet
 {
     /**
      * @var Coefficient[]
+     *
+     * @Assert\Type("array")
+     *
+     * @Serializer\Type("array<BreakingBetBundle\Operation\Bet\Update\Dto\Response\Coefficient>")
      */
     private $coefficients;
 
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
      */
     private $date;
 

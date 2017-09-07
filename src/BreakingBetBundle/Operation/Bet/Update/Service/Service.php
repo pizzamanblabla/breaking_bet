@@ -10,7 +10,6 @@ use BreakingBetBundle\Internal\Service\ServiceInterface;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Request\Request;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
 final class Service implements ServiceInterface
 {
@@ -52,7 +51,7 @@ final class Service implements ServiceInterface
 
         if ($response->getType()->isSuccessful()) {
             $this->logger->info('Successful response received');
-            $this->dataUpdater->update($response);
+            $this->dataUpdater->update($request, $response);
         } else {
             $this->logger->info('Erroneous response received');
         }

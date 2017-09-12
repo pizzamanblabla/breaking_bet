@@ -22,13 +22,12 @@ final class Composite implements DataCorrectorInterface
      */
     public function correct(array $data): array
     {
-        return
-            array_reduce(
-                $this->container,
-                function (array $merged, DataCorrectorInterface $dataCorrector) use ($data) {
-                    return array_merge($merged, $dataCorrector->correct($data));
-                },
-                []
-            );
+        $corrected = $data;
+
+        foreach ($this->container as $dataCorrector) {
+            $corrected = $dataCorrector->correct($corrected);
+        }
+
+        return $corrected;
     }
 }

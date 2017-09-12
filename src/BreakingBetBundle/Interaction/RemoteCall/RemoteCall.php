@@ -4,12 +4,16 @@ namespace BreakingBetBundle\Interaction\RemoteCall;
 
 use BreakingBetBundle\Interaction\Dto\Response\ResponseFactoryInterface;
 use BreakingBetBundle\Internal\DataParser\DataParserInterface;
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Interaction\RequestAssembler\RequestAssemblerInterface;
 use BreakingBetBundle\Internal\ObjectBuilder\Exception\InvalidObjectException;
 use BreakingBetBundle\Internal\ObjectBuilder\ObjectBuilderInterface;
+use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleTor\Middleware;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -85,10 +89,27 @@ final class RemoteCall implements RemoteCallInterface
         $httpRequest = $this->requestAssembler->assemble($request);
 
         $this->logger->info('Sending remote request');
-        $httpResponse = $this->client->send($httpRequest);
+        $httpResponse = $this->setUpClient()->send(
+            $httpRequest,
+            [
+                'tor_new_identity' => true,
+                'tor_new_identity_sleep' => 15,
+                'tor_new_identity_timeout' => 10,
+                'tor_new_identity_exception' => false,
+                'tor_control_password' => 'password',
+            ]
+        );
 
         $this->logger->info('Parsing data from http response');
         $parsed = $this->dataParser->parse($httpResponse);
+
+        if (!count($parsed)) {
+            $this->logger->info('Failed. Sending unmasked remote request');
+            $httpResponse = $this->client->send($httpRequest);
+
+            $this->logger->info('Extracting data from http response');
+            $parsed = $this->dataParser->parse($httpResponse);
+        }
 
         $this->logger->info('Building internal request');
         return $this->buildInternalRequest($parsed);
@@ -113,5 +134,17 @@ final class RemoteCall implements RemoteCallInterface
         }
 
         return $response;
+    }
+
+    /**
+     * @return Client
+     */
+    private function setUpClient()
+    {
+        $stack = new HandlerStack();
+        $stack->setHandler(new CurlHandler());
+        $stack->push(Middleware::tor());
+
+        return new Client(['handler' => $stack]);
     }
 }

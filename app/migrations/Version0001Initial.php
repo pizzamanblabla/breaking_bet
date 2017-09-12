@@ -103,7 +103,7 @@ SQL
                 bet_id BIGINT NOT NULL REFERENCES bet(id),
                 coefficient_type varchar(36) NOT NULL,
                 value DOUBLE PRECISION NOT NULL,
-                ps DOUBLE PRECISION NOT NULL,
+                ps DOUBLE PRECISION DEFAULT NULL,
                 date TIMESTAMPTZ NOT NULL DEFAULT current_timestamp
             );
 SQL

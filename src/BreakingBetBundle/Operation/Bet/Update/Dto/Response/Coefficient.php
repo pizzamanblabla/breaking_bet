@@ -13,6 +13,7 @@ class Coefficient
      * @Assert\Type("string")
      *
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("coefficientType")
      */
     private $coefficientType;
 

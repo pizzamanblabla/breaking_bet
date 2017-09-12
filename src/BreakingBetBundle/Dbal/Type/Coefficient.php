@@ -33,7 +33,7 @@ class Coefficient extends Type
             return null;
         }
 
-        return parent::convertToDatabaseValue($value->getValue(), $platform);
+        return parent::convertToDatabaseValue($value, $platform);
     }
 
     /**

@@ -13,6 +13,7 @@ use BreakingBetBundle\Operation\Bet\Update\Dto\Response\Event;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Response\Kind;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Response\SuccessfulResponse;
 use BreakingBetBundle\Operation\Bet\Update\Dto\Response\Team;
+use DateTime;
 
 final class DataUpdater extends BaseDataUpdater
 {
@@ -31,7 +32,10 @@ final class DataUpdater extends BaseDataUpdater
 
                 foreach ($chain->getEvents() as $event) {
                     $eventEntity = $this->updateEvent($event, $chainEntity);
-                    //$this->updateBet($event->getBet(), $eventEntity);
+
+                    if (!is_null($event->getBet())) {
+                        $this->updateBet($event->getBet(), $eventEntity);
+                    }
                 }
             }
         }
@@ -94,9 +98,9 @@ final class DataUpdater extends BaseDataUpdater
         if (!$entity) {
             $entity = (new Entity\Event())
                 ->setExternalId($event->getExternalId())
-                ->setName($event->getName())
+                ->setName($chain->getName())
                 ->setChain($chain)
-                ->setDate(new \DateTime($event->getDate()))
+                ->setDate($this->checkAndGetDate($event->getDate()))
             ;
 
             $teams = [];
@@ -122,7 +126,7 @@ final class DataUpdater extends BaseDataUpdater
     private function updateTeam(Team $team, Entity\Kind $kind)
     {
 
-        $entity = $this->repositoryFactory->event()->findOneBy(['externalId' => $team->getExternalId()]);
+        $entity = $this->repositoryFactory->team()->findOneBy(['externalId' => $team->getExternalId()]);
 
         if (!$entity) {
             $entity = (new Entity\Team())
@@ -144,44 +148,63 @@ final class DataUpdater extends BaseDataUpdater
      */
     private function updateBet(Bet $bet, Entity\Event $event)
     {
-//        $betEntity = $this->migrator
-//            ->getBet()
-//            ->setDate(new \DateTime())
-//            ->setEvent($event)
-//            ->migrate()
-//        ;
-//
-//        foreach ($this->coefficientTypeMap as $key => $coefficient) {
-//            if (array_key_exists($key, $bet)) {
-//                foreach ($coefficient as $keyType => $type) {
-//                    $coef = $this->finder->findOrElse($keyType, $bet[$key], null);
-//                    $coefType = $this->migrator->getCoefficientType()->setCode($type)->get();
-//
-//                    if (is_null($coef)) {
-//                        continue;
-//                    } elseif (is_array($coef)) {
-//                        $this->migrator
-//                            ->getCoefficient()
-//                            ->setBet($betEntity)
-//                            ->setCoefficientType($coefType)
-//                            ->setValue($coef['kf'])
-//                            ->setDate(new \DateTime(date("Y-m-d H:i:s", $coef['md'])))
-//                            ->setPs($coef['ps'])
-//                            ->migrate()
-//                        ;
-//                    } else {
-//                        $this->migrator
-//                            ->getCoefficient()
-//                            ->setBet($betEntity)
-//                            ->setCoefficientType($coefType)
-//                            ->setValue($coef)
-//                            ->setDate(new \DateTime())
-//                            ->setPs(0)
-//                            ->migrate()
-//                        ;
-//                    }
-//                }
-//            }
-//        }
+        $coefficients = [];
+
+        $betEntity = (new Entity\Bet())
+            ->setDate(new DateTime())
+            ->setEvent($event)
+        ;
+
+        foreach ($bet->getCoefficients() as $coefficient) {
+            $entity = $this->repositoryFactory->coefficient()->getLastByEventAndType(
+                $event,
+                $coefficient->getCoefficientType()
+            );
+
+            if (!$entity || $coefficient->getValue() != $entity->getValue()) {
+                $coefficient = (new Entity\Coefficient())
+                    ->setCoefficientType($coefficient->getCoefficientType())
+                    ->setValue($coefficient->getValue())
+                    ->setPs($coefficient->getPs())
+                    ->setDate($this->checkAndGetDate($coefficient->getDate()))
+                    ->setBet($betEntity)
+                ;
+
+                $coefficients[] = $coefficient;
+                $this->entityManager->persist($coefficient);
+            }
+        }
+
+        if (count($coefficients)) {
+            $betEntity->setCoefficients($coefficients);
+
+            $this->entityManager->persist($betEntity);
+        }
+    }
+
+    /**
+     * @param $date
+     * @return DateTime
+     */
+    private function checkAndGetDate($date): DateTime
+    {
+        return
+            !empty($date)
+                ? $this->getDateTime($date)
+                : new DateTime()
+            ;
+    }
+
+    /**
+     * @param string $date
+     * @return DateTime
+     */
+    private function getDateTime(string $date): DateTime
+    {
+        return
+            is_numeric($date)
+                ? (new DateTime())->setTimestamp((int) $date)
+                : new DateTime($date)
+            ;
     }
 }

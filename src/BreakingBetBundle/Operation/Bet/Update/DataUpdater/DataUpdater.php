@@ -112,7 +112,6 @@ final class DataUpdater extends BaseDataUpdater
             $entity->setTeams($teams);
 
             $this->entityManager->persist($entity);
-            $this->entityManager->flush();
         }
 
         return $entity;

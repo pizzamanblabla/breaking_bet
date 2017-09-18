@@ -1,0 +1,14 @@
+services:
+    breaking_bet.drawdown.calculate.service.transactional:
+        class: BreakingBetBundle\Internal\Service\Transactional
+        arguments:
+            - '@breaking_bet.drawdown.calculate.service'
+            - '@doctrine.orm.entity_manager'
+            - '@logger'
+
+    breaking_bet.drawdown.calculate.service:
+        class: BreakingBetBundle\Operation\Drawdown\Calculate\Service\Service
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'

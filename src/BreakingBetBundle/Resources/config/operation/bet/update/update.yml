@@ -1,5 +1,5 @@
 services:
-    breaking_bet.bet.update.service.trnasactional:
+    breaking_bet.bet.update.service.transactional:
         class: BreakingBetBundle\Internal\Service\Transactional
         arguments:
             - '@breaking_bet.bet.update.service'

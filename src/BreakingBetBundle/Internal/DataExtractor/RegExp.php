@@ -2,7 +2,7 @@
 
 namespace BreakingBetBundle\Internal\DataExtractor;
 
-use BreakingBetBundle\DataExtractor\Exception\DataExtractionException;
+use BreakingBetBundle\Internal\DataExtractor\Exception\DataExtractionException;
 use BreakingBetBundle\Internal\PayloadModifier\PayloadModifierInterface;
 use BreakingBetBundle\Internal\Sanitizer\SanitizerInterface;
 

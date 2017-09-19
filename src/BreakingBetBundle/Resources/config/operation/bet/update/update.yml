@@ -9,8 +9,16 @@ services:
     breaking_bet.bet.update.service:
         class: BreakingBetBundle\Operation\Bet\Update\Service\Service
         arguments:
-            - '@breaking_bet.bet.update.remote_call'
+            - '@breaking_bet.bet.update.remote_call.chain'
             - '@breaking_bet.bet.update.data_updater'
+            - '@logger'
+
+    breaking_bet.bet.update.remote_call.chain:
+        class: BreakingBetBundle\Interaction\RemoteCall\Chain
+        arguments:
+            -
+                - '@breaking_bet.bet.update.remote_call.tor'
+                - '@breaking_bet.bet.update.remote_call'
             - '@logger'
 
     breaking_bet.bet.update.remote_call:
@@ -23,6 +31,23 @@ services:
             - '@breaking_bet.bet.update.response_factory'
             - '@validator'
             - '@logger'
+
+    breaking_bet.bet.update.remote_call.tor:
+        class: BreakingBetBundle\Interaction\RemoteCall\RemoteCall
+        arguments:
+            - '@breaking_bet.bet.update.request_assembler'
+            - '@breaking_bet.guzzle.tor.client'
+            - '@breaking_bet.bet.update.data_parser.chain'
+            - '@breaking_bet.object_builder.jms'
+            - '@breaking_bet.bet.update.response_factory'
+            - '@validator'
+            - '@logger'
+            -
+                tor_new_identity: true
+                tor_new_identity_sleep: 15
+                tor_new_identity_timeout: 10
+                tor_new_identity_exception: false
+                tor_control_password: 'password'
 
     breaking_bet.bet.update.request_assembler:
         class: BreakingBetBundle\Operation\Bet\Update\RequestAssembler\RequestAssembler

@@ -81,7 +81,11 @@ final class Calculate extends BaseCommand
      */
     private function resolveDifference($difference)
     {
-        return $difference ? $difference : self::DEFAULT_DIFFERENCE_VALUE;
+        return
+            !is_numeric($difference)
+                ? $difference
+                : self::DEFAULT_DIFFERENCE_VALUE
+            ;
     }
 
     /**

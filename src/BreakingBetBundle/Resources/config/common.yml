@@ -2,6 +2,23 @@ services:
     breaking_bet.guzzle.client:
         class: GuzzleHttp\Client
 
+    breaking_bet.guzzle.tor.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                handler: '@breaking_bet.guzzle.tor.stack'
+
+    breaking_bet.guzzle.tor.stack:
+        class: BreakingBetBundle\Interaction\Guzzle\TorHandlerStack
+        calls:
+            -
+                method: setHandler
+                arguments:
+                    - '@breaking_bet.guzzle.curl_handler'
+
+    breaking_bet.guzzle.curl_handler:
+        class: GuzzleHttp\Handler\CurlHandler
+
     breaking_bet.object_builder.jms:
         class: BreakingBetBundle\Internal\ObjectBuilder\JMSObjectBuilder
         arguments:

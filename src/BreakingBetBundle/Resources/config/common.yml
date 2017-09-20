@@ -33,9 +33,6 @@ services:
         arguments:
             - '@breaking_bet.object_normalizer'
 
-    breaking_bet.interaction.object_to_array_transformer:
-        class: BreakingBetBundle\Interaction\Transformer\Type\ObjectToArrayTransformer
-
     breaking_bet.entity.repository.factory:
         class: BreakingBetBundle\Entity\Repository\RepositoryFactory
         arguments:
@@ -49,3 +46,9 @@ services:
 
     breaking_bet.payload_modifier.json:
         class: BreakingBetBundle\Internal\PayloadModifier\Json
+
+    breaking_bet.data_extractor.array_from_json_request:
+        class: BreakingBetBundle\Interaction\DataExtractor\HttpRequest\Content
+        arguments:
+            - '@breaking_bet.data_extractor.blank'
+            - '@breaking_bet.payload_modifier.json'

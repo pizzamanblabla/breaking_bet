@@ -36,6 +36,11 @@ class Request implements InternalRequestInterface
     private $event;
 
     /**
+     * @var int
+     */
+    private $maxResults;
+
+    /**
      * @return float
      */
     public function getMinDifferenceValue()
@@ -122,6 +127,24 @@ class Request implements InternalRequestInterface
     public function setEvent(Event $event)
     {
         $this->event = $event;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxResults(): int
+    {
+        return $this->maxResults;
+    }
+
+    /**
+     * @param int $maxResults
+     * @return Request
+     */
+    public function setMaxResults(int $maxResults): Request
+    {
+        $this->maxResults = $maxResults;
         return $this;
     }
 }

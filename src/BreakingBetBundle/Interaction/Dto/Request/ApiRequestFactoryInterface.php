@@ -7,5 +7,5 @@ interface InternalRequestFactoryInterface
     /**
      * @return InternalRequestInterface
      */
-    public function getRequest();
+    public function createRequest();
 }

@@ -2,9 +2,9 @@
 
 namespace BreakingBetBundle\Interaction\Transformer\Request;
 
-use BreakingBetBundle\DataExtractor\DataExtractorInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestFactoryInterface;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
+use BreakingBetBundle\Internal\DataExtractor\DataExtractorInterface;
 use BreakingBetBundle\Internal\ObjectBuilder\ObjectBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -48,7 +48,7 @@ class Transformer implements TransformerInterface
     {
         return
             $this->builder->build(
-                $this->requestFactory->getRequest(),
+                $this->requestFactory->createRequest(),
                 $this->dataExtractor->extract($request)
             );
     }

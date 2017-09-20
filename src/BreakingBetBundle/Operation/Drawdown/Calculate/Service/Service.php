@@ -29,7 +29,12 @@ final class Service extends BaseEntityService
 
                 if (
                     count($coefficients) == 2 &&
-                    $request->getMinDifferenceValue() < abs($coefficients[0]->getValue() - $coefficients[1]->getValue())
+                    $request->getMinDifferenceValue() < abs($coefficients[0]->getValue() - $coefficients[1]->getValue()) &&
+                    !$this->repositoryFactory->drawdown()->findOneByCoefficientsAndMinDifference(
+                        $coefficients[0],
+                        $coefficients[1],
+                        $request->getMinDifferenceValue()
+                    )
                 ) {
                     $this->logger->info(
                         strtr(

@@ -69,10 +69,18 @@ final class RepositoryFactory implements RepositoryFactoryInterface
     }
 
     /**
-     * @return Source
+     * {@inheritdoc}
      */
     public function source(): Source
     {
         return $this->entityManager->getRepository(Entity\Source::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function drawdown(): Drawdown
+    {
+        return $this->entityManager->getRepository(Entity\Drawdown::class);
     }
 }

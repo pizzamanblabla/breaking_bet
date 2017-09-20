@@ -38,4 +38,9 @@ interface RepositoryFactoryInterface
      * @return Team
      */
     public function team(): Team;
+
+    /**
+     * @return Drawdown
+     */
+    public function drawdown(): Drawdown;
 }

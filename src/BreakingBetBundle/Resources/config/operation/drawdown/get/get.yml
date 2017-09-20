@@ -1,0 +1,17 @@
+services:
+    breaking_bet.drawdown.get.service:
+        class: BreakingBetBundle\Operation\Drawdown\Get\Service\Service
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'
+
+    breaking_bet.drawdown.get.transformer.http_to_api:
+        class: BreakingBetBundle\Interaction\Transformer\Request\Transformer
+        arguments:
+            - '@breaking_bet.object_builder.jms'
+            - '@breaking_bet.drawdown.get.request_factory'
+            - '@breaking_bet.data_extractor.array_from_json_request'
+
+    breaking_bet.drawdown.get.request_factory:
+        class: BreakingBetBundle\Operation\Drawdown\Get\Dto\Request\RequestFactory

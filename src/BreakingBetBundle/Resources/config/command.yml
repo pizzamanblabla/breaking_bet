@@ -1,0 +1,18 @@
+services:
+    bets.update:
+        class: BreakingBetBundle\Command\Bet\Update
+        arguments:
+            - '@breaking_bet.bet.update.service.transactional'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'
+        tags:
+            - { name: console.command }
+
+    drawdown.calculate:
+        class: BreakingBetBundle\Command\Drawdown\Calculate
+        arguments:
+            - '@breaking_bet.drawdown.calculate.service.transactional'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'
+        tags:
+            - { name: console.command }

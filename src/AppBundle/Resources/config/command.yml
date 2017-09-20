@@ -1,8 +1,0 @@
-services:
-    bets.update:
-      class: AppBundle\Command\BetUpdateCommand
-      arguments:
-        - '@service.parser'
-        - '@logger'
-      tags:
-        - { name: console.command }

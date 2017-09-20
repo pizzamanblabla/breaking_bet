@@ -1,5 +1,5 @@
-controller.api.bet.get:
-    path: '/api/bet/get'
+controller.api.drawdown.get:
+    path: '/api/v1/drawdown/get'
     defaults: { _controller: controller.api:operationAction, security: false }
     methods: [POST]
 

@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  breaking_bet:
+    container_name: breaking_bet
+    environment:
+      - ENVIRONMENT=development
+    build: .
+    command: "./server/fix_permissions.sh"
+    volumes:
+      - ./:/var/www
+    ports:
+      - 80:80
+    links:
+      - breaking_bet-postgresql
+
+  breaking_bet-postgresql:
+    container_name: breaking_bet-postgresql
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432

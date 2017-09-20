@@ -1,0 +1,71 @@
+services:
+    breaking_bet.bet.update.service.transactional:
+        class: BreakingBetBundle\Internal\Service\Transactional
+        arguments:
+            - '@breaking_bet.bet.update.service'
+            - '@doctrine.orm.entity_manager'
+            - '@logger'
+
+    breaking_bet.bet.update.service:
+        class: BreakingBetBundle\Operation\Bet\Update\Service\Service
+        arguments:
+            - '@breaking_bet.bet.update.remote_call.chain'
+            - '@breaking_bet.bet.update.data_updater'
+            - '@logger'
+
+    breaking_bet.bet.update.remote_call.chain:
+        class: BreakingBetBundle\Interaction\RemoteCall\Chain
+        arguments:
+            -
+                - '@breaking_bet.bet.update.remote_call.tor'
+                - '@breaking_bet.bet.update.remote_call'
+            - '@logger'
+
+    breaking_bet.bet.update.remote_call:
+        class: BreakingBetBundle\Interaction\RemoteCall\RemoteCall
+        arguments:
+            - '@breaking_bet.bet.update.request_assembler'
+            - '@breaking_bet.guzzle.client'
+            - '@breaking_bet.bet.update.data_parser.chain'
+            - '@breaking_bet.object_builder.jms'
+            - '@breaking_bet.bet.update.response_factory'
+            - '@validator'
+            - '@logger'
+
+    breaking_bet.bet.update.remote_call.tor:
+        class: BreakingBetBundle\Interaction\RemoteCall\RemoteCall
+        arguments:
+            - '@breaking_bet.bet.update.request_assembler'
+            - '@breaking_bet.guzzle.tor.client'
+            - '@breaking_bet.bet.update.data_parser.chain'
+            - '@breaking_bet.object_builder.jms'
+            - '@breaking_bet.bet.update.response_factory'
+            - '@validator'
+            - '@logger'
+            -
+                tor_new_identity: true
+                tor_new_identity_sleep: 15
+                tor_new_identity_timeout: 10
+                tor_new_identity_exception: false
+                tor_control_password: 'password'
+
+    breaking_bet.bet.update.request_assembler:
+        class: BreakingBetBundle\Operation\Bet\Update\RequestAssembler\RequestAssembler
+        arguments:
+            - 'GET'
+
+    breaking_bet.bet.update.response_factory:
+        class: BreakingBetBundle\Operation\Bet\Update\Dto\Response\SuccessfulResponseFactory
+
+    breaking_bet.bet.update.data_parser.chain:
+        class: BreakingBetBundle\Internal\DataParser\Chain
+        arguments:
+            -
+                - '@breaking_bet.bet.update.betsbc.data_parser'
+
+    breaking_bet.bet.update.data_updater:
+        class: BreakingBetBundle\Operation\Bet\Update\DataUpdater\DataUpdater
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@breaking_bet.entity.repository.factory'
+            - '@logger'

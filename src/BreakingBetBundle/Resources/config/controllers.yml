@@ -1,0 +1,9 @@
+services:
+    controller.drawdown.bet.api:
+        class: BreakingBetBundle\Controller\ApplicationController
+        arguments:
+            - '@breaking_bet.common.transformer.http_to_api'
+            - '@validator'
+            - '@breaking_bet.drawdown.get.service'
+            - '@breaking_bet.interaction.api_to_http_transformer'
+            - '@logger'

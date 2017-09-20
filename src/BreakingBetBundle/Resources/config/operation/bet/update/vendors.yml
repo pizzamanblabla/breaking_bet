@@ -1,0 +1,148 @@
+services:
+    breaking_bet.bet.update.betsbc.data_parser:
+        class: BreakingBetBundle\Internal\DataParser\DataParser
+        arguments:
+            - '@breaking_bet.bet.update.betsbc.data_extractor'
+            - '@breaking_bet.bet.update.betsbc.data_corrector'
+            - '@logger'
+
+    breaking_bet.bet.update.betsbc.data_extractor:
+        class: BreakingBetBundle\Interaction\DataExtractor\HttpResponse\Content
+        arguments:
+            - '@breaking_bet.bet.update.betsbc.data_extractor.unwrapper'
+            - '@breaking_bet.payload_modifier.json'
+
+    breaking_bet.bet.update.betsbc.data_extractor.unwrapper:
+        class: BreakingBetBundle\Internal\DataExtractor\Unwrapper
+        arguments:
+            - 'reply'
+
+    breaking_bet.bet.update.betsbc.data_corrector:
+        class: BreakingBetBundle\Internal\DataCorrector\Composite
+        arguments:
+            -
+                - '@breaking_bet.bet.update.betsbc.data_corrector.value_lifter'
+                - '@breaking_bet.bet.update.betsbc.data_corrector.bet_grouper'
+                - '@breaking_bet.bet.update.betsbc.data_corrector.bet_grouper_two'
+                - '@breaking_bet.bet.update.betsbc.data_corrector.value_wrapper'
+                - '@breaking_bet.bet.update.betsbc.data_corrector.value_insert'
+                - '@breaking_bet.bet.update.betsbc.data_corrector.keys_swapper'
+
+    breaking_bet.bet.update.betsbc.data_corrector.keys_swapper:
+        class: BreakingBetBundle\Internal\DataCorrector\KeySwapper
+        arguments:
+            -
+                sports: 'kinds'
+                id_sp: 'externalId'
+                chmps: 'chains'
+                name_sp: 'name'
+                name_ht: 'name'
+                name_at: 'name'
+                evts: 'events'
+                name_ch: 'name'
+                id_ch: 'externalId'
+                id_ev: 'externalId'
+                id_ht: 'externalId'
+                id_at: 'externalId'
+                name_ht: 'name'
+                id_ht: 'externalId'
+                date_ev_str: 'date'
+                main: 'bet'
+                md: 'date'
+                kf: 'value'
+
+    breaking_bet.bet.update.betsbc.data_corrector.bet_grouper:
+        class: BreakingBetBundle\Internal\DataCorrector\NodeGrouper
+        arguments:
+            -
+                id_ht: 'teams'
+                id_at: 'teams'
+                name_ht: 'teams'
+                name_at: 'teams'
+                Y: 'coefficients'
+                N: 'coefficients'
+                P1: 'coefficients'
+                P2: 'coefficients'
+                X: 'coefficients'
+                1X: 'coefficients'
+                X2: 'coefficients'
+                12N: 'coefficients'
+                Kf_F1: 'coefficients'
+                F1: 'coefficients'
+                Kf_F2: 'coefficients'
+                F2: 'coefficients'
+                Tm: 'coefficients'
+                Tot: 'coefficients'
+                Tb: 'coefficients'
+
+    breaking_bet.bet.update.betsbc.data_corrector.bet_grouper_two:
+        class: BreakingBetBundle\Internal\DataCorrector\NodeGrouper
+        arguments:
+            -
+                id_ht: 0
+                id_at: 1
+                name_ht: 0
+                name_at: 1
+
+    breaking_bet.bet.update.betsbc.data_corrector.value_insert:
+        class: BreakingBetBundle\Internal\DataCorrector\ValueInsert
+        arguments:
+            -
+                Y:
+                    coefficientType: 'actual_y'
+                N:
+                    coefficientType: 'actual_n'
+                P1:
+                    coefficientType: 'actual_p1'
+                P2:
+                    coefficientType: 'actual_p2'
+                X:
+                    coefficientType: 'actual_x'
+                1X:
+                    coefficientType: 'double_1x'
+                X2:
+                    coefficientType: 'double_2x'
+                12N:
+                    coefficientType: 'double_12'
+                Kf_F1:
+                    coefficientType: 'handicap_kf_f1'
+                F1:
+                    coefficientType: 'handicap_f2'
+                Kf_F2:
+                    coefficientType: 'handicap_kf_f2'
+                F2:
+                    coefficientType: 'handicap_f2'
+                Tm:
+                    coefficientType: 'total_under'
+                Tot:
+                    coefficientType: 'total'
+                Tb:
+                    coefficientType: 'total_over'
+
+    breaking_bet.bet.update.betsbc.data_corrector.value_lifter:
+        class: BreakingBetBundle\Internal\DataCorrector\ValueLifter
+        arguments:
+            - 'main'
+            -
+                - 'Y'
+                - 'N'
+                - 'P1'
+                - 'P2'
+                - '1X'
+                - 'X2'
+                - '12'
+                - 'Kf_F1'
+                - 'F1'
+                - 'Kf_F2'
+                - 'F2'
+                - 'Tm'
+                - 'Tot'
+                - 'Tb'
+
+    breaking_bet.bet.update.betsbc.data_corrector.value_wrapper:
+        class: BreakingBetBundle\Internal\DataCorrector\ValueWrapper
+        arguments:
+            -
+                Tot: 'kf'
+                F1: 'kf'
+                F2: 'kf'

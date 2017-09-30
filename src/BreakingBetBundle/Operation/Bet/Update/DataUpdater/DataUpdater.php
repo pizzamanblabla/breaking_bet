@@ -106,12 +106,25 @@ final class DataUpdater extends BaseDataUpdater
             $teams = [];
 
             foreach ($event->getTeams() as $team) {
-                $teams[] = $this->updateTeam($team, $chain->getKind());
+                $team = $this->updateTeam($team, $chain->getKind());
+
+                $flag = true;
+
+                foreach ($teams as $savedTeam) {
+                    if ($team == $savedTeam) {
+                        $flag = false;
+                    }
+                }
+
+                if ($flag) {
+                    $teams[] = $team;
+                }
             }
 
             $entity->setTeams($teams);
 
             $this->entityManager->persist($entity);
+            $this->entityManager->flush();
         }
 
         return $entity;

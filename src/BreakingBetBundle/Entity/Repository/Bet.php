@@ -2,7 +2,6 @@
 
 namespace BreakingBetBundle\Entity\Repository;
 
-use BreakingBetBundle\Operation\Bet\Get\Dto\Request\ApiRequest;
 use Doctrine\ORM\EntityRepository;
 use BreakingBetBundle\Entity;
 use DateTime;

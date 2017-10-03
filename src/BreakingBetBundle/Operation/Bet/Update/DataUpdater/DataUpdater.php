@@ -124,7 +124,6 @@ final class DataUpdater extends BaseDataUpdater
             $entity->setTeams($teams);
 
             $this->entityManager->persist($entity);
-            $this->entityManager->flush();
         }
 
         return $entity;
@@ -177,6 +176,7 @@ final class DataUpdater extends BaseDataUpdater
                 $coefficient = (new Entity\Coefficient())
                     ->setCoefficientType($coefficient->getCoefficientType())
                     ->setValue($coefficient->getValue())
+                    ->setLv($coefficient->getLv())
                     ->setPs($coefficient->getPs())
                     ->setDate($this->checkAndGetDate($coefficient->getDate()))
                     ->setBet($betEntity)

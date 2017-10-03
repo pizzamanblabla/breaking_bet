@@ -55,9 +55,16 @@ class Coefficient
     /**
      * @var float
      *
-     * @ORM\Column(name="ps", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="ps", type="float", precision=10, scale=0, nullable=true)
      */
     private $ps;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lv", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $lv;
 
     /**
      * @return int
@@ -164,6 +171,24 @@ class Coefficient
     public function setPs($ps)
     {
         $this->ps = $ps;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLv()
+    {
+        return $this->lv;
+    }
+
+    /**
+     * @param float $lv
+     * @return Coefficient
+     */
+    public function setLv($lv)
+    {
+        $this->lv = $lv;
         return $this;
     }
 }

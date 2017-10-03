@@ -42,6 +42,15 @@ class Coefficient
      *
      * @Serializer\Type("string")
      */
+    private $lv;
+
+    /**
+     * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
+     */
     private $date;
 
     /**
@@ -113,6 +122,24 @@ class Coefficient
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLv()
+    {
+        return $this->lv;
+    }
+
+    /**
+     * @param string $lv
+     * @return Coefficient
+     */
+    public function setLv($lv)
+    {
+        $this->lv = $lv;
         return $this;
     }
 }

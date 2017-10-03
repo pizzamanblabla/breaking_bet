@@ -46,7 +46,7 @@ services:
                 id_at: 'externalId'
                 name_ht: 'name'
                 id_ht: 'externalId'
-                date_ev_str: 'date'
+                date_ev: 'date'
                 main: 'bet'
                 md: 'date'
                 kf: 'value'

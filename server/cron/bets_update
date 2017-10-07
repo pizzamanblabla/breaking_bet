@@ -1,3 +1,4 @@
 
 #CRONS
 0 * * * * /usr/bin/php /var/www/dropdope.com/html/bin/console bets:update --env=prod > dev/null 2>&1
+

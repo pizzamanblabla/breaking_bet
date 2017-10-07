@@ -106,7 +106,19 @@ final class DataUpdater extends BaseDataUpdater
             $teams = [];
 
             foreach ($event->getTeams() as $team) {
-                $teams[] = $this->updateTeam($team, $chain->getKind());
+                $team = $this->updateTeam($team, $chain->getKind());
+
+                $flag = true;
+
+                foreach ($teams as $savedTeam) {
+                    if ($team == $savedTeam) {
+                        $flag = false;
+                    }
+                }
+
+                if ($flag) {
+                    $teams[] = $team;
+                }
             }
 
             $entity->setTeams($teams);
@@ -164,6 +176,7 @@ final class DataUpdater extends BaseDataUpdater
                 $coefficient = (new Entity\Coefficient())
                     ->setCoefficientType($coefficient->getCoefficientType())
                     ->setValue($coefficient->getValue())
+                    ->setLv($coefficient->getLv())
                     ->setPs($coefficient->getPs())
                     ->setDate($this->checkAndGetDate($coefficient->getDate()))
                     ->setBet($betEntity)

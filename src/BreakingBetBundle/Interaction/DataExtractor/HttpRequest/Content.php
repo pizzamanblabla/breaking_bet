@@ -43,6 +43,6 @@ final class Content implements DataExtractorInterface
      */
     private function extractFromRequest(Request $httpRequest)
     {
-        return $httpRequest->request->all();
+        return json_decode($httpRequest->getContent(), 1);
     }
 }

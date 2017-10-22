@@ -4,7 +4,7 @@ namespace BreakingBetBundle\Interaction\DataExtractor\HttpRequest;
 
 use BreakingBetBundle\Internal\DataExtractor\DataExtractorInterface;
 use BreakingBetBundle\Internal\PayloadModifier\PayloadModifierInterface;
-use Psr\Http\Message\RequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 final class Content implements DataExtractorInterface
 {
@@ -35,17 +35,14 @@ final class Content implements DataExtractorInterface
      */
     public function extract($data): array
     {
-        return $this->extractFromResponse($data);
+        return $this->extractFromRequest($data);
     }
 
     /**
      * {@inheritdoc}
      */
-    private function extractFromResponse(RequestInterface $httpRequest)
+    private function extractFromRequest(Request $httpRequest)
     {
-        return
-            $this->decoratedDataExtractor->extract(
-                $this->payloadModifier->modify((string) $httpRequest->getBody())
-            );
+        return $httpRequest->request->all();
     }
 }

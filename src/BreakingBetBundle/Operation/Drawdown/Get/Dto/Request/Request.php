@@ -7,11 +7,18 @@ use BreakingBetBundle\Entity\Event;
 use BreakingBetBundle\Entity\Kind;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use DateInterval;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Request implements InternalRequestInterface
 {
     /**
      * @var float
+     *
+     * @Assert\Type("float")
+     * @Assert\NotNull()
+     *
+     * @Serializer\Type("float")
      */
     private $minDifferenceValue;
 
@@ -37,6 +44,11 @@ class Request implements InternalRequestInterface
 
     /**
      * @var int
+     *
+     * @Assert\Type("int")
+     * @Assert\NotNull()
+     *
+     * @Serializer\Type("int")
      */
     private $maxResults;
 

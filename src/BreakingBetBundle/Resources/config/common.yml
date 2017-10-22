@@ -25,13 +25,10 @@ services:
             - '@jms_serializer'
             - '@logger'
 
-    breaking_bet.object_normalizer:
-        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
-
     breaking_bet.interaction.api_to_http_transformer:
         class: BreakingBetBundle\Interaction\Transformer\Response\Json
         arguments:
-            - '@breaking_bet.object_normalizer'
+            - '@jms_serializer'
 
     breaking_bet.entity.repository.factory:
         class: BreakingBetBundle\Entity\Repository\RepositoryFactory

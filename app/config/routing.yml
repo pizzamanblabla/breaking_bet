@@ -1,9 +1,6 @@
 controller.api.drawdown.get:
     path: '/api/v1/drawdown/get'
-    defaults: { _controller: controller.api:operationAction, security: false }
+    defaults: { _controller: controller.drawdown.get.api:operationAction, security: false }
     methods: [POST]
 
-controller.main.home:
-    path: '/'
-    defaults: { _controller: controller.main:homeAction, security: false }
-    methods: [GET]
+

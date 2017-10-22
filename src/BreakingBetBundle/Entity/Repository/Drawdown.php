@@ -33,4 +33,22 @@ class Drawdown extends EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /**
+     * @param float $minDifference
+     * @param int $limit
+     * @return array
+     */
+    public function findAllByMinDifferenceWithLimit(float $minDifference, int $limit) {
+        $queryBuilder = $this->createQueryBuilder('d');
+
+        $queryBuilder
+            ->select('d')
+            ->where('d.minDifference > :minDifference')
+            ->setParameter('minDifference', $minDifference)
+            ->setMaxResults($limit)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

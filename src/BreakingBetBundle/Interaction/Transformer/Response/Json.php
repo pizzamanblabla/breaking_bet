@@ -4,23 +4,23 @@ namespace BreakingBetBundle\Interaction\Transformer\Response;
 
 use BreakingBetBundle\Enumeration\ResponseType;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class Json implements TransformerInterface
 {
     /**
-     * @var NormalizerInterface
+     * @var SerializerInterface
      */
-    private $normalizer;
+    private $serializer;
 
     /**
-     * @param NormalizerInterface $normalizer
+     * @param SerializerInterface $serializer
      */
-    public function __construct(NormalizerInterface $normalizer)
+    public function __construct(SerializerInterface $serializer)
     {
-        $this->normalizer = $normalizer;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -32,7 +32,7 @@ final class Json implements TransformerInterface
             new JsonResponse(
                 [
                     'type' => ResponseType::SUCCESSFUL,
-                    'data' => $this->normalizer->normalize($response),
+                    'data' => json_decode($this->serializer->serialize($response, 'json'), 1),
                 ]
             );
     }

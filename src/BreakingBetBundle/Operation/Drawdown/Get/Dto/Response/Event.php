@@ -20,6 +20,11 @@ class Event
     private $link;
 
     /**
+     * @var string
+     */
+    private $date;
+
+    /**
      * @return string
      */
     public function getExternalId()
@@ -70,6 +75,24 @@ class Event
     public function setLink($link)
     {
         $this->link = $link;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param string $date
+     * @return Event
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
         return $this;
     }
 }

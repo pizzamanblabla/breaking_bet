@@ -13,6 +13,7 @@ class EventTeam
     /**
      * @var Team
      *
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
      */
@@ -21,6 +22,7 @@ class EventTeam
     /**
      * @var Event
      *
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=true)
      */

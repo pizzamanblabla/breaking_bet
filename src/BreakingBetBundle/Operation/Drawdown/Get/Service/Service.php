@@ -22,10 +22,10 @@ final class Service extends BaseEntityService
     {
         $drawdowns = [];
 
-//        foreach ($this->getDrawdowns($request) as $entityDrawdown) {
-//
-//            $drawdowns[] = $this->createDrawdown($entityDrawdown);
-//        }
+        foreach ($this->getDrawdowns($request) as $entityDrawdown) {
+
+            $drawdowns[] = $this->createDrawdown($entityDrawdown);
+        }
 
         return (new SuccessfulResponse())->setDrawdowns($drawdowns);
     }
@@ -59,16 +59,10 @@ final class Service extends BaseEntityService
                     ]
                 )
                 ->setChain($entityDrawdown->getCoefficientOne()->getBet()->getEvent()->getChain()->getName())
-                ->setKind($entityDrawdown->getCoefficientOne()->getBet()->getEvent()->getChain()->getKind())
-                ->setTeams(
-                    array_map(
-                        function(Entity\Team $entityTeam) {
-                            return $this->createTeam($entityTeam);
-                        },
-                        $entityDrawdown->getCoefficientOne()->getBet()->getEvent()->getTeams()
-                    )
-                )
+                ->setKind($entityDrawdown->getCoefficientOne()->getBet()->getEvent()->getChain()->getKind()->getName())
+                ->setTeams($this->createTeams($entityDrawdown->getCoefficientOne()->getBet()->getEvent()->getTeams()))
                 ->setEvent($this->createEvent($entityDrawdown->getCoefficientOne()->getBet()->getEvent()))
+                ->setDate($entityDrawdown->getDate()->format('Y-m-d H:i:s'))
             ;
     }
 
@@ -80,12 +74,27 @@ final class Service extends BaseEntityService
     {
         return
             (new Coefficient())
-                ->setCoefficientType($entityCoefficient->getCoefficientType())
+                ->setCoefficientType($entityCoefficient->getCoefficientType()->getValue())
                 ->setValue($entityCoefficient->getValue())
                 ->setPs($entityCoefficient->getPs())
                 ->setLv($entityCoefficient->getLv())
                 ->setDate($entityCoefficient->getDate()->format('Y-m-d H:i:s'))
             ;
+    }
+
+    /**
+     * @param Entity\Team[] $entityTeams
+     * @return Team[]
+     */
+    private function createTeams($entityTeams): array
+    {
+        $teams = [];
+
+        foreach ($entityTeams as $entityTeam) {
+            $teams[] = $this->createTeam($entityTeam);
+        }
+
+        return $teams;
     }
 
     /**
@@ -112,6 +121,7 @@ final class Service extends BaseEntityService
                 ->setName($entityEvent->getName())
                 ->setExternalId($entityEvent->getExternalId())
                 ->setLink('http://www.betsbc.com/v3/ru/line/bets/events=a:' . $entityEvent->getExternalId() . ';period=0;')
+                ->setDate($entityEvent->getDate()->format('Y-m-d H:i:s'))
             ;
     }
 }

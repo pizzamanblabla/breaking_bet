@@ -35,6 +35,11 @@ class Drawdown
     private $difference;
 
     /**
+     * @var string
+     */
+    private $date;
+
+    /**
      * @return string
      */
     public function getKind()
@@ -139,6 +144,24 @@ class Drawdown
     public function setDifference($difference)
     {
         $this->difference = $difference;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param string $date
+     * @return Drawdown
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
         return $this;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace BreakingBetBundle\Entity;
 
+use BreakingBetBundle\Enumeration\CoefficientType;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +33,7 @@ class Coefficient
     private $bet;
 
     /**
-     * @var string
+     * @var CoefficientType
      *
      * @ORM\Column(name="coefficient_type", type="coefficient_type", nullable=false)
      */
@@ -103,7 +104,7 @@ class Coefficient
     }
 
     /**
-     * @return string
+     * @return CoefficientType
      */
     public function getCoefficientType()
     {
@@ -111,7 +112,7 @@ class Coefficient
     }
 
     /**
-     * @param string $coefficientType
+     * @param CoefficientType $coefficientType
      * @return Coefficient
      */
     public function setCoefficientType($coefficientType)

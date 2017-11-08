@@ -3,6 +3,7 @@
 namespace BreakingBetBundle\Operation\Drawdown\Get\Service;
 
 use BreakingBetBundle\Entity;
+use BreakingBetBundle\Enumeration\CoefficientType;
 use BreakingBetBundle\Interaction\Dto\Request\InternalRequestInterface;
 use BreakingBetBundle\Interaction\Dto\Response\InternalResponseInterface;
 use BreakingBetBundle\Internal\Service\BaseEntityService;
@@ -37,10 +38,16 @@ final class Service extends BaseEntityService
     private function getDrawdowns(InternalRequestInterface $request): array
     {
         return
-            $this->repositoryFactory->drawdown()->findAllByMinDifferenceWithLimit(
-                $request->getMinDifferenceValue(),
-                $request->getMaxResults()
-            );
+            empty($request->getCoefficientType())
+                ? $this->repositoryFactory->drawdown()->findAllByMinDifferenceWithLimit(
+                    $request->getMinDifferenceValue(),
+                    $request->getMaxResults()
+                )
+                : $this->repositoryFactory->drawdown()->findAllByMinDifferenceAndCoefficientTypeWithLimit(
+                    $request->getMinDifferenceValue(),
+                    $request->getMaxResults(),
+                    new CoefficientType($request->getCoefficientType())
+                );
     }
 
     /**

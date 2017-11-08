@@ -2,6 +2,7 @@
 
 namespace BreakingBetBundle\Entity\Repository;
 
+use BreakingBetBundle\Enumeration\CoefficientType;
 use Doctrine\ORM\EntityRepository;
 use BreakingBetBundle\Entity;
 
@@ -45,8 +46,35 @@ class Drawdown extends EntityRepository
 
         $queryBuilder
             ->select('d')
-            ->where('d.minDifference > :minDifference')
+            ->where('d.minDifference >= :minDifference')
             ->setParameter('minDifference', $minDifference)
+            ->setMaxResults($limit)
+            ->orderBy('d.date', 'DESC')
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param float $minDifference
+     * @param int $limit
+     * @param CoefficientType $type
+     * @return array
+     */
+    public function findAllByMinDifferenceAndCoefficientTypeWithLimit(
+        float $minDifference,
+        int $limit,
+        CoefficientType $type
+    ) {
+        $queryBuilder = $this->createQueryBuilder('d');
+
+        $queryBuilder
+            ->select('d')
+            ->leftJoin('d.coefficientOne', 'c')
+            ->where('c.coefficientType = :type')
+            ->andWhere('d.minDifference >= :minDifference')
+            ->setParameter('minDifference', $minDifference)
+            ->setParameter('type', $type->getValue())
             ->setMaxResults($limit)
             ->orderBy('d.date', 'DESC')
         ;

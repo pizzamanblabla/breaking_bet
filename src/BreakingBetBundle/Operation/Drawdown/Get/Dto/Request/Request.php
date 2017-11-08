@@ -43,6 +43,15 @@ class Request implements InternalRequestInterface
     private $event;
 
     /**
+     * @var string
+     *
+     * @Assert\Type("string")
+     *
+     * @Serializer\Type("string")
+     */
+    private $coefficientType;
+
+    /**
      * @var int
      *
      * @Assert\Type("int")
@@ -145,7 +154,7 @@ class Request implements InternalRequestInterface
     /**
      * @return int
      */
-    public function getMaxResults(): int
+    public function getMaxResults()
     {
         return $this->maxResults;
     }
@@ -154,9 +163,27 @@ class Request implements InternalRequestInterface
      * @param int $maxResults
      * @return Request
      */
-    public function setMaxResults(int $maxResults): Request
+    public function setMaxResults($maxResults)
     {
         $this->maxResults = $maxResults;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCoefficientType()
+    {
+        return $this->coefficientType;
+    }
+
+    /**
+     * @param string $coefficientType
+     * @return Request
+     */
+    public function setCoefficientType($coefficientType)
+    {
+        $this->coefficientType = $coefficientType;
         return $this;
     }
 }

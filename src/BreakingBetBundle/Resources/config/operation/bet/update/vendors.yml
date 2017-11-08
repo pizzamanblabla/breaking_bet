@@ -107,7 +107,7 @@ services:
                 Kf_F1:
                     coefficientType: 'handicap_kf_f1'
                 F1:
-                    coefficientType: 'handicap_f2'
+                    coefficientType: 'handicap_f1'
                 Kf_F2:
                     coefficientType: 'handicap_kf_f2'
                 F2:
